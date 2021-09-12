@@ -70,7 +70,7 @@ showSnackBar(BuildContext context, String message) {
     content: Text(
       message,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
       ),
     ),
     backgroundColor: Colors.redAccent,
