@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fix_bike/views/login.dart';
+import 'package:fix_bike/views/repairman/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'styles/my_icons.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }

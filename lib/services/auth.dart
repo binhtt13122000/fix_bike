@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/views/home.dart';
-import 'package:fix_bike/views/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,8 +59,6 @@ class AuthMethods {
   signOut(BuildContext context) async {
     await auth.signOut();
     GoogleSignIn().disconnect();
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => LoginPage()));
   }
 }
 

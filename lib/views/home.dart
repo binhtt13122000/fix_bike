@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fix_bike/services/auth.dart';
-import 'package:fix_bike/views/login.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,8 +14,6 @@ class _HomePageState extends State<HomePage> {
   User? user;
   checkLoggedIn() {
     if (_auth.currentUser == null) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
     } else {
       user = _auth.currentUser;
     }
