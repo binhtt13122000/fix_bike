@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fix_bike/screens/edit_profile_screen.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:flutter/cupertino.dart';

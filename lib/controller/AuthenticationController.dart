@@ -1,6 +1,3 @@
-
-
-import 'package:fix_bike/screens/edit_profile_screen.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:fix_bike/services/auth.dart';
 import 'package:flutter/cupertino.dart';
