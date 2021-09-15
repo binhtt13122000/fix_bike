@@ -1,6 +1,7 @@
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class SupportPage extends StatefulWidget {
   const SupportPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _SupportPageState extends State<SupportPage> {
         leading: IconButton(
            icon: Icon(Icons.close, size: 30.0,),
           onPressed: () {
-             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
         title: Text(

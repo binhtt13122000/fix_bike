@@ -1,9 +1,11 @@
+import 'package:fix_bike/controller/AuthenticationController.dart';
 import 'package:fix_bike/services/auth.dart';
 import 'package:fix_bike/styles/my_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,9 +29,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationController controller = Get.put(AuthenticationController());
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Obx(() => controller.isLoading.isTrue ? Center(child: CircularProgressIndicator(),) : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -48,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 15.0),
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                           child: Text(
                             'Đăng Nhập',
                             style: TextStyle(
@@ -60,18 +63,18 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 45.0),
                         ElevatedButton(
                           onPressed: () {
-                            AuthMethods().signInWithGoogle(context);
+                            controller.authenticationWithGoogle(context);
                           },
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(4),
                             backgroundColor:
-                                MaterialStateProperty.resolveWith<Color>(
+                            MaterialStateProperty.resolveWith<Color>(
                                     (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.pressed))
-                                return Colors.white70;
-                              return Color(
-                                  0xfff5f8fd); // Defer to the widget's default.
-                            }),
+                                  if (states.contains(MaterialState.pressed))
+                                    return Colors.white70;
+                                  return Color(
+                                      0xfff5f8fd); // Defer to the widget's default.
+                                }),
                             padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.symmetric(
                                 vertical: 10.0,
@@ -124,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ],
-        ),
+        ),)
       ),
     );
   }
