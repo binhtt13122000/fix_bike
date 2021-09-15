@@ -1,4 +1,4 @@
-import 'package:fix_bike/views/profile_screen.dart';
+import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 

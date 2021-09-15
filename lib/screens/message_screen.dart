@@ -1,6 +1,6 @@
 import 'package:fix_bike/styles/my_icons.dart';
 import 'package:fix_bike/models/Message.dart';
-import 'package:fix_bike/views/profile_screen.dart';
+import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

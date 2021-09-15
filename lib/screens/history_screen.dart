@@ -1,5 +1,5 @@
 import 'package:fix_bike/models/Order.dart';
-import 'package:fix_bike/views/profile_screen.dart';
+import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

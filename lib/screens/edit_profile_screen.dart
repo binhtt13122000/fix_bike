@@ -1,5 +1,5 @@
 import 'package:fix_bike/components/text_field_pref_text.dart';
-import 'package:fix_bike/views/profile_screen.dart';
+import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatefulWidget {

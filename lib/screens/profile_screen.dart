@@ -1,7 +1,7 @@
-import 'package:fix_bike/views/edit_profile_screen.dart';
-import 'package:fix_bike/views/history_screen.dart';
-import 'package:fix_bike/views/notifi_screen.dart';
-import 'package:fix_bike/views/support_screen.dart';
+import 'package:fix_bike/screens/edit_profile_screen.dart';
+import 'package:fix_bike/screens/history_screen.dart';
+import 'package:fix_bike/screens/notifi_screen.dart';
+import 'package:fix_bike/screens/support_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

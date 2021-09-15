@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fix_bike/components/button_custom.dart';
 import 'package:fix_bike/components/text_field_pref_icon.dart';
-import 'package:fix_bike/views/repairman/login_screen.dart';
+import 'package:fix_bike/screens/repairman/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -3,7 +3,7 @@ import 'package:fix_bike/components/button_custom.dart';
 import 'package:fix_bike/components/text_field_pref_icon.dart';
 import 'package:fix_bike/services/auth.dart';
 import 'package:fix_bike/styles/my_icons.dart';
-import 'package:fix_bike/views/repairman/register_screen.dart';
+import 'package:fix_bike/screens/repairman/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
