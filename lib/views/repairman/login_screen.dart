@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fix_bike/components/button_custom.dart';
+import 'package:fix_bike/components/text_field_pref_icon.dart';
 import 'package:fix_bike/services/auth.dart';
 import 'package:fix_bike/styles/my_icons.dart';
-import 'package:fix_bike/views/home.dart';
 import 'package:fix_bike/views/repairman/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +23,15 @@ class _LoginPageState extends State<LoginPage> {
   bool isErrorUsername = false, isErrorPassword = false;
 
   checkAuthentication() async {
-    if(_auth.currentUser != null) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
+    if (_auth.currentUser != null) {}
   }
+
   @override
   void initState() {
     super.initState();
     this.checkAuthentication();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Container(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                         child: Center(
                           child: Text(
                             'Đăng Nhập',
@@ -79,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 15.0),
                       TextFieldInput(
                         labelText: 'Email',
-                        validator: (val) => val!.isEmpty ? "Email không được để trống" : null,
+                        validator: (val) =>
+                            val!.isEmpty ? "Email không được để trống" : null,
                         icon: Icons.email_outlined,
                         textEditingController: textUsernameController,
                         textInputType: TextInputType.emailAddress,
@@ -88,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 15.0),
                       TextFieldInput(
                         labelText: 'Mật khẩu',
-                        validator: (val) => val!.isEmpty ? "Mật khẩu không được để trống" : null,
+                        validator: (val) => val!.isEmpty
+                            ? "Mật khẩu không được để trống"
+                            : null,
                         icon: Icons.vpn_key,
                         textEditingController: textPasswordController,
                         isVisibleText: false,
@@ -119,17 +123,26 @@ class _LoginPageState extends State<LoginPage> {
                                 horizontal: 14.0,
                               ),
                               handleFunction: () {
-                                if(_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
                                   setState(() {
                                     isErrorUsername = false;
                                     isErrorPassword = false;
                                   });
-                                  AuthMethods().signInWithUsernameAndPassword(context, textUsernameController.value.text, textPasswordController.value.text);
-                                }else {
+                                  AuthMethods().signInWithUsernameAndPassword(
+                                      context,
+                                      textUsernameController.value.text,
+                                      textPasswordController.value.text);
+                                } else {
                                   setState(() {
-                                    isErrorUsername = textUsernameController.value.text != "" ? false : true;
-                                    isErrorPassword = textPasswordController.value.text != "" ? false : true;
+                                    isErrorUsername =
+                                        textUsernameController.value.text != ""
+                                            ? false
+                                            : true;
+                                    isErrorPassword =
+                                        textPasswordController.value.text != ""
+                                            ? false
+                                            : true;
                                   });
                                 }
                               },
@@ -153,7 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                                 horizontal: 14.0,
                               ),
                               handleFunction: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RegisterPage()));
                               },
                             ),
                           ],
@@ -166,104 +182,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ButtonCustom extends StatelessWidget {
-  ButtonCustom(
-      {required this.bgColor,
-        required this.bgColorPress,
-        required this.textButton,
-        this.imageUrl = "",
-        this.handleFunction,
-        required this.textStyle,
-        required this.borderRadius,
-        required this.edgeInsets});
-  Color bgColor, bgColorPress;
-  double borderRadius;
-  EdgeInsets edgeInsets;
-  String textButton, imageUrl;
-  TextStyle textStyle;
-  Function? handleFunction;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        handleFunction!();
-      },
-      style: ButtonStyle(
-        elevation: MaterialStateProperty.all(4),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) return bgColorPress;
-              return bgColor; // Defer to the widget's default.
-            }),
-        padding: MaterialStateProperty.all<EdgeInsets>(edgeInsets),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-            )),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            textButton,
-            style: textStyle,
-          ),
-          if (imageUrl != "")
-            SizedBox(
-              width: 4,
-            ),
-          if (imageUrl != "")
-            Image(
-              image: AssetImage(imageUrl),
-              height: 24,
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class TextFieldInput extends StatelessWidget {
-  TextFieldInput({required this.labelText, required this.icon, this.textEditingController, this.textInputType, this.isVisibleText = true, this.validator, this.isErrorField = false});
-  String labelText;
-  IconData icon;
-  TextEditingController? textEditingController;
-  TextInputType? textInputType;
-  bool isVisibleText;
-  bool? isErrorField;
-  String? Function(String?)? validator;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: TextFormField(
-        validator: validator,
-        textAlignVertical: TextAlignVertical.center,
-        controller: textEditingController,
-        keyboardType: textInputType,
-        obscureText: !isVisibleText,
-        enableSuggestions: isVisibleText,
-        autocorrect: isVisibleText,
-        decoration: InputDecoration(
-            labelText: labelText,
-            labelStyle: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w400,
-            ),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8)
-            ),
-            filled: true,
-            fillColor: Colors.white,
-            prefixIcon: Icon(
-              icon,
-              color: (isErrorField != null && isErrorField!) ? Colors.redAccent : Colors.lightBlueAccent.shade400,
-            )),
       ),
     );
   }

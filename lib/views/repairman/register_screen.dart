@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fix_bike/views/home.dart';
+import 'package:fix_bike/components/button_custom.dart';
+import 'package:fix_bike/components/text_field_pref_icon.dart';
 import 'package:fix_bike/views/repairman/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isErrorUsername = false, isErrorPassword = false;
 
   checkAuthentication() async {
-    if (_auth.currentUser != null) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
+    if (_auth.currentUser != null) {}
   }
 
   @override
@@ -227,107 +225,5 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-class ButtonCustom extends StatelessWidget {
-  ButtonCustom(
-      {required this.bgColor,
-      required this.bgColorPress,
-      required this.textButton,
-      this.imageUrl = "",
-      this.handleFunction,
-      required this.textStyle,
-      required this.borderRadius,
-      required this.edgeInsets});
-  Color bgColor, bgColorPress;
-  double borderRadius;
-  EdgeInsets edgeInsets;
-  String textButton, imageUrl;
-  TextStyle textStyle;
-  Function? handleFunction;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        handleFunction!();
-      },
-      style: ButtonStyle(
-        elevation: MaterialStateProperty.all(4),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) return bgColorPress;
-          return bgColor; // Defer to the widget's default.
-        }),
-        padding: MaterialStateProperty.all<EdgeInsets>(edgeInsets),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-        )),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            textButton,
-            style: textStyle,
-          ),
-          if (imageUrl != "")
-            SizedBox(
-              width: 4,
-            ),
-          if (imageUrl != "")
-            Image(
-              image: AssetImage(imageUrl),
-              height: 24,
-            ),
-        ],
-      ),
-    );
-  }
-}
 
-class TextFieldInput extends StatelessWidget {
-  TextFieldInput(
-      {required this.labelText,
-      required this.icon,
-      this.textEditingController,
-      this.textInputType,
-      this.isVisibleText = true,
-      this.validator,
-      this.isErrorField = false});
-  String labelText;
-  IconData icon;
-  TextEditingController? textEditingController;
-  TextInputType? textInputType;
-  bool isVisibleText;
-  bool? isErrorField;
-  String? Function(String?)? validator;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: TextFormField(
-        validator: validator,
-        textAlignVertical: TextAlignVertical.center,
-        controller: textEditingController,
-        keyboardType: textInputType,
-        obscureText: !isVisibleText,
-        enableSuggestions: isVisibleText,
-        autocorrect: isVisibleText,
-        decoration: InputDecoration(
-            labelText: labelText,
-            labelStyle: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w400,
-            ),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            filled: true,
-            fillColor: Colors.white,
-            prefixIcon: Icon(
-              icon,
-              color: (isErrorField != null && isErrorField!)
-                  ? Colors.redAccent
-                  : Colors.lightBlueAccent.shade400,
-            )),
-      ),
-    );
-  }
-}
+

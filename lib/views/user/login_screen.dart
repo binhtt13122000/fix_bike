@@ -1,7 +1,6 @@
 import 'package:fix_bike/services/auth.dart';
 import 'package:fix_bike/styles/my_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fix_bike/views/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -17,10 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   checkAuthentication() async {
-    if (_auth.currentUser != null) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
+    if (_auth.currentUser != null) {}
   }
 
   @override
@@ -28,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     this.checkAuthentication();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +64,24 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(4),
-                            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
                                     (Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.pressed)) return Colors.white70;
-                                  return Color(0xfff5f8fd); // Defer to the widget's default.
-                                }),
-                            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 10.0,
-                            ),),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                )),
+                              if (states.contains(MaterialState.pressed))
+                                return Colors.white70;
+                              return Color(
+                                  0xfff5f8fd); // Defer to the widget's default.
+                            }),
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                              EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 10.0,
+                              ),
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            )),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,25 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fix_bike/services/database.dart';
-import 'package:fix_bike/views/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   signInWithUsernameAndPassword(
       BuildContext context, String userName, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: userName, password: password);
-      if(userCredential.user != null) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-      }
+      if (userCredential.user != null) {}
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showSnackBar(context, "No user found for that email.");
       } else if (e.code == 'wrong-password') {
-        showSnackBar(context, "Wrong username or password provided for that user.");
+        showSnackBar(
+            context, "Wrong username or password provided for that user.");
       }
     }
   }
@@ -40,7 +39,6 @@ class AuthMethods {
     User? userDetails = result.user;
 
     if (userDetails != null) {
-
       Map<String, dynamic> userInfoMap = {
         "email": userDetails.email,
         "username": userDetails.email!.replaceAll("@gmail.com", ""),
@@ -49,10 +47,7 @@ class AuthMethods {
       };
       DatabaseMethods()
           .addUserInfoToDB(userDetails.uid, userInfoMap)
-          .then((value) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      });
+          .then((value) {});
     }
   }
 
