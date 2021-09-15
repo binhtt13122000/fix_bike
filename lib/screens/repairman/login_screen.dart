@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fix_bike/components/button_custom.dart';
 import 'package:fix_bike/components/text_field_pref_icon.dart';
+import 'package:fix_bike/controller/AuthenticationController.dart';
 import 'package:fix_bike/services/auth.dart';
 import 'package:fix_bike/styles/my_icons.dart';
 import 'package:fix_bike/screens/repairman/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -34,9 +36,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationController controller = Get.put(AuthenticationController());
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child:  Obx(() => controller.isLoading.isTrue ? Center(
+          child: CircularProgressIndicator(),
+        ): SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
@@ -66,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                         child: Center(
                           child: Text(
                             'Đăng Nhập',
@@ -81,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextFieldInput(
                         labelText: 'Email',
                         validator: (val) =>
-                            val!.isEmpty ? "Email không được để trống" : null,
+                        val!.isEmpty ? "Email không được để trống" : null,
                         icon: Icons.email_outlined,
                         textEditingController: textUsernameController,
                         textInputType: TextInputType.emailAddress,
@@ -129,20 +134,20 @@ class _LoginPageState extends State<LoginPage> {
                                     isErrorUsername = false;
                                     isErrorPassword = false;
                                   });
-                                  AuthMethods().signInWithUsernameAndPassword(
-                                      context,
+                                  controller.authenticationWithUsernameAndPassword(context,
                                       textUsernameController.value.text,
-                                      textPasswordController.value.text);
+                                      textPasswordController.value.text
+                                  );
                                 } else {
                                   setState(() {
                                     isErrorUsername =
-                                        textUsernameController.value.text != ""
-                                            ? false
-                                            : true;
+                                    textUsernameController.value.text != ""
+                                        ? false
+                                        : true;
                                     isErrorPassword =
-                                        textPasswordController.value.text != ""
-                                            ? false
-                                            : true;
+                                    textPasswordController.value.text != ""
+                                        ? false
+                                        : true;
                                   });
                                 }
                               },
@@ -181,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ),
+        ),)
       ),
     );
   }
