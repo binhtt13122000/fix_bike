@@ -1,7 +1,6 @@
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class _NotificationPageState extends State<NotificationPage> {
     setState(() {
       _selectedIndex = index;
       if(_selectedIndex == 1) {
-        Get.to(() => ProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
       }
     });
   }
@@ -32,9 +31,7 @@ class _NotificationPageState extends State<NotificationPage> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        centerTitle: true,
-        // leading: Icon(Icons.arrow_back_ios),
-        automaticallyImplyLeading: false,
+        leading: Icon(Icons.arrow_back_ios),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

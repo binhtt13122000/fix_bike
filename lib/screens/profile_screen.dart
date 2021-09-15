@@ -2,10 +2,8 @@ import 'package:fix_bike/screens/edit_profile_screen.dart';
 import 'package:fix_bike/screens/history_screen.dart';
 import 'package:fix_bike/screens/notifi_screen.dart';
 import 'package:fix_bike/screens/support_screen.dart';
-import 'package:fix_bike/screens/user/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -21,7 +19,8 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _selectedIndex = index;
       if (_selectedIndex == 2) {
-        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NotificationPage()));
       }
     });
   }
@@ -84,7 +83,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       trailing: RawMaterialButton(
                           onPressed: () {
-                            Get.to(() => EditProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditProfilePage()));
                           },
                           child: Icon(
                             Icons.edit,
@@ -129,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Lịch sử',
                     icon: Icons.history,
                     handleFunction: () {
-                      Get.to(() => HistoryPage(), transition: Transition.rightToLeftWithFade, duration: Duration(microseconds: 600));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HistoryPage()));
                     },
                   ),
                   Divider(
@@ -139,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Hổ trợ',
                     icon: Icons.support_agent_outlined,
                     handleFunction: () {
-                      Get.to(() => SupportPage(), transition: Transition.rightToLeftWithFade, duration: Duration(microseconds: 600));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SupportPage()));
                     },
                   ),
                   Divider(
@@ -156,9 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.grey.shade300,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        Get.offAll(() => LoginPage(), transition: Transition.leftToRightWithFade, duration: Duration(microseconds: 600));
-                      },
+                      onPressed: () {},
                       style: ButtonStyle(
                         elevation: MaterialStateProperty.all(4),
                         backgroundColor:
@@ -218,7 +218,9 @@ class TileItem extends StatelessWidget {
     return Ink(
       color: Colors.grey.shade100,
       child: ListTile(
-        onTap: handleFunction,
+        onTap: () {
+          handleFunction != null && handleFunction!();
+        },
         title: Text(
           title,
           style: TextStyle(
