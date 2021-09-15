@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "3836533513",
+    "firebase_url": "https://testapp-f2b7c-default-rtdb.firebaseio.com",
+    "project_id": "testapp-f2b7c",
+    "storage_bucket": "testapp-f2b7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3836533513:android:8beb7e4f43d86f6a7d51d8",
+        "android_client_info": {
+          "package_name": "com.example.fix_bike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3836533513-jpltrs9jrjhr0ih4idpesik1n1kd4jol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7aKvG36BtxQtGAs5Mqtt5SA-kv0Naqzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3836533513-jpltrs9jrjhr0ih4idpesik1n1kd4jol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
