@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "3836533513",
-    "firebase_url": "https://testapp-f2b7c-default-rtdb.firebaseio.com",
-    "project_id": "testapp-f2b7c",
-    "storage_bucket": "testapp-f2b7c.appspot.com"
+    "project_number": "869674453883",
+    "project_id": "demo124-dda26",
+    "storage_bucket": "demo124-dda26.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:3836533513:android:8beb7e4f43d86f6a7d51d8",
+        "mobilesdk_app_id": "1:869674453883:android:6c85b137a163c7d406cbde",
         "android_client_info": {
           "package_name": "com.example.fix_bike"
         }
       },
       "oauth_client": [
         {
-          "client_id": "3836533513-jpltrs9jrjhr0ih4idpesik1n1kd4jol.apps.googleusercontent.com",
+          "client_id": "869674453883-qiq9thhapegig9qp4291n6dchbtapto6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB7aKvG36BtxQtGAs5Mqtt5SA-kv0Naqzc"
+          "current_key": "AIzaSyC2XOc29xQgZlHo-wsCMpEacEzRQ5YTmXI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "3836533513-jpltrs9jrjhr0ih4idpesik1n1kd4jol.apps.googleusercontent.com",
+              "client_id": "869674453883-qiq9thhapegig9qp4291n6dchbtapto6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
