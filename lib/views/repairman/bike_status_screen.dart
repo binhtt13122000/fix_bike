@@ -12,7 +12,6 @@ class BikeStatusPage extends StatefulWidget {
 }
 
 class _BikeStatusPageState extends State<BikeStatusPage> {
-  bool _isShown = true;
 
   void _delete(BuildContext context) {
     showCupertinoDialog(
@@ -28,7 +27,6 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
               CupertinoDialogAction(
                 onPressed: () {
                   setState(() {
-                    _isShown = false;
                     Navigator.of(context).pop();
                   });
                 },
@@ -224,8 +222,8 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
 class TileItem extends StatelessWidget {
   TileItem({required this.prefixText, required this.value, this.maxLines = 1});
 
-  String prefixText, value;
-  int maxLines;
+  final String prefixText, value;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {

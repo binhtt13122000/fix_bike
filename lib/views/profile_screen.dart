@@ -210,9 +210,9 @@ class _ProfilePageState extends State<ProfilePage> {
 class TileItem extends StatelessWidget {
   TileItem({required this.title, required this.icon, this.handleFunction});
 
-  String title;
-  IconData icon;
-  Function()? handleFunction;
+  final String title;
+  final IconData icon;
+  final Function()? handleFunction;
   @override
   Widget build(BuildContext context) {
     return Ink(

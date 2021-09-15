@@ -159,8 +159,8 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
 class TileItem extends StatelessWidget {
   TileItem({required this.prefixText, required this.value, this.maxLines = 1});
 
-  String prefixText, value;
-  int maxLines;
+  final String prefixText, value;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {

@@ -10,16 +10,11 @@ class RatingPage extends StatefulWidget {
 }
 
 class _RatingPageState extends State<RatingPage> {
-  late final _ratingController;
-  late double _rating;
-
-  double _userRating = 3.0;
-  int _ratingBarMode = 1;
   double _initialRating = 2.0;
-  bool _isRTLMode = false;
   bool _isVertical = false;
 
   IconData? _selectedIcon;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +54,7 @@ class _RatingPageState extends State<RatingPage> {
                   color: Colors.amber,
                 ),
                 onRatingUpdate: (rating) {
-                  setState(() {
-                    _rating = rating;
-                  });
+                  setState(() {});
                 },
                 updateOnDrag: true,
               ),
@@ -107,7 +100,9 @@ class _RatingPageState extends State<RatingPage> {
                         size: 30,
                       ),
                     ),
-                    SizedBox(width: 8,),
+                    SizedBox(
+                      width: 8,
+                    ),
                     GestureDetector(
                       onTap: () {},
                       child: Icon(
@@ -116,7 +111,9 @@ class _RatingPageState extends State<RatingPage> {
                         size: 30,
                       ),
                     ),
-                    SizedBox(width: 8,),
+                    SizedBox(
+                      width: 8,
+                    ),
                     GestureDetector(
                       onTap: () {},
                       child: Icon(

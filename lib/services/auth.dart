@@ -27,7 +27,7 @@ class AuthMethods {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     final googleSignInAccount = await _googleSignIn.signIn();
     if (googleSignInAccount == null) return;
-    GoogleSignInAccount? user = googleSignInAccount;
+    // GoogleSignInAccount? user = googleSignInAccount;
     final googleAuth = await googleSignInAccount.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       idToken: googleAuth.idToken,

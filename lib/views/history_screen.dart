@@ -2,7 +2,6 @@ import 'package:fix_bike/models/Order.dart';
 import 'package:fix_bike/views/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -115,7 +114,7 @@ class NotificationItem extends StatelessWidget {
       required this.price,
       required this.status,
       required this.date});
-  String customerName, price, status, date;
+  final String customerName, price, status, date;
   @override
   Widget build(BuildContext context) {
     return Container(

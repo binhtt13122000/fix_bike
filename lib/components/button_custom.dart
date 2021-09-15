@@ -12,12 +12,12 @@ class ButtonCustom extends StatelessWidget {
         required this.borderRadius,
         required this.edgeInsets});
 
-  Color bgColor, bgColorPress;
-  double borderRadius;
-  EdgeInsets edgeInsets;
-  String textButton, imageUrl;
-  TextStyle textStyle;
-  void Function()? handleFunction;
+  final Color bgColor, bgColorPress;
+  final double borderRadius;
+  final EdgeInsets edgeInsets;
+  final String textButton, imageUrl;
+  final TextStyle textStyle;
+  final void Function()? handleFunction;
 
   @override
   Widget build(BuildContext context) {

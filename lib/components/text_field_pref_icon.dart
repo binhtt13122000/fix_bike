@@ -11,13 +11,13 @@ class TextFieldInput extends StatelessWidget {
         this.validator,
         this.isErrorField = false});
 
-  String labelText;
-  IconData icon;
-  TextEditingController? textEditingController;
-  TextInputType? textInputType;
-  bool isVisibleText;
-  bool? isErrorField;
-  String? Function(String?)? validator;
+  final String labelText;
+  final IconData icon;
+  final TextEditingController? textEditingController;
+  final TextInputType? textInputType;
+  final bool isVisibleText;
+  final bool? isErrorField;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {

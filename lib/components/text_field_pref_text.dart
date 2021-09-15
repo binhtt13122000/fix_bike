@@ -5,20 +5,20 @@ class TextFieldInput extends StatelessWidget {
       {required this.labelText,
         required this.prefixText,
         this.textEditingController,
-        this.initialValue = null,
+        this.initialValue,
         this.textInputType,
         this.isVisibleText = true,
         this.validator,
         this.isErrorField = false});
 
-  String labelText;
-  String prefixText;
-  String? initialValue;
-  TextEditingController? textEditingController;
-  TextInputType? textInputType;
-  bool isVisibleText;
-  bool? isErrorField;
-  String? Function(String?)? validator;
+  final String labelText;
+  final String prefixText;
+  final String? initialValue;
+  final TextEditingController? textEditingController;
+  final TextInputType? textInputType;
+  final bool isVisibleText;
+  final bool? isErrorField;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
