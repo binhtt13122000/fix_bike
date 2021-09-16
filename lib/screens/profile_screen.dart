@@ -1,5 +1,6 @@
 import 'package:fix_bike/screens/edit_profile_screen.dart';
 import 'package:fix_bike/screens/history_screen.dart';
+import 'package:fix_bike/screens/home.dart';
 import 'package:fix_bike/screens/notifi_screen.dart';
 import 'package:fix_bike/screens/support_screen.dart';
 import 'package:fix_bike/screens/user/login_screen.dart';
@@ -20,6 +21,9 @@ class _ProfilePageState extends State<ProfilePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 0) {
+        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
       if (_selectedIndex == 2) {
         Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
       }

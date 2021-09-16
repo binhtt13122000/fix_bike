@@ -1,8 +1,9 @@
 import 'package:fix_bike/components/button_custom.dart';
+import 'package:fix_bike/screens/home2.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class BikeStatusPage extends StatefulWidget {
   const BikeStatusPage({Key? key}) : super(key: key);
@@ -12,42 +13,6 @@ class BikeStatusPage extends StatefulWidget {
 }
 
 class _BikeStatusPageState extends State<BikeStatusPage> {
-
-  void _delete(BuildContext context) {
-    showCupertinoDialog(
-        context: context,
-        builder: (BuildContext ctx) {
-          return CupertinoAlertDialog(
-            content: Text('Bạn muốn tìm người sửa xe không?', style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),),
-            actions: [
-              // The "Yes" button
-              CupertinoDialogAction(
-                onPressed: () {
-                  setState(() {
-                    Navigator.of(context).pop();
-                  });
-                },
-                child: Text('Có'),
-                isDefaultAction: true,
-                isDestructiveAction: true,
-              ),
-              // The "No" button
-              CupertinoDialogAction(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Không'),
-                isDefaultAction: false,
-                isDestructiveAction: false,
-              )
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +99,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                     ),
                   ),
                   Container(
-                    height: 100,
+                    height: 220,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -164,50 +129,26 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                 ],
               ),
             ),
-            TileItem(
-              prefixText: "Số tiền thanh toán: ",
-              value: "150.000 VNĐ",
-              maxLines: 2,
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ButtonCustom(
-                    bgColor: Colors.red.shade600,
-                    bgColorPress: Colors.red.shade800,
-                    textButton: "Hủy",
-                    imageUrl: "",
-                    textStyle: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                    borderRadius: 8,
-                    edgeInsets: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 16.0,
-                    ),
-                ),
                 ButtonCustom(
                   bgColor: Colors.green.shade500,
                   bgColorPress: Colors.green.shade700,
-                  textButton: "Xác nhận sửa xe",
+                  textButton: "Xác nhận",
                   imageUrl: "",
                   textStyle: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                   borderRadius: 8,
                   edgeInsets: EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 16.0,
+                    vertical: 14.0,
+                    horizontal: 14.0,
                   ),
                   handleFunction: () {
-                    _delete(context);
+                    Get.to(() => Home2());
                   },
                 ),
               ],

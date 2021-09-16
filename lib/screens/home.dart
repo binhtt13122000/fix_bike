@@ -2,14 +2,38 @@ import 'dart:async';
 
 import 'package:fix_bike/controller/address_controller.dart';
 import 'package:fix_bike/models/Direction.dart';
+import 'package:fix_bike/screens/notifi_screen.dart';
+import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/screens/repairman/bike_status_screen.dart';
 import 'package:fix_bike/services/direction_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Home extends StatelessWidget {
-  // This widget is the root of your application.
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (_selectedIndex == 1) {
+        Get.to(() => ProfilePage(),
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 600));
+      } else if (_selectedIndex == 2) {
+        Get.to(() => NotificationPage(),
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 600));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,9 +45,6 @@ class Home extends StatelessWidget {
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              title: Text("FIX BIKE"),
-            ),
             body: MapGoogle(),
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
@@ -34,6 +55,8 @@ class Home extends StatelessWidget {
                 BottomNavigationBarItem(
                     icon: Icon(Icons.notifications), label: "Thông báo"),
               ],
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
             ),
           ),
         ));
@@ -72,132 +95,147 @@ class MapGoogleState extends State<MapGoogle> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                flex: 7,
-                child: Stack(
-                  children: <Widget>[
-                    // Replace this container with your Map widget
-                    Container(
-                      color: Colors.black,
-                      child: GoogleMap(
-                        mapType: MapType.normal,
-                        zoomControlsEnabled: true,
-                        zoomGesturesEnabled: true,
-                        polylines: {
-                          if (_info != null)
-                            Polyline(
-                              polylineId: const PolylineId('overview_polyline'),
-                              color: Colors.red,
-                              width: 5,
-                              points: _info!.polylinePoints
-                                  .map((e) => LatLng(e.latitude, e.longitude))
-                                  .toList(),
-                            ),
-                        },
-                        initialCameraPosition: CameraPosition(
-                            target: LatLng(addressController.location.value.lat,
-                                addressController.location.value.lng),
-                            zoom: 15),
-                        onMapCreated: (GoogleMapController controller) {
-                          _controller.complete(controller);
-                        },
-                        markers: {addressController.origin.value, destination},
-                      ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      right: 15,
-                      left: 15,
-                      child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                                child: TypeAheadField<String>(
-                                    itemBuilder: (context, suggestion) {
-                                      return ListTile(
-                                        title: Text(suggestion),
-                                      );
-                                    },
-                                    suggestionsCallback: (pattern) {
-                                      if (pattern == "")
-                                        return [];
-                                      else
-                                        return ["1"];
-                                    },
-                                    onSuggestionSelected: (suggestion) {},
-                                    textFieldConfiguration:
-                                        TextFieldConfiguration(
-                                      cursorColor: Colors.black,
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.go,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.search),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              borderSide: BorderSide.none),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          hintText: "Chọn một địa chỉ khác...",
-                                          filled: true,
-                                          fillColor: Colors.white),
-                                    ))),
-                          ],
+        : SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  flex: 7,
+                  child: Stack(
+                    children: <Widget>[
+                      // Replace this container with your Map widget
+                      Container(
+                        color: Colors.black,
+                        child: GoogleMap(
+                          mapType: MapType.normal,
+                          zoomControlsEnabled: true,
+                          zoomGesturesEnabled: true,
+                          polylines: {
+                            if (_info != null)
+                              Polyline(
+                                polylineId:
+                                    const PolylineId('overview_polyline'),
+                                color: Colors.red,
+                                width: 5,
+                                points: _info!.polylinePoints
+                                    .map((e) => LatLng(e.latitude, e.longitude))
+                                    .toList(),
+                              ),
+                          },
+                          initialCameraPosition: CameraPosition(
+                              target: LatLng(
+                                  addressController.location.value.lat,
+                                  addressController.location.value.lng),
+                              zoom: 15),
+                          onMapCreated: (GoogleMapController controller) {
+                            _controller.complete(controller);
+                          },
+                          markers: {
+                            addressController.origin.value,
+                            destination
+                          },
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Flexible(
-                  flex: 3,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RichText(
-                          text: new TextSpan(
-                            // Note: Styles for TextSpans must be explicitly defined.
-                            // Child text spans will inherit styles from parent
-                            style: new TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.black,
-                            ),
-                            children: <TextSpan>[
-                              new TextSpan(
-                                  text: 'Địa Chỉ: ',
-                                  style: new TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              new TextSpan(
-                                text: addressController.location.value.address,
-                              ),
+                      Positioned(
+                        top: 10,
+                        right: 15,
+                        left: 15,
+                        child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                  child: TypeAheadField<String>(
+                                      itemBuilder: (context, suggestion) {
+                                        return ListTile(
+                                          title: Text(suggestion),
+                                        );
+                                      },
+                                      suggestionsCallback: (pattern) {
+                                        if (pattern == "")
+                                          return [];
+                                        else
+                                          return ["1"];
+                                      },
+                                      onSuggestionSelected: (suggestion) {},
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                        cursorColor: Colors.black,
+                                        keyboardType: TextInputType.text,
+                                        textInputAction: TextInputAction.go,
+                                        decoration: InputDecoration(
+                                            prefixIcon: Icon(Icons.search),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide.none),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                            hintText:
+                                                "Chọn một địa chỉ khác...",
+                                            filled: true,
+                                            fillColor: Colors.white),
+                                      ))),
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              child: Text("Tìm đường"),
-                              onPressed: () => drawLine(
-                                  addressController.origin.value.position,
-                                  destination.position),
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                    flex: 3,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                            text: new TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: new TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                new TextSpan(
+                                    text: 'Địa Chỉ: ',
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                new TextSpan(
+                                  text:
+                                      addressController.location.value.address,
+                                ),
+                              ],
                             ),
-                            ElevatedButton(
-                              child: Text("Cập nhật tình trạng xe"),
-                              onPressed: null,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ))
-            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              // ElevatedButton(
+                              //   child: Text("Tìm đường"),
+                              //   onPressed: () => drawLine(
+                              //       addressController.origin.value.position,
+                              //       destination.position),
+                              // ),
+                              ElevatedButton(
+                                child: Text("Cập nhật tình trạng xe"),
+                                onPressed: () {
+                                  Get.to(() => BikeStatusPage(),
+                                      transition:
+                                          Transition.rightToLeftWithFade,
+                                      duration: Duration(milliseconds: 500));
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
           ));
   }
 

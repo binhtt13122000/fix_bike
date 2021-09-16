@@ -1,5 +1,6 @@
 import 'package:fix_bike/components/button_custom.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,6 +12,44 @@ class BikeStatusPage extends StatefulWidget {
 }
 
 class _BikeStatusPageState extends State<BikeStatusPage> {
+  void _delete(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            content: Text(
+              'Bạn muốn tìm người sửa xe không?',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            actions: [
+              // The "Yes" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text('Có'),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              // The "No" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Không'),
+                isDefaultAction: false,
+                isDestructiveAction: false,
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +136,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                     ),
                   ),
                   Container(
-                    height: 220,
+                    height: 100,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -127,24 +166,51 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                 ],
               ),
             ),
+            TileItem(
+              prefixText: "Số tiền thanh toán: ",
+              value: "150.000 VNĐ",
+              maxLines: 2,
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ButtonCustom(
-                  bgColor: Colors.green.shade500,
-                  bgColorPress: Colors.green.shade700,
-                  textButton: "Xác nhận",
+                  bgColor: Colors.red.shade600,
+                  bgColorPress: Colors.red.shade800,
+                  textButton: "Hủy",
                   imageUrl: "",
                   textStyle: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                   borderRadius: 8,
                   edgeInsets: EdgeInsets.symmetric(
-                    vertical: 14.0,
-                    horizontal: 14.0,
+                    vertical: 10.0,
+                    horizontal: 16.0,
                   ),
+                ),
+                ButtonCustom(
+                  bgColor: Colors.green.shade500,
+                  bgColorPress: Colors.green.shade700,
+                  textButton: "Xác nhận sửa xe",
+                  imageUrl: "",
+                  textStyle: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                  borderRadius: 8,
+                  edgeInsets: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 16.0,
+                  ),
+                  handleFunction: () {
+                    _delete(context);
+                  },
                 ),
               ],
             ),
@@ -154,7 +220,6 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
     );
   }
 }
-
 
 class TileItem extends StatelessWidget {
   TileItem({required this.prefixText, required this.value, this.maxLines = 1});

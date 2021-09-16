@@ -1,6 +1,9 @@
 import 'package:fix_bike/components/text_field_pref_text.dart';
+import 'package:fix_bike/screens/home.dart';
+import 'package:fix_bike/screens/notifi_screen.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -10,11 +13,16 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  int _selectedIndex = 2;
-
+  int _selectedIndex = 1;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 0) {
+        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
+      if (_selectedIndex == 2) {
+        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
     });
   }
 

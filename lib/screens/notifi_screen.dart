@@ -1,3 +1,4 @@
+import 'package:fix_bike/screens/home.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ class _NotificationPageState extends State<NotificationPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 0) {
+        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
       if(_selectedIndex == 1) {
         Get.to(() => ProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
       }

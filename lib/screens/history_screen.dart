@@ -1,7 +1,10 @@
 import 'package:fix_bike/models/Order.dart';
+import 'package:fix_bike/screens/home.dart';
+import 'package:fix_bike/screens/notifi_screen.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -43,6 +46,19 @@ class _HistoryPageState extends State<HistoryPage> {
         status: "Thành công",
         date: "08/04/2021"),
   ];
+  int _selectedIndex = 1;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (_selectedIndex == 0) {
+        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
+      if (_selectedIndex == 2) {
+        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +97,8 @@ class _HistoryPageState extends State<HistoryPage> {
             label: 'Thông báo',
           ),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
       body: Column(
         children: [
@@ -114,7 +132,9 @@ class NotificationItem extends StatelessWidget {
       required this.price,
       required this.status,
       required this.date});
+
   final String customerName, price, status, date;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -170,7 +190,9 @@ class NotificationItem extends StatelessWidget {
               SizedBox(
                 height: 18,
               ),
-              Divider(thickness: 2,),
+              Divider(
+                thickness: 2,
+              ),
             ],
           ),
         ),

@@ -53,7 +53,6 @@ class AuthMethods {
       DatabaseMethods()
           .addUserInfoToDB(userDetails.uid, userInfoMap)
           .then((value) {});
-      Get.offAll(() => ProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(microseconds: 600));
     }
   }
 

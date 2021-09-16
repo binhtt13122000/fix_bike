@@ -3,6 +3,7 @@ import 'package:fix_bike/models/Message.dart';
 import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
@@ -44,8 +45,7 @@ class _MessagePageState extends State<MessagePage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
       ),
@@ -62,7 +62,7 @@ class _MessagePageState extends State<MessagePage> {
                       ? MainAxisAlignment.end
                       : MainAxisAlignment.start,
                   children: [
-                    if(!listMessage[index].isSender)
+                    if (!listMessage[index].isSender)
                       CircleAvatar(
                         radius: 16,
                         backgroundImage: AssetImage(imageUser1),
@@ -145,23 +145,17 @@ class TextMessage extends StatelessWidget {
         maxWidth: MediaQuery.of(context).size.width * 0.7,
       ),
       child: Container(
-        margin: EdgeInsets.only(
-            left: 14, right: 14, top: 20, bottom: 20),
+        margin: EdgeInsets.only(left: 14, right: 14, top: 20, bottom: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: (!message.isSender
-              ? Colors.grey.shade200
-              : Colors.blue[200]),
+          color: (!message.isSender ? Colors.grey.shade200 : Colors.blue[200]),
         ),
         padding: EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
         child: Text(
           message.messageText,
           softWrap: true,
-          style: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w500),
-          textAlign: !message.isSender
-              ? TextAlign.left
-              : TextAlign.right,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          textAlign: !message.isSender ? TextAlign.left : TextAlign.right,
         ),
       ),
     );
