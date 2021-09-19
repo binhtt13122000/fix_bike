@@ -1,19 +1,11 @@
+import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/models/Order.dart';
-import 'package:fix_bike/screens/home.dart';
-import 'package:fix_bike/screens/notifi_screen.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({Key? key}) : super(key: key);
-
-  @override
-  _HistoryPageState createState() => _HistoryPageState();
-}
-
-class _HistoryPageState extends State<HistoryPage> {
+class HistoryPage extends GetWidget {
   List<Order> listOrder = [
     new Order(
         customerName: "Nguyễn Văn A",
@@ -46,18 +38,6 @@ class _HistoryPageState extends State<HistoryPage> {
         status: "Thành công",
         date: "08/04/2021"),
   ];
-  int _selectedIndex = 1;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 0) {
-        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-      if (_selectedIndex == 2) {
-        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,24 +62,7 @@ class _HistoryPageState extends State<HistoryPage> {
         ),
         centerTitle: true,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_outlined),
-            label: 'Thông tin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: 'Thông báo',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: BottomNav(),
       body: Column(
         children: [
           SizedBox(

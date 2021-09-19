@@ -1,17 +1,15 @@
-import 'package:fix_bike/components/button_custom.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/components/ButtonCustom.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/Home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-class BikeStatusPage extends StatefulWidget {
-  const BikeStatusPage({Key? key}) : super(key: key);
-
-  @override
-  _BikeStatusPageState createState() => _BikeStatusPageState();
-}
-
-class _BikeStatusPageState extends State<BikeStatusPage> {
+class BikeStatusPage extends GetWidget {
+  final StatusAppController statusAppController =
+      Get.put(StatusAppController());
   void _delete(BuildContext context) {
     showCupertinoDialog(
         context: context,
@@ -28,9 +26,9 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
               // The "Yes" button
               CupertinoDialogAction(
                 onPressed: () {
-                  setState(() {
-                    Navigator.of(context).pop();
-                  });
+                  statusAppController.setStatus(2);
+                  Navigator.of(context).pop();
+                  Get.to(Home());
                 },
                 child: Text('Có'),
                 isDefaultAction: true,
@@ -65,27 +63,11 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_outlined),
-            label: 'Thông tin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: 'Thông báo',
-          ),
-        ],
-      ),
+      bottomNavigationBar: BottomNav(),
       body: SafeArea(
         child: ListView(
           shrinkWrap: true,
@@ -178,6 +160,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ButtonCustom(
+                  handleFunction: () => {Get.back()},
                   bgColor: Colors.red.shade600,
                   bgColorPress: Colors.red.shade800,
                   textButton: "Hủy",

@@ -1,56 +1,17 @@
-import 'package:fix_bike/screens/edit_profile_screen.dart';
-import 'package:fix_bike/screens/history_screen.dart';
-import 'package:fix_bike/screens/home.dart';
-import 'package:fix_bike/screens/notifi_screen.dart';
-import 'package:fix_bike/screens/support_screen.dart';
-import 'package:fix_bike/screens/user/login_screen.dart';
+import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/screens/EditProfileScreen.dart';
+import 'package:fix_bike/screens/HistoryScreen.dart';
+import 'package:fix_bike/screens/SupportScreen.dart';
+import 'package:fix_bike/screens/user/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  int _selectedIndex = 1;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 0) {
-        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-      if (_selectedIndex == 2) {
-        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-    });
-  }
-
+class ProfilePage extends GetWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_outlined),
-            label: 'Thông tin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: 'Thông báo',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: BottomNav(),
       body: SafeArea(
         child: Column(
           children: [
@@ -88,7 +49,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       trailing: RawMaterialButton(
                           onPressed: () {
-                            Get.to(() => EditProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+                            Get.to(() => EditProfilePage(),
+                                transition: Transition.rightToLeftWithFade,
+                                duration: Duration(milliseconds: 600));
                           },
                           child: Icon(
                             Icons.edit,
@@ -133,7 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Lịch sử',
                     icon: Icons.history,
                     handleFunction: () {
-                      Get.to(() => HistoryPage(), transition: Transition.rightToLeftWithFade, duration: Duration(microseconds: 600));
+                      Get.to(() => HistoryPage(),
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(microseconds: 600));
                     },
                   ),
                   Divider(
@@ -143,7 +108,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Hổ trợ',
                     icon: Icons.support_agent_outlined,
                     handleFunction: () {
-                      Get.to(() => SupportPage(), transition: Transition.rightToLeftWithFade, duration: Duration(microseconds: 600));
+                      Get.to(() => SupportPage(),
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(microseconds: 600));
                     },
                   ),
                   Divider(
@@ -161,13 +128,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.offAll(() => LoginPage(), transition: Transition.leftToRightWithFade, duration: Duration(microseconds: 600));
+                        Get.offAll(() => LoginPage(),
+                            transition: Transition.leftToRightWithFade,
+                            duration: Duration(microseconds: 600));
                       },
                       style: ButtonStyle(
                         elevation: MaterialStateProperty.all(4),
                         backgroundColor:
                             MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
+                                (Set<MaterialState> states) {
                           if (states.contains(MaterialState.pressed)) {
                             return Colors.red.shade900;
                           }

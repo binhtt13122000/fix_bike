@@ -1,6 +1,7 @@
-import 'package:fix_bike/styles/my_icons.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/Home.dart';
+import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:fix_bike/models/Message.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,8 +31,13 @@ class _MessagePageState extends State<MessagePage> {
         isSend: false),
   ];
 
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    StatusAppController controller = Get.put(StatusAppController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -111,7 +117,10 @@ class _MessagePageState extends State<MessagePage> {
                     width: 15,
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.setStatus(4);
+                      Get.to(Home());
+                    },
                     child: Icon(
                       Icons.send,
                       color: Colors.white,

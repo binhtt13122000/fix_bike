@@ -1,6 +1,6 @@
-import 'package:fix_bike/components/button_custom.dart';
-import 'package:fix_bike/screens/home2.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/components/ButtonCustom.dart';
+import 'package:fix_bike/screens/Home.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -148,7 +148,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                     horizontal: 14.0,
                   ),
                   handleFunction: () {
-                    Get.to(() => Home2());
+                    Get.to(() => Home());
                   },
                 ),
               ],

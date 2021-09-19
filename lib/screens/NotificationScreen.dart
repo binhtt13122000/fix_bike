@@ -1,5 +1,5 @@
-import 'package:fix_bike/screens/home.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/screens/Home.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,10 +17,14 @@ class _NotificationPageState extends State<NotificationPage> {
     setState(() {
       _selectedIndex = index;
       if (_selectedIndex == 0) {
-        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+        Get.to(() => Home(),
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 600));
       }
-      if(_selectedIndex == 1) {
-        Get.to(() => ProfilePage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
+      if (_selectedIndex == 1) {
+        Get.to(() => ProfilePage(),
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 600));
       }
     });
   }
@@ -94,9 +98,7 @@ class _NotificationItemState extends State<NotificationItem> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 4, left: 12, right: 12),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6)
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
       child: Ink(
         color: Colors.grey.shade100,
         child: ListTile(
@@ -107,25 +109,26 @@ class _NotificationItemState extends State<NotificationItem> {
           },
           title: Container(
             padding: EdgeInsets.only(top: 14, bottom: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6)
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Checkbox(
                     shape: CircleBorder(),
-                    value: _isSelected, onChanged: (value) {
-                  setState(() {
-                    _isSelected = value!;
-                  });
-                }),
+                    value: _isSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        _isSelected = value!;
+                      });
+                    }),
                 Icon(
                   CupertinoIcons.person_crop_square,
                   size: 40,
                 ),
-                SizedBox(width: 10.0,),
+                SizedBox(
+                  width: 10.0,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,4 @@
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,10 @@ class _SupportPageState extends State<SupportPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-           icon: Icon(Icons.close, size: 30.0,),
+          icon: Icon(
+            Icons.close,
+            size: 30.0,
+          ),
           onPressed: () {
             Get.back();
           },
@@ -36,7 +39,8 @@ class _SupportPageState extends State<SupportPage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
             },
           )
         ],
@@ -82,16 +86,16 @@ class _SupportPageState extends State<SupportPage> {
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
               ),
-                child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                    hintText: 'Type your message here...',
-                    border: InputBorder.none,
-                  ),
+              child: TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: 'Type your message here...',
+                  border: InputBorder.none,
                 ),
               ),
             ),
+          ),
         ],
       ),
     );

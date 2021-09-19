@@ -1,6 +1,7 @@
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RatingPage extends StatefulWidget {
   const RatingPage({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _RatingPageState extends State<RatingPage> {
 
   @override
   Widget build(BuildContext context) {
+    StatusAppController controller = Get.put(StatusAppController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,8 +32,8 @@ class _RatingPageState extends State<RatingPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            controller.setStatus(1);
+            Get.back();
           },
         ),
       ),
@@ -132,7 +134,10 @@ class _RatingPageState extends State<RatingPage> {
                       width: 15,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.setStatus(1);
+                        Get.back();
+                      },
                       child: Text(
                         'Send',
                         style: TextStyle(

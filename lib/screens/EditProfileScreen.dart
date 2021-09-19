@@ -1,31 +1,10 @@
-import 'package:fix_bike/components/text_field_pref_text.dart';
-import 'package:fix_bike/screens/home.dart';
-import 'package:fix_bike/screens/notifi_screen.dart';
-import 'package:fix_bike/screens/profile_screen.dart';
+import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/components/TextFieldPrefText.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
-}
-
-class _EditProfilePageState extends State<EditProfilePage> {
-  int _selectedIndex = 1;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 0) {
-        Get.to(() => Home(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-      if (_selectedIndex == 2) {
-        Get.to(() => NotificationPage(), transition: Transition.rightToLeftWithFade, duration: Duration(milliseconds: 600));
-      }
-    });
-  }
-
+class EditProfilePage extends GetWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +12,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
           },
         ),
         title: Text(
@@ -45,24 +25,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
         centerTitle: true,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_outlined),
-            label: 'Thông tin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: 'Thông báo',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: BottomNav(),
       body: Container(
         color: Colors.white,
         margin: EdgeInsets.only(top: 50, bottom: 30),
