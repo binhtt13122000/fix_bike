@@ -1,33 +1,11 @@
+import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/screens/Home.dart';
 import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
-
-  @override
-  _NotificationPageState createState() => _NotificationPageState();
-}
-
-class _NotificationPageState extends State<NotificationPage> {
-  int _selectedIndex = 2;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 0) {
-        Get.to(() => Home(),
-            transition: Transition.rightToLeftWithFade,
-            duration: Duration(milliseconds: 600));
-      }
-      if (_selectedIndex == 1) {
-        Get.to(() => ProfilePage(),
-            transition: Transition.rightToLeftWithFade,
-            duration: Duration(milliseconds: 600));
-      }
-    });
-  }
+class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -44,24 +22,7 @@ class _NotificationPageState extends State<NotificationPage> {
         // leading: Icon(Icons.arrow_back_ios),
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_outlined),
-            label: 'Thông tin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: 'Thông báo',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: BottomNav(),
       body: Column(
         children: [
           SizedBox(

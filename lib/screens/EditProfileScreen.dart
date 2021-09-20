@@ -12,8 +12,7 @@ class EditProfilePage extends GetWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
         title: Text(
@@ -72,8 +71,9 @@ class EditProfilePage extends GetWidget {
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                    Get.to(() => ProfilePage(),
+                        transition: Transition.leftToRightWithFade,
+                        duration: Duration(milliseconds: 600));
                   },
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all(4),

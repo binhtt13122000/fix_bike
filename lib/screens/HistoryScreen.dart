@@ -49,8 +49,7 @@ class HistoryPage extends GetWidget {
             size: 30.0,
           ),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
         title: Text(
