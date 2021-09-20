@@ -4,7 +4,7 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
-final googleApiKey = "";
+final googleApiKey = "AIzaSyCmc1T4bTp9U79b3Lq5jkOgqjAO51cfQvI";
 
 class Response {
   List<Place> predictions = List.empty();

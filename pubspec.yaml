@@ -22,7 +22,7 @@ dependencies:
   geolocator: ^7.6.0
   location: ^4.2.0
   geocoder: ^0.2.1
-  flutter_dotenv: ^5.0.2
+  # flutter_dotenv: ^5.0.2
   get: ^4.3.8
   flutter_typeahead: ^3.2.1
   flutter_svg: ^0.22.0
@@ -44,7 +44,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - .env
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -53,8 +53,7 @@ class AddressController extends GetxController {
     } on Exception catch (_) {
       printError(info: "Error");
     } finally {
-      new Future.delayed(
-          const Duration(milliseconds: 2000), () => {loading.value = false});
+      loading.value = false;
     }
   }
 }

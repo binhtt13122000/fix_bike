@@ -81,7 +81,6 @@ class MapGoogleState extends State<MapGoogle> {
             (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
       }
     } else if (statusAppController.status.value == 3) {
-      print("TT");
       if (destination != null) {
         drawLine(
             LatLng(addressController.location.value.getLat,
@@ -151,7 +150,6 @@ class MapGoogleState extends State<MapGoogle> {
               children: <Widget>[
                 // Replace this container with your Map widget
                 Container(
-                  color: Colors.black,
                   child: GoogleMap(
                     mapType: MapType.normal,
                     zoomControlsEnabled: false,
