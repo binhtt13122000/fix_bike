@@ -72,14 +72,14 @@ class MapGoogleState extends State<MapGoogle> {
       setState(() {
         destination = defautDestination;
       });
-      if (destination != null) {
-        _controller.future.then((value) => {
-              value.animateCamera(CameraUpdate.newCameraPosition(
-                  CameraPosition(target: destination!.position, zoom: 13)))
-            });
-        _controller.future.then(
-            (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
-      }
+      // if (destination != null) {
+        // _controller.future.then((value) => {
+        //       value.animateCamera(CameraUpdate.newCameraPosition(
+        //           CameraPosition(target: destination!.position, zoom: 13)))
+        //     });
+        // _controller.future.then(
+        //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
+      // }
     } else if (statusAppController.status.value == 3) {
       if (destination != null) {
         drawLine(
@@ -258,8 +258,6 @@ class MapGoogleState extends State<MapGoogle> {
                                       ? Normal()
                                       : (statusAppController.status.value == 2
                                           ? Found(
-                                              name: "Nguyễn Văn A",
-                                              minutes: 15,
                                               destination:
                                                   destination!.position,
                                               origin: LatLng(
