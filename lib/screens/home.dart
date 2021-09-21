@@ -13,7 +13,6 @@ import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/services/DirectionService.dart';
 import 'package:fix_bike/services/PlacesService.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -51,8 +50,6 @@ class MapGoogleState extends State<MapGoogle> {
   final PlacesService placesService = PlacesService();
   final StatusAppController statusAppController =
       Get.put(StatusAppController());
-  final TextEditingController _typeAheadController = TextEditingController();
-
   Marker? destination;
   Marker defautDestination = new Marker(
       markerId: new MarkerId("destination"),
@@ -69,17 +66,13 @@ class MapGoogleState extends State<MapGoogle> {
         statusAppController.status.value == 4) {
       cancel();
     } else if (statusAppController.status.value == 2) {
-      setState(() {
-        destination = defautDestination;
-      });
-      // if (destination != null) {
-        // _controller.future.then((value) => {
-        //       value.animateCamera(CameraUpdate.newCameraPosition(
-        //           CameraPosition(target: destination!.position, zoom: 13)))
-        //     });
-        // _controller.future.then(
-        //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
-      // }
+      if (addressController.markers.isNotEmpty &&
+          statusAppController.markerId.value.isNotEmpty) {
+        setState(() {
+          destination = addressController.markers.firstWhere((element) =>
+              element.markerId.value == statusAppController.markerId.value);
+        });
+      }
     } else if (statusAppController.status.value == 3) {
       if (destination != null) {
         drawLine(
@@ -88,6 +81,34 @@ class MapGoogleState extends State<MapGoogle> {
             destination!.position);
       }
     }
+  }
+
+  double getZoomLevel(double radius) {
+    double zoomLevel = 11;
+    if (radius > 0) {
+      double radiusElevated = radius + radius / 2;
+      double scale = radiusElevated / 500;
+      zoomLevel = 16 - log(scale) / log(2);
+    }
+    zoomLevel = double.parse(zoomLevel.toStringAsFixed(2));
+    return zoomLevel;
+  }
+
+  void toggleSwitch(bool value) {
+    double zoom = 15.0;
+    if (statusAppController.switched.isFalse) {
+      statusAppController.setSwitch(true);
+      zoom = getZoomLevel(3000);
+    } else {
+      statusAppController.setSwitch(false);
+      zoom = 15.0;
+    }
+    _controller.future.then((value) => {
+          value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+              target: LatLng(addressController.location.value.lat,
+                  addressController.location.value.lng),
+              zoom: zoom)))
+        });
   }
 
   redraw(lat, lng) {
@@ -128,7 +149,6 @@ class MapGoogleState extends State<MapGoogle> {
   }
 
   void drawLine(LatLng origin, LatLng destinationLatLng) async {
-    print("MM");
     if (destination != null) {
       DirectionsRepository()
           .getDirections(origin: origin, destination: destinationLatLng)
@@ -137,6 +157,12 @@ class MapGoogleState extends State<MapGoogle> {
       controller.animateCamera(CameraUpdate.newLatLngBounds(
           getBounds([destination!, addressController.origin.value]), 80.0));
     }
+  }
+
+  void onTap(String markerId) {
+    setState(() {
+      destination = Marker(markerId: MarkerId(markerId));
+    });
   }
 
   @override
@@ -172,10 +198,11 @@ class MapGoogleState extends State<MapGoogle> {
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
                     },
-                    markers: {
-                      addressController.origin.value,
-                      if (destination != null) destination!
-                    },
+                    markers: statusAppController.switched.isTrue
+                        ? (destination != null
+                            ? {destination!}
+                            : addressController.markers.toSet())
+                        : {addressController.origin.value},
                   ),
                 ),
                 Positioned(
@@ -183,115 +210,68 @@ class MapGoogleState extends State<MapGoogle> {
                   right: 15,
                   left: 15,
                   child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: TypeAheadField<Place>(
-                                loadingBuilder: (context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                noItemsFoundBuilder: (context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                itemBuilder: (context, suggestion) {
-                                  return ListTile(
-                                    title: Text(suggestion.description),
-                                  );
-                                },
-                                suggestionsCallback: (pattern) async {
-                                  if (pattern == "")
-                                    return List.empty();
-                                  else
-                                    return await placesService.getPlaces(
-                                        input: pattern);
-                                },
-                                onSuggestionSelected: (suggestion) {
-                                  this._typeAheadController.text =
-                                      suggestion.description;
-                                  addressController.setAddress(
-                                      suggestion.description,
-                                      suggestion.placeId,
-                                      redraw);
-                                },
-                                textFieldConfiguration: TextFieldConfiguration(
-                                  controller: this._typeAheadController,
-                                  cursorColor: Colors.black,
-                                  keyboardType: TextInputType.text,
-                                  textInputAction: TextInputAction.go,
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.search),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide.none),
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      hintText: "Chọn một địa chỉ khác...",
-                                      filled: true,
-                                      fillColor: Colors.white),
-                                ))),
-                      ],
-                    ),
-                  ),
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Switch(
+                        onChanged: toggleSwitch,
+                        value: statusAppController.switched.value,
+                        activeColor: Colors.blue,
+                      )
+                    ],
+                  )),
                 ),
-                Positioned(
-                  right: 15,
-                  left: 15,
-                  bottom: 20,
-                  child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Container(
-                                width: double.infinity,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white),
-                                child: Padding(
-                                  padding: EdgeInsets.all(15),
-                                  child: statusAppController.status.value == 1
-                                      ? Normal()
-                                      : (statusAppController.status.value == 2
-                                          ? Found(
-                                              destination:
-                                                  destination!.position,
-                                              origin: LatLng(
-                                                  addressController
-                                                      .location.value.getLat,
-                                                  addressController
-                                                      .location.value.getLng),
-                                              draw: drawLine)
-                                          : (statusAppController.status.value ==
-                                                  3
-                                              ? Ordered(
-                                                  name: "Nguyễn Văn A",
-                                                  minutes: 15,
-                                                  cancel: cancel)
-                                              : (statusAppController
-                                                          .status.value ==
-                                                      4
-                                                  ? Fixed(
-                                                      cancel: cancel,
-                                                      money: "150.000",
-                                                    )
-                                                  : null))),
-                                ))),
-                      ],
+                if (statusAppController.status.value != 1)
+                  Positioned(
+                    right: 15,
+                    left: 15,
+                    bottom: 20,
+                    child: Container(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Container(
+                                  width: double.infinity,
+                                  height: 150,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: statusAppController.status.value == 1
+                                        ? Normal()
+                                        : (statusAppController.status.value == 2
+                                            ? Found(
+                                                destination:
+                                                    destination!.position,
+                                                origin: LatLng(
+                                                    addressController
+                                                        .location.value.getLat,
+                                                    addressController
+                                                        .location.value.getLng),
+                                                draw: drawLine)
+                                            : (statusAppController
+                                                        .status.value ==
+                                                    3
+                                                ? Ordered(
+                                                    name: "Nguyễn Văn A",
+                                                    minutes: 15,
+                                                    cancel: cancel)
+                                                : (statusAppController
+                                                            .status.value ==
+                                                        4
+                                                    ? Fixed(
+                                                        cancel: cancel,
+                                                        money: "150.000",
+                                                      )
+                                                    : null))),
+                                  ))),
+                        ],
+                      ),
                     ),
-                  ),
-                )
+                  )
               ],
             ),
           ));
   }
-
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
 }

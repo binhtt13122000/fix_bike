@@ -1,18 +1,14 @@
 import 'package:fix_bike/components/ButtonCustom.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/screens/Home.dart';
-import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class BikeStatusPage extends StatefulWidget {
-  const BikeStatusPage({Key? key}) : super(key: key);
-
-  @override
-  _BikeStatusPageState createState() => _BikeStatusPageState();
-}
-
-class _BikeStatusPageState extends State<BikeStatusPage> {
+class BikeStatusPage extends StatelessWidget {
+  final String markerId = Get.arguments;
+  final StatusAppController statusAppController =
+      Get.put(StatusAppController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +24,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
       ),
@@ -148,7 +143,8 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                     horizontal: 14.0,
                   ),
                   handleFunction: () {
-                    Get.to(() => Home());
+                    statusAppController.setStatus(2);
+                    Get.to(() => Home(), arguments: markerId);
                   },
                 ),
               ],
