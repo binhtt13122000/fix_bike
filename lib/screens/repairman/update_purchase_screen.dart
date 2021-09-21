@@ -6,14 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class BikeStatusPage extends StatefulWidget {
-  const BikeStatusPage({Key? key}) : super(key: key);
+class UpdatePurchasePage extends StatelessWidget {
+  const UpdatePurchasePage({Key? key}) : super(key: key);
 
-  @override
-  _BikeStatusPageState createState() => _BikeStatusPageState();
-}
-
-class _BikeStatusPageState extends State<BikeStatusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +24,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+            Get.back();
           },
         ),
       ),
@@ -85,7 +79,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                     ),
                   ),
                   Container(
-                    height: 220,
+                    height: 100,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -115,6 +109,14 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                 ],
               ),
             ),
+            TileItem(
+              prefixText: "Số tiền thanh toán: ",
+              value: "150.000 VNĐ",
+              maxLines: 2,
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -138,7 +140,7 @@ class _BikeStatusPageState extends State<BikeStatusPage> {
                 ButtonCustom(
                   bgColor: Colors.green.shade500,
                   bgColorPress: Colors.green.shade700,
-                  textButton: "Xác nhận sửa xe",
+                  textButton: "Xác nhận",
                   imageUrl: "",
                   textStyle: TextStyle(
                     fontSize: 18.0,
