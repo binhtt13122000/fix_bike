@@ -1,7 +1,5 @@
 import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/components/ButtonCustom.dart';
-import 'package:fix_bike/screens/Home.dart';
-import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
