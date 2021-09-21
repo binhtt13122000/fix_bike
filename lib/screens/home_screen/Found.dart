@@ -1,8 +1,8 @@
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/MessageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 
 class Found extends GetWidget {
   final Function draw;
@@ -25,7 +25,6 @@ class Found extends GetWidget {
 
   @override
   Widget build(BuildContext context) {
-    new Future.delayed(const Duration(seconds: 5), handleChangeScreen);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,16 +34,62 @@ class Found extends GetWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Đang tìm người sửa xe',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+              "Thông tin khách hàng",
+              textAlign: TextAlign.center,
+            ),
+            RichText(
+              text: new TextSpan(
+                // Note: Styles for TextSpans must be explicitly defined.
+                // Child text spans will inherit styles from parent
+                style: new TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  new TextSpan(
+                      text: 'Tên: ',
+                      style: new TextStyle(fontWeight: FontWeight.bold)),
+                  new TextSpan(
+                    text: "Nguyễn Văn A",
+                  ),
+                ],
               ),
             ),
-            JumpingDotsProgressIndicator(
-              fontSize: 20.0,
+            RichText(
+              text: new TextSpan(
+                // Note: Styles for TextSpans must be explicitly defined.
+                // Child text spans will inherit styles from parent
+                style: new TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  new TextSpan(
+                      text: 'Thời gian dự kiến sẽ đến: ',
+                      style: new TextStyle(fontWeight: FontWeight.bold)),
+                  new TextSpan(
+                    text: '15 phút',
+                  ),
+                ],
+              ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  child: Text("Nhắn tin"),
+                  onPressed: () => Get.to(MessagePage()),
+                ),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red)),
+                    child: Text("Nhắn tin"),
+                    onPressed: () {
+                      Get.to(MessagePage());
+                    })
+              ],
+            )
           ],
         )
       ],
