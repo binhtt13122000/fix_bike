@@ -20,10 +20,12 @@ class Ordered extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Thông tin khách hàng",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        Center(
+          child: Text(
+            "Thông tin khách hàng",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          ),
         ),
         RichText(
           text: new TextSpan(

@@ -17,11 +17,14 @@ class Found extends GetWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Thông tin khách hàng",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        Center(
+          child: Text(
+            "Thông tin khách hàng",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
