@@ -72,15 +72,12 @@ class MapGoogleState extends State<MapGoogle> {
           destination = addressController.markers.firstWhere((element) =>
               element.markerId.value == statusAppController.markerId.value);
         });
-      }
-    } else if (statusAppController.status.value == 3) {
-      if (destination != null) {
         drawLine(
-            LatLng(addressController.location.value.getLat,
-                addressController.location.value.getLng),
+            LatLng(addressController.location.value.lat,
+                addressController.location.value.lng),
             destination!.position);
       }
-    }
+    } else if (statusAppController.status.value == 3) {}
   }
 
   double getZoomLevel(double radius) {
@@ -95,19 +92,18 @@ class MapGoogleState extends State<MapGoogle> {
   }
 
   void toggleSwitch(bool value) {
-    double zoom = 15.0;
     if (statusAppController.switched.isFalse) {
       statusAppController.setSwitch(true);
-      zoom = getZoomLevel(3000);
+      statusAppController.zoom.value = getZoomLevel(3000);
     } else {
       statusAppController.setSwitch(false);
-      zoom = 15.0;
+      statusAppController.zoom.value = 15.0;
     }
     _controller.future.then((value) => {
           value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
               target: LatLng(addressController.location.value.lat,
                   addressController.location.value.lng),
-              zoom: zoom)))
+              zoom: statusAppController.zoom.value)))
         });
   }
 
@@ -127,7 +123,7 @@ class MapGoogleState extends State<MapGoogle> {
           value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
               target: LatLng(addressController.location.value.lat,
                   addressController.location.value.lng),
-              zoom: 15)))
+              zoom: statusAppController.zoom.value)))
         });
   }
 
@@ -194,13 +190,13 @@ class MapGoogleState extends State<MapGoogle> {
                     initialCameraPosition: CameraPosition(
                         target: LatLng(addressController.location.value.lat,
                             addressController.location.value.lng),
-                        zoom: 15),
+                        zoom: statusAppController.zoom.value),
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
                     },
                     markers: statusAppController.switched.isTrue
                         ? (destination != null
-                            ? {destination!}
+                            ? {destination!, addressController.origin.value}
                             : addressController.markers.toSet())
                         : {addressController.origin.value},
                   ),
@@ -249,7 +245,7 @@ class MapGoogleState extends State<MapGoogle> {
                                                         .location.value.getLat,
                                                     addressController
                                                         .location.value.getLng),
-                                                draw: drawLine)
+                                              )
                                             : (statusAppController
                                                         .status.value ==
                                                     3

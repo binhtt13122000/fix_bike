@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class BikeStatusPage extends StatelessWidget {
-  final String markerId = Get.arguments;
-  final StatusAppController statusAppController =
-      Get.put(StatusAppController());
+class UpdatePurchasePage extends StatelessWidget {
+  const UpdatePurchasePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    StatusAppController statusAppController = Get.put(StatusAppController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -62,11 +62,6 @@ class BikeStatusPage extends StatelessWidget {
             Divider(
               height: 1,
             ),
-            TileItem(
-              prefixText: "Địa chỉ: ",
-              value: "12 Nguyễn Thị Minh Khai, Quận 1, tp Hồ Chí Minh",
-              maxLines: 2,
-            ),
             Container(
               margin: EdgeInsets.all(16.0),
               child: Column(
@@ -80,7 +75,7 @@ class BikeStatusPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 220,
+                    height: 100,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -110,6 +105,14 @@ class BikeStatusPage extends StatelessWidget {
                 ],
               ),
             ),
+            TileItem(
+              prefixText: "Số tiền thanh toán: ",
+              value: "150.000 VNĐ",
+              maxLines: 2,
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -133,7 +136,7 @@ class BikeStatusPage extends StatelessWidget {
                 ButtonCustom(
                   bgColor: Colors.green.shade500,
                   bgColorPress: Colors.green.shade700,
-                  textButton: "Xác nhận sửa xe",
+                  textButton: "Xác nhận",
                   imageUrl: "",
                   textStyle: TextStyle(
                     fontSize: 18.0,
@@ -146,7 +149,7 @@ class BikeStatusPage extends StatelessWidget {
                     horizontal: 16.0,
                   ),
                   handleFunction: () {
-                    statusAppController.setStatus(2);
+                    statusAppController.setStatus(3);
                     Get.to(Home());
                   },
                 ),

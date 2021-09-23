@@ -1,9 +1,10 @@
 import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/screens/MessageScreen.dart';
+import 'package:fix_bike/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Ordered extends GetWidget {
+class Ordered extends StatelessWidget {
   final int minutes;
   final String name;
   final Function cancel;
@@ -19,6 +20,11 @@ class Ordered extends GetWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          "Thông tin khách hàng",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        ),
         RichText(
           text: new TextSpan(
             // Note: Styles for TextSpans must be explicitly defined.
@@ -32,7 +38,7 @@ class Ordered extends GetWidget {
                   text: 'Tên: ',
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               new TextSpan(
-                text: name,
+                text: 'Nguyễn Văn A',
               ),
             ],
           ),
@@ -47,29 +53,25 @@ class Ordered extends GetWidget {
             ),
             children: <TextSpan>[
               new TextSpan(
-                  text: 'Thời gian dự kiến sẽ đến: ',
+                  text: 'Số tiền: ',
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               new TextSpan(
-                text: '$minutes phút',
+                text: '150.000 VNĐ',
               ),
             ],
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ElevatedButton(
-              child: Text("Nhắn tin"),
-              onPressed: () => Get.to(MessagePage()),
-            ),
-            ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red)),
-                child: Text("Hủy"),
+                child: Text("Đã sửa"),
                 onPressed: () {
                   statusAppController.setStatus(1);
-                  cancel();
+                  Get.to(Home());
                 })
           ],
         )
