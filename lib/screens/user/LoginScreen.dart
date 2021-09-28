@@ -77,61 +77,84 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child: Container(
                                       padding:
-                                          EdgeInsets.fromLTRB(10, 50, 10, 0),
+                                          EdgeInsets.fromLTRB(10, 0, 10, 0),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          SizedBox(height: 11.5),
+                                          // SizedBox(height: 11.5),
                                           Container(
                                             child: Text(
                                               'Helper Repair',
                                               style: TextStyle(
-                                                fontSize: 26.0,
+                                                fontSize: 24.0,
                                                 fontWeight: FontWeight.w800,
                                               ),
                                             ),
                                           ),
-                                          SizedBox(height: 30.0),
-                                          TextField(
-                                            obscureText: false,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 20.0),
-                                            decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.fromLTRB(
-                                                        20.0, 15.0, 20.0, 15.0),
-                                                hintText: "Email",
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            32.0))),
+                                          // SizedBox(height: 30.0),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 0),
+                                            child: TextField(
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 30.0),
+                                              decoration: InputDecoration(
+                                                labelText: "Tên",
+                                                labelStyle: TextStyle(
+                                                    color: Color(0xff888888),
+                                                    fontSize: 15),
+                                              ),
+                                            ),
                                           ),
-                                          SizedBox(height: 10.0),
-                                          TextField(
-                                            obscureText: false,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 20.0),
-                                            decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.fromLTRB(
-                                                        20.0, 15.0, 20.0, 15.0),
-                                                hintText: "Mật khẩu",
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            32.0))),
+                                          // SizedBox(height: 10.0),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 0),
+                                            child: Stack(
+                                              alignment: AlignmentDirectional
+                                                  .centerEnd,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          0, 0, 0, 0),
+                                                  child: TextField(
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18.0),
+                                                    obscureText: true,
+                                                    decoration: InputDecoration(
+                                                      labelText: "Mật khẩu",
+                                                      labelStyle: TextStyle(
+                                                          color:
+                                                              Color(0xff888888),
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text("Show",
+                                                    style: TextStyle(
+                                                        color: Colors.blue,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold))
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(height: 10.0),
+
+                                          // SizedBox(height: 10.0),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 170, top: 0, right: 0),
+                                                left: 0, top: 20, right: 0),
                                             child: Material(
                                               elevation: 5.0,
                                               borderRadius:
-                                                  BorderRadius.circular(30.0),
+                                                  BorderRadius.circular(80.0),
                                               color: Color(0xFFA0D1F9),
                                               child: MaterialButton(
                                                 minWidth: MediaQuery.of(context)
@@ -140,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 padding: EdgeInsets.fromLTRB(
                                                     20.0, 15.0, 20.0, 15.0),
                                                 onPressed: () {},
-                                                child: Text("Login",
+                                                child: Text("Sign In",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                             fontFamily:
@@ -154,15 +177,44 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(height: 30),
-                                          Text(
-                                            'Tiếp tục với',
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(fontWeight: FontWeight.w900),
+                                          // SizedBox(height: 30),
+                                          Container(
+                                            height: 90,
+                                            width: double.infinity,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "Sign Up",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Color(0xff888888)),
+                                                ),
+                                                Text(
+                                                  "Quên mật khẩu",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.blue),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.fromLTRB(25,30, 25, 30),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 0),
+                                            child: Text(
+                                              'Tiếp tục với',
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                25, 10, 25, 30),
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 controller
@@ -171,12 +223,13 @@ class _LoginPageState extends State<LoginPage> {
                                               },
                                               style: ButtonStyle(
                                                 elevation:
-                                                    MaterialStateProperty.all(6),
+                                                    MaterialStateProperty.all(
+                                                        6),
                                                 backgroundColor:
                                                     MaterialStateProperty
-                                                        .resolveWith<Color>((Set<
-                                                                MaterialState>
-                                                            states) {
+                                                        .resolveWith<Color>(
+                                                            (Set<MaterialState>
+                                                                states) {
                                                   if (states.contains(
                                                       MaterialState.pressed))
                                                     return Colors.white70;
@@ -195,7 +248,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Image(
-                                                    image: AssetImage(iconGoogle),
+                                                    image:
+                                                        AssetImage(iconGoogle),
                                                     height: 45,
                                                   ),
                                                   SizedBox(
@@ -203,14 +257,16 @@ class _LoginPageState extends State<LoginPage> {
                                                   ),
 
                                                   Image(
-                                                    image: AssetImage(iconFacebook),
+                                                    image: AssetImage(
+                                                        iconFacebook),
                                                     height: 40,
                                                   ),
                                                   SizedBox(
                                                     width: 20,
                                                   ),
                                                   Image(
-                                                    image: AssetImage(iconApple),
+                                                    image:
+                                                        AssetImage(iconApple),
                                                     height: 40,
                                                   ),
                                                   SizedBox(
