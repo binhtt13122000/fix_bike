@@ -34,6 +34,8 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   http: ^0.13.3
   progress_indicators: ^1.0.0
+  multi_select_flutter: ^4.0.0
+  fa_stepper: ^0.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:fix_bike/controller/AddressController.dart';
+import 'package:fix_bike/screens/steps/step_one_screen.dart';
 import 'package:fix_bike/screens/user/BikeStatusScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class Normal extends StatelessWidget {
             ElevatedButton(
               child: Text("Cập nhật tình trạng xe"),
               onPressed: () {
-                Get.to(() => BikeStatusPage(),
+                Get.to(() => StepOneScreen(),
                     transition: Transition.rightToLeftWithFade,
                     duration: Duration(milliseconds: 500));
               },
