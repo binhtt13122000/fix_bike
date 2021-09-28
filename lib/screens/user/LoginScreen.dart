@@ -65,121 +65,192 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
                   child: Obx(
-                        () => controller.isLoading.isTrue
+                    () => controller.isLoading.isTrue
                         ? Center(child: CircularProgressIndicator())
                         : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              padding:
-                              EdgeInsets.fromLTRB(10, 0, 10, 70),
-                              child: Container(
-                                padding:
-                                EdgeInsets.fromLTRB(10, 50, 10, 50),
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(height: 11.5),
-                                    Container(
-                                      child: Text(
-                                        'Helper Repair',
-                                        style: TextStyle(
-                                          fontSize: 26.0,
-                                          fontWeight: FontWeight.w800,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 30.0),
-                                    TextFieldInput(
-                                      labelText: 'Email',
-                                      validator: (val) => val!.isEmpty
-                                          ? "Email không được để trống"
-                                          : null,
-                                      icon: Icons.email_outlined,
-                                      textInputType: TextInputType.emailAddress,
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    TextFieldInput(
-                                      labelText: 'Mật khẩu',
-                                      validator: (val) => val!.isEmpty
-                                          ? "Mật khẩu không được để trống"
-                                          : null,
-                                      icon: Icons.vpn_key,
-                                      isVisibleText: false,
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        controller
-                                            .authenticationWithGoogle(
-                                            context);
-                                      },
-                                      style: ButtonStyle(
-                                        elevation:
-                                        MaterialStateProperty.all(4),
-                                        backgroundColor:
-                                        MaterialStateProperty
-                                            .resolveWith<Color>((Set<
-                                            MaterialState>
-                                        states) {
-                                          if (states.contains(
-                                              MaterialState.pressed))
-                                            return Colors.white70;
-                                          return Color(
-                                              0xfff5f8fd); // Defer to the widget's default.
-                                        }),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(40),
-                                            )),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 50, 10, 0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          Image(
-                                            image: AssetImage(iconGoogle),
-                                            height: 32,
+                                          SizedBox(height: 11.5),
+                                          Container(
+                                            child: Text(
+                                              'Helper Repair',
+                                              style: TextStyle(
+                                                fontSize: 26.0,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
                                           ),
-                                          SizedBox(
-                                            width: 6,
-                                          ),
-                                          Text(
-                                            "Tiếp tục Google",
+                                          SizedBox(height: 30.0),
+                                          TextField(
+                                            obscureText: false,
                                             style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w700,
-                                              color: Color(0xff1877f2),
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 20.0),
+                                            decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.fromLTRB(
+                                                        20.0, 15.0, 20.0, 15.0),
+                                                hintText: "Email",
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            32.0))),
+                                          ),
+                                          SizedBox(height: 10.0),
+                                          TextField(
+                                            obscureText: false,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 20.0),
+                                            decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.fromLTRB(
+                                                        20.0, 15.0, 20.0, 15.0),
+                                                hintText: "Mật khẩu",
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            32.0))),
+                                          ),
+                                          SizedBox(height: 10.0),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 170, top: 0, right: 0),
+                                            child: Material(
+                                              elevation: 5.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                              color: Color(0xFFA0D1F9),
+                                              child: MaterialButton(
+                                                minWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                padding: EdgeInsets.fromLTRB(
+                                                    20.0, 15.0, 20.0, 15.0),
+                                                onPressed: () {},
+                                                child: Text("Login",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontSize: 20.0)
+                                                        .copyWith(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 30),
+                                          Text(
+                                            'Tiếp tục với',
+                                            textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(fontWeight: FontWeight.w900),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(25,30, 25, 30),
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                controller
+                                                    .authenticationWithGoogle(
+                                                        context);
+                                              },
+                                              style: ButtonStyle(
+                                                elevation:
+                                                    MaterialStateProperty.all(6),
+                                                backgroundColor:
+                                                    MaterialStateProperty
+                                                        .resolveWith<Color>((Set<
+                                                                MaterialState>
+                                                            states) {
+                                                  if (states.contains(
+                                                      MaterialState.pressed))
+                                                    return Colors.white70;
+                                                  return Color(
+                                                      0xfff5f8fd); // Defer to the widget's default.
+                                                }),
+                                                shape: MaterialStateProperty.all<
+                                                        RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                )),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(iconGoogle),
+                                                    height: 45,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 16,
+                                                  ),
+
+                                                  Image(
+                                                    image: AssetImage(iconFacebook),
+                                                    height: 40,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Image(
+                                                    image: AssetImage(iconApple),
+                                                    height: 40,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Image(
+                                                    image: AssetImage(iconZalo),
+                                                    height: 46,
+                                                  ),
+                                                  // Text(
+                                                  //   "Tiếp tục Google",
+                                                  //   style: TextStyle(
+                                                  //     fontSize: 20.0,
+                                                  //     fontWeight: FontWeight.w700,
+                                                  //     color: Color(0xff1877f2),
+                                                  //   ),
+                                                  // ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  // Positioned.fill(
+                                  //   top: 20,
+                                  //   child: Align(
+                                  //     alignment: Alignment.topCenter,
+                                  //     child: CircleAvatar(
+                                  //       radius: 50.0,
+                                  //       backgroundImage: Svg(iconLogin),
+                                  //       backgroundColor: Colors.grey.shade400,
+                                  //     ),
+                                  //   ),
+                                  // )
+                                ],
                               ),
-                            ),
-                            // Positioned.fill(
-                            //   top: 20,
-                            //   child: Align(
-                            //     alignment: Alignment.topCenter,
-                            //     child: CircleAvatar(
-                            //       radius: 50.0,
-                            //       backgroundImage: Svg(iconLogin),
-                            //       backgroundColor: Colors.grey.shade400,
-                            //     ),
-                            //   ),
-                            // )
-                          ],
-                        ),
-                      ],
-                    ),
+                            ],
+                          ),
                   ),
                 ),
               ),

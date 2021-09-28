@@ -3,3 +3,6 @@ const iconGoogle = 'assets/images/google.png';
 const imageUser1 = 'assets/images/user.png';
 const imageUser2 = 'assets/images/user_2.png';
 const imageCar = 'assets/images/1.jpg';
+const iconFacebook = 'assets/images/facebook.png';
+const iconApple = 'assets/images/apple.png';
+const iconZalo = 'assets/images/zalo.png';
