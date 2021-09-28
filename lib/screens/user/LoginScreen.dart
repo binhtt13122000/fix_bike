@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.45,
+                  height: MediaQuery.of(context).size.height * 0.40,
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: Center(
                     child: Image(
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.60,
+                height: MediaQuery.of(context).size.height * 0.61,
                 width: MediaQuery.of(context).size.width,
                 decoration: new BoxDecoration(
                     color: Color(0xFFF3F3F5),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                                           // SizedBox(height: 11.5),
                                           Container(
                                             child: Text(
-                                              'Helper Repair',
+                                              'Mọi lúc - Mọi Nơi',
                                               style: TextStyle(
                                                 fontSize: 24.0,
                                                 fontWeight: FontWeight.w800,
@@ -95,12 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                                           // SizedBox(height: 30.0),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 0, 0),
+                                                0, 0, 0, 20),
                                             child: TextField(
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30.0),
+                                                  // fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0),
                                               decoration: InputDecoration(
                                                 labelText: "Tên",
                                                 labelStyle: TextStyle(
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                           // SizedBox(height: 10.0),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 0, 0),
+                                                0, 0, 0, 20),
                                             child: Stack(
                                               alignment: AlignmentDirectional
                                                   .centerEnd,
@@ -124,8 +124,6 @@ class _LoginPageState extends State<LoginPage> {
                                                   child: TextField(
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
                                                         fontSize: 18.0),
                                                     obscureText: true,
                                                     decoration: InputDecoration(
@@ -137,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     ),
                                                   ),
                                                 ),
-                                                Text("Show",
+                                                Text("Hiển thị",
                                                     style: TextStyle(
                                                         color: Colors.blue,
                                                         fontSize: 13,
@@ -163,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 padding: EdgeInsets.fromLTRB(
                                                     20.0, 15.0, 20.0, 15.0),
                                                 onPressed: () {},
-                                                child: Text("Sign In",
+                                                child: Text("Đăng nhập",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                             fontFamily:
@@ -178,27 +176,30 @@ class _LoginPageState extends State<LoginPage> {
                                             ),
                                           ),
                                           // SizedBox(height: 30),
-                                          Container(
-                                            height: 90,
-                                            width: double.infinity,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Text(
-                                                  "Sign Up",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color(0xff888888)),
-                                                ),
-                                                Text(
-                                                  "Quên mật khẩu",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Colors.blue),
-                                                )
-                                              ],
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(0,0,0,10),
+                                            child: Container(
+                                              height: 70,
+                                              width: double.infinity,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Text(
+                                                    "Đăng ký",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color(0xff888888)),
+                                                  ),
+                                                  Text(
+                                                    "Quên mật khẩu ?",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.blue),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           Padding(
@@ -214,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                25, 10, 25, 30),
+                                                20, 10, 20, 23),
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 controller
@@ -250,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   Image(
                                                     image:
                                                         AssetImage(iconGoogle),
-                                                    height: 45,
+                                                    height: 39,
                                                   ),
                                                   SizedBox(
                                                     width: 16,
@@ -259,7 +260,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   Image(
                                                     image: AssetImage(
                                                         iconFacebook),
-                                                    height: 40,
+                                                    height: 35,
                                                   ),
                                                   SizedBox(
                                                     width: 20,
@@ -267,14 +268,14 @@ class _LoginPageState extends State<LoginPage> {
                                                   Image(
                                                     image:
                                                         AssetImage(iconApple),
-                                                    height: 40,
+                                                    height: 35,
                                                   ),
                                                   SizedBox(
                                                     width: 15,
                                                   ),
                                                   Image(
                                                     image: AssetImage(iconZalo),
-                                                    height: 46,
+                                                    height: 40,
                                                   ),
                                                   // Text(
                                                   //   "Tiếp tục Google",
