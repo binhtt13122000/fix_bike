@@ -1,8 +1,6 @@
 import 'package:fa_stepper/fa_stepper.dart';
 import 'package:fix_bike/components/BottomNav.dart';
-import 'package:fix_bike/components/ButtonCustom.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -48,14 +46,8 @@ List<String> listProducts = [
 ];
 
 class _StepOneScreenState extends State<StepOneScreen> {
-  int _value = 1, _index = 1;
 
   String _myStateProblem = listProblem[0], _myStateProduct = listProducts[0];
-  selectDropDown(int? value) {
-    setState(() {
-      _value = value!;
-    });
-  }
 
   FAStepperType stepperType = FAStepperType.horizontal;
 
