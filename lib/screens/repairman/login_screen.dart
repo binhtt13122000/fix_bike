@@ -40,167 +40,205 @@ class _LoginPageState extends State<LoginPage> {
         Get.put(AuthenticationController());
     return Scaffold(
       body: SafeArea(
-          child: Obx(
-        () => controller.isLoading.isTrue
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    // mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            height: 180.0,
-                            width: 600.0,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: SvgPicture.asset(iconLogin),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 60,
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 3),
-                              child: Center(
-                                child: Text(
-                                  'Đăng Nhập',
-                                  style: TextStyle(
-                                    fontSize: 26.0,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15.0),
-                            TextFieldInput(
-                              labelText: 'Email',
-                              validator: (val) => val!.isEmpty
-                                  ? "Email không được để trống"
-                                  : null,
-                              icon: Icons.email_outlined,
-                              textEditingController: textUsernameController,
-                              textInputType: TextInputType.emailAddress,
-                              isErrorField: isErrorUsername,
-                            ),
-                            SizedBox(height: 15.0),
-                            TextFieldInput(
-                              labelText: 'Mật khẩu',
-                              validator: (val) => val!.isEmpty
-                                  ? "Mật khẩu không được để trống"
-                                  : null,
-                              icon: Icons.vpn_key,
-                              textEditingController: textPasswordController,
-                              isVisibleText: false,
-                              isErrorField: isErrorPassword,
-                            ),
-                            SizedBox(height: 15.0),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 4,
-                                horizontal: 10,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  ButtonCustom(
-                                    bgColor: Color(0xff1877f2),
-                                    bgColorPress: Color(0xff1877f2),
-                                    textButton: "Đăng Nhập",
-                                    imageUrl: "",
-                                    textStyle: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
-                                    borderRadius: 8,
-                                    edgeInsets: EdgeInsets.symmetric(
-                                      vertical: 14.0,
-                                      horizontal: 14.0,
-                                    ),
-                                    handleFunction: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        _formKey.currentState!.save();
-                                        setState(() {
-                                          isErrorUsername = false;
-                                          isErrorPassword = false;
-                                        });
-                                        controller
-                                            .authenticationWithUsernameAndPassword(
-                                                context,
-                                                textUsernameController
-                                                    .value.text,
-                                                textPasswordController
-                                                    .value.text);
-                                      } else {
-                                        setState(() {
-                                          isErrorUsername =
-                                              textUsernameController
-                                                          .value.text !=
-                                                      ""
-                                                  ? false
-                                                  : true;
-                                          isErrorPassword =
-                                              textPasswordController
-                                                          .value.text !=
-                                                      ""
-                                                  ? false
-                                                  : true;
-                                        });
-                                      }
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 18.0,
-                                  ),
-                                  ButtonCustom(
-                                    bgColor: Colors.white,
-                                    bgColorPress: Colors.white,
-                                    textButton: "Đăng ký làm người sửa xe",
-                                    imageUrl: "",
-                                    textStyle: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black87,
-                                    ),
-                                    borderRadius: 8,
-                                    edgeInsets: EdgeInsets.symmetric(
-                                      vertical: 14.0,
-                                      horizontal: 14.0,
-                                    ),
-                                    handleFunction: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterPage()));
-                                    },
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+        child: Stack(
+          children: [
+            Container(
+              color: Color(0xFFA0D1F9),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.45,
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  child: Center(
+                    child: Image(
+                      image: AssetImage(imageCar),
+                    ),
                   ),
                 ),
               ),
-      )),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.60,
+                width: MediaQuery.of(context).size.width,
+                decoration: new BoxDecoration(
+                    color: Color(0xFFF3F3F5),
+                    borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(50.0),
+                      topRight: const Radius.circular(50.0),
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, top: 30, right: 30),
+                  child: Obx(
+                        () => controller.isLoading.isTrue
+                        ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                        : SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          // mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 3),
+                                    child: Center(
+                                      child: Text(
+                                        'Mọi lúc - mọi nơi',
+                                        style: TextStyle(
+                                          fontFamily: 'RobotoMono',
+                                          fontSize: 26.0,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.0),
+                                  TextFieldInput(
+                                    labelText: 'Email',
+                                    validator: (val) => val!.isEmpty
+                                        ? "Email không được để trống"
+                                        : null,
+                                    icon: Icons.email_outlined,
+                                    textEditingController:
+                                    textUsernameController,
+                                    textInputType:
+                                    TextInputType.emailAddress,
+                                    isErrorField: isErrorUsername,
+                                  ),
+                                  SizedBox(height: 15.0),
+                                  TextFieldInput(
+                                    labelText: 'Mật khẩu',
+                                    validator: (val) => val!.isEmpty
+                                        ? "Mật khẩu không được để trống"
+                                        : null,
+                                    icon: Icons.vpn_key,
+                                    textEditingController:
+                                    textPasswordController,
+                                    isVisibleText: false,
+                                    isErrorField: isErrorPassword,
+                                  ),
+                                  SizedBox(height: 15.0),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 10,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                      children: [
+                                        ButtonCustom(
+                                          bgColor: Color(0xff1877f2),
+                                          bgColorPress: Color(0xff1877f2),
+                                          textButton: "Đăng Nhập",
+                                          imageUrl: "",
+                                          textStyle: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                          borderRadius: 8,
+                                          edgeInsets:
+                                          EdgeInsets.symmetric(
+                                            vertical: 14.0,
+                                            horizontal: 14.0,
+                                          ),
+                                          handleFunction: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              _formKey.currentState!
+                                                  .save();
+                                              setState(() {
+                                                isErrorUsername = false;
+                                                isErrorPassword = false;
+                                              });
+                                              controller
+                                                  .authenticationWithUsernameAndPassword(
+                                                  context,
+                                                  textUsernameController
+                                                      .value.text,
+                                                  textPasswordController
+                                                      .value.text);
+                                            } else {
+                                              setState(() {
+                                                isErrorUsername =
+                                                textUsernameController
+                                                    .value
+                                                    .text !=
+                                                    ""
+                                                    ? false
+                                                    : true;
+                                                isErrorPassword =
+                                                textPasswordController
+                                                    .value
+                                                    .text !=
+                                                    ""
+                                                    ? false
+                                                    : true;
+                                              });
+                                            }
+                                          },
+                                        ),
+                                        SizedBox(height: 10.0,),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 130),
+                                          child: Text("Quên mật khẩu ?", style: TextStyle(fontSize: 15),),
+                                        ),
+                                        SizedBox(height: 18.0,),
+                                        ButtonCustom(
+                                          bgColor: Colors.white,
+                                          bgColorPress: Colors.white,
+                                          textButton:
+                                          "Đăng ký làm người sửa xe",
+                                          imageUrl: "",
+                                          textStyle: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87,
+                                          ),
+                                          borderRadius: 8,
+                                          edgeInsets:
+                                          EdgeInsets.symmetric(
+                                            vertical: 14.0,
+                                            horizontal: 14.0,
+                                          ),
+                                          handleFunction: () {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage()));
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
