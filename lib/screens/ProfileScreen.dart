@@ -1,8 +1,11 @@
 import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/components/ProfileMenu.dart';
 import 'package:fix_bike/screens/EditProfileScreen.dart';
 import 'package:fix_bike/screens/HistoryScreen.dart';
 import 'package:fix_bike/screens/SupportScreen.dart';
+import 'package:fix_bike/screens/settings.dart';
 import 'package:fix_bike/screens/user/LoginScreen.dart';
+import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,167 +15,275 @@ class ProfilePage extends GetWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNav(),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
-              child: Center(
-                child: RawMaterialButton(
-                  onPressed: () {},
-                  elevation: 2.0,
-                  fillColor: Colors.grey,
-                  child: Icon(
-                    Icons.camera_alt_outlined,
-                    color: Colors.white,
-                    size: 30.0,
-                  ),
-                  padding: EdgeInsets.all(28.0),
-                  shape: CircleBorder(),
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: SizedBox(
+                height: 150,
+                width: 150,
+                child: Stack(
+                  fit: StackFit.expand,
+                  clipBehavior: Clip.none,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage:
+                          AssetImage(avatar),
+                    ),
+                    Positioned(
+                      right: -16,
+                      bottom: 0,
+                      child: SizedBox(
+                        height: 46,
+                        width: 46,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                              side: BorderSide(color: Colors.white),
+                            ),
+                            primary: Colors.black,
+                            backgroundColor: Color(0xFFF5F6F9),
+                          ),
+                          onPressed: () {},
+                          child: Icon(Icons.camera_alt_outlined),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.grey.shade300,
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Thông tin cơ bản',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      trailing: RawMaterialButton(
-                          onPressed: () {
-                            Get.to(() => EditProfilePage(),
-                                transition: Transition.rightToLeftWithFade,
-                                duration: Duration(milliseconds: 600));
-                          },
-                          child: Icon(
-                            Icons.edit,
-                            size: 60,
-                            color: Colors.black87,
-                          )),
-                    ),
-                  ),
-                  TileItem(
-                    title: 'Nguyễn Văn B',
-                    icon: Icons.person,
-                  ),
-                  Divider(
-                    height: 1,
-                  ),
-                  TileItem(
-                    title: 'Ngày sinh: 05/01/1998',
-                    icon: Icons.date_range_outlined,
-                  ),
-                  Divider(
-                    height: 1,
-                  ),
-                  TileItem(
-                    title: '+1 510 486 1234',
-                    icon: Icons.phone_android,
-                  ),
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.grey.shade300,
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Tài khoản của tôi',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  TileItem(
-                    title: 'Lịch sử',
-                    icon: Icons.history,
-                    handleFunction: () {
-                      Get.to(() => HistoryPage(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: Duration(microseconds: 600));
-                    },
-                  ),
-                  Divider(
-                    height: 1,
-                  ),
-                  TileItem(
-                    title: 'Hổ trợ',
-                    icon: Icons.support_agent_outlined,
-                    handleFunction: () {
-                      Get.to(() => SupportPage(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: Duration(microseconds: 600));
-                    },
-                  ),
-                  Divider(
-                    height: 1,
-                  ),
-                  TileItem(
-                    title: 'Thay đổi mật khẩu',
-                    icon: Icons.vpn_key_outlined,
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 25, horizontal: 20.0),
-                    decoration: new BoxDecoration(
-                      color: Colors.grey.shade300,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.offAll(() => LoginPage(),
-                            transition: Transition.leftToRightWithFade,
-                            duration: Duration(microseconds: 600));
-                      },
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all(4),
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.pressed)) {
-                            return Colors.red.shade900;
-                          }
-                          return Colors
-                              .red.shade800; // Defer to the widget's default.
-                        }),
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.symmetric(
-                            vertical: 12.0,
-                            horizontal: 14.0,
-                          ),
-                        ),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        )),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Log Out',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+
+            // Container(
+            //   padding: EdgeInsets.only(top: 30.0, bottom: 40.0),
+            //   child: Center(
+            //     child: RawMaterialButton(
+            //       onPressed: () {},
+            //       elevation: 2.0,
+            //       fillColor: Colors.grey,
+            //       child: Icon(
+            //         Icons.camera_alt_outlined,
+            //         color: Colors.white,
+            //         size: 30.0,
+            //       ),
+            //       padding: EdgeInsets.all(28.0),
+            //       shape: CircleBorder(),
+            //     ),
+            //   ),
+            // ),
+
+            ProfileMenu(
+              text: "Tài khoản của tôi",
+              icon: iconLogin,
+              press: () => {
+                Get.to(() => EditProfilePage(),
+                    transition: Transition.rightToLeftWithFade,
+                    duration: Duration(milliseconds: 600))
+              },
+            ),
+            ProfileMenu(
+              text: "Lịch sử",
+              icon: iconLogin,
+              press: () {
+                Get.offAll(() => HistoryPage(),
+                    transition: Transition.leftToRightWithFade,
+                    duration: Duration(microseconds: 600));
+              },
+            ),
+            ProfileMenu(
+              text: "Cài đặt",
+              icon: iconLogin,
+              press: () {
+                Get.to(() => SettingsPage(),
+                    transition: Transition.leftToRightWithFade,
+                    duration: Duration(microseconds: 600));
+              },
+            ),
+            ProfileMenu(
+              text: "Hỗ trợ",
+              icon: iconLogin,
+              press: () {
+                Get.to(() => SupportPage(),
+                    transition: Transition.leftToRightWithFade,
+                    duration: Duration(microseconds: 600));
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 20, top: 40, right: 20),
+              child: Material(
+                elevation: 5.0,
+                borderRadius:
+                BorderRadius.circular(80.0),
+                color: Colors.red,
+                child: MaterialButton(
+                  minWidth: MediaQuery.of(context)
+                      .size
+                      .width,
+                  padding: EdgeInsets.fromLTRB(
+                      20.0, 15.0, 20.0, 15.0),
+                  onPressed: () {
+                    Get.offAll(() => LoginPage(),
+                        transition: Transition.leftToRightWithFade,
+                        duration: Duration(microseconds: 600));
+                  },
+                  child: Text("Đăng xuất",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily:
+                          'Montserrat',
+                          fontSize: 20.0)
+                          .copyWith(
+                          color: Colors.white,
+                          fontWeight:
+                          FontWeight
+                              .bold)),
+                ),
               ),
-            )
+            ),
+            // Expanded(
+            //   child: ListView(
+            //     children: [
+            //       Container(
+            //         decoration: new BoxDecoration(
+            //           color: Colors.grey.shade300,
+            //         ),
+            //         child: ListTile(
+            //           title: Text(
+            //             'Thông tin cơ bản',
+            //             style: TextStyle(
+            //               fontSize: 20,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           trailing: RawMaterialButton(
+            //               onPressed: () {
+            //                 Get.to(() => EditProfilePage(),
+            //                     transition: Transition.rightToLeftWithFade,
+            //                     duration: Duration(milliseconds: 600));
+            //               },
+            //               child: Icon(
+            //                 Icons.edit,
+            //                 size: 60,
+            //                 color: Colors.black87,
+            //               )),
+            //         ),
+            //       ),
+            //       TileItem(
+            //         title: 'Nguyễn Văn B',
+            //         icon: Icons.person,
+            //       ),
+            //       Divider(
+            //         height: 1,
+            //       ),
+            //       TileItem(
+            //         title: 'Ngày sinh: 05/01/1998',
+            //         icon: Icons.date_range_outlined,
+            //       ),
+            //       Divider(
+            //         height: 1,
+            //       ),
+            //       TileItem(
+            //         title: '+1 510 486 1234',
+            //         icon: Icons.phone_android,
+            //       ),
+            //       Container(
+            //         decoration: new BoxDecoration(
+            //           color: Colors.grey.shade300,
+            //         ),
+            //         child: ListTile(
+            //           title: Text(
+            //             'Tài khoản của tôi',
+            //             style: TextStyle(
+            //               fontSize: 20,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       TileItem(
+            //         title: 'Lịch sử',
+            //         icon: Icons.history,
+            //         handleFunction: () {
+            //           Get.to(() => HistoryPage(),
+            //               transition: Transition.rightToLeftWithFade,
+            //               duration: Duration(microseconds: 600));
+            //         },
+            //       ),
+            //       Divider(
+            //         height: 1,
+            //       ),
+            //       TileItem(
+            //         title: 'Hổ trợ',
+            //         icon: Icons.support_agent_outlined,
+            //         handleFunction: () {
+            //           Get.to(() => SupportPage(),
+            //               transition: Transition.rightToLeftWithFade,
+            //               duration: Duration(microseconds: 600));
+            //         },
+            //       ),
+            //       Divider(
+            //         height: 1,
+            //       ),
+            //       TileItem(
+            //         title: 'Thay đổi mật khẩu',
+            //         icon: Icons.vpn_key_outlined,
+            //       ),
+            //       Container(
+            //         padding:
+            //             EdgeInsets.symmetric(vertical: 25, horizontal: 20.0),
+            //         decoration: new BoxDecoration(
+            //           color: Colors.grey.shade300,
+            //         ),
+            //         child: ElevatedButton(
+            //           onPressed: () {
+            //             Get.offAll(() => LoginPage(),
+            //                 transition: Transition.leftToRightWithFade,
+            //                 duration: Duration(microseconds: 600));
+            //           },
+            //           style: ButtonStyle(
+            //             elevation: MaterialStateProperty.all(4),
+            //             backgroundColor:
+            //                 MaterialStateProperty.resolveWith<Color>(
+            //                     (Set<MaterialState> states) {
+            //               if (states.contains(MaterialState.pressed)) {
+            //                 return Colors.red.shade900;
+            //               }
+            //               return Colors
+            //                   .red.shade800; // Defer to the widget's default.
+            //             }),
+            //             padding: MaterialStateProperty.all<EdgeInsets>(
+            //               EdgeInsets.symmetric(
+            //                 vertical: 12.0,
+            //                 horizontal: 14.0,
+            //               ),
+            //             ),
+            //             shape:
+            //                 MaterialStateProperty.all<RoundedRectangleBorder>(
+            //                     RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(8),
+            //             )),
+            //           ),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               Text(
+            //                 'Log Out',
+            //                 style: TextStyle(
+            //                   fontSize: 20.0,
+            //                   fontWeight: FontWeight.w600,
+            //                   color: Colors.white,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),
@@ -186,6 +297,7 @@ class TileItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function()? handleFunction;
+
   @override
   Widget build(BuildContext context) {
     return Ink(
@@ -206,4 +318,20 @@ class TileItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class HeaderCurvedContainer extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()..color = Colors.blue;
+    Path path = Path()
+      ..relativeLineTo(0, 150)
+      ..quadraticBezierTo(size.width / 2, 225, size.width, 150)
+      ..relativeLineTo(0, -150)
+      ..close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

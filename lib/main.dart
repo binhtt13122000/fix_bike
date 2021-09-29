@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fix_bike/screens/NotificationScreen.dart';
+import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:fix_bike/screens/repairman/login_screen.dart';
+import 'package:fix_bike/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: LoginPage(),
+      home: NotificationPage(),
     );
   }
 }
