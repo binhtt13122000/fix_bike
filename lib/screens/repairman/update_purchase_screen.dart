@@ -1,5 +1,7 @@
 import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/components/ButtonCustom.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ class UpdatePurchasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StatusAppController statusAppController = Get.put(StatusAppController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -58,11 +61,6 @@ class UpdatePurchasePage extends StatelessWidget {
             ),
             Divider(
               height: 1,
-            ),
-            TileItem(
-              prefixText: "Địa chỉ: ",
-              value: "12 Nguyễn Thị Minh Khai, Quận 1, tp Hồ Chí Minh",
-              maxLines: 2,
             ),
             Container(
               margin: EdgeInsets.all(16.0),
@@ -151,6 +149,8 @@ class UpdatePurchasePage extends StatelessWidget {
                     horizontal: 16.0,
                   ),
                   handleFunction: () {
+                    statusAppController.setStatus(3);
+                    Get.to(Home());
                   },
                 ),
               ],

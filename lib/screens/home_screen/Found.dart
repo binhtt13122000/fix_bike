@@ -1,50 +1,83 @@
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/MessageScreen.dart';
+import 'package:fix_bike/screens/repairman/update_purchase_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 
 class Found extends GetWidget {
-  final Function draw;
   final LatLng destination;
   final LatLng origin;
   final StatusAppController statusAppController =
       Get.put(StatusAppController());
 
-  Found(
-      {Key? key,
-      required this.draw,
-      required this.destination,
-      required this.origin})
+  Found({Key? key, required this.destination, required this.origin})
       : super(key: key);
-
-  handleChangeScreen() {
-    statusAppController.setStatus(3);
-    draw(origin, destination);
-  }
 
   @override
   Widget build(BuildContext context) {
-    new Future.delayed(const Duration(seconds: 5), handleChangeScreen);
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        Center(
+          child: Text(
+            "Thông tin khách hàng",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Đang tìm người sửa xe',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            RichText(
+              text: new TextSpan(
+                style: new TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  new TextSpan(
+                      text: 'Tên1: ',
+                      style: new TextStyle(fontWeight: FontWeight.bold)),
+                  new TextSpan(
+                    text: "Nguyễn Văn A",
+                  ),
+                ],
               ),
             ),
-            JumpingDotsProgressIndicator(
-              fontSize: 20.0,
+            RichText(
+              text: new TextSpan(
+                style: new TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  new TextSpan(
+                      text: 'Thời gian dự kiến sẽ đến: ',
+                      style: new TextStyle(fontWeight: FontWeight.bold)),
+                  new TextSpan(
+                    text: '15 phút',
+                  ),
+                ],
+              ),
             ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              child: Text("Cập nhật thanh toán"),
+              onPressed: () => Get.to(UpdatePurchasePage()),
+            ),
+            ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red)),
+                child: Text("Nhắn tin"),
+                onPressed: () {
+                  Get.to(MessagePage());
+                })
           ],
         )
       ],

@@ -7,8 +7,19 @@ class StatusAppController extends GetxController {
   //3 - BOOKED
   //4 - FIXED
 
+  RxDouble zoom = 15.0.obs;
+  RxBool switched = false.obs;
+  RxString markerId = "".obs;
   setStatus(int selectedStatus) {
     status.value = selectedStatus;
     update();
+  }
+
+  setSwitch(bool currentBool) {
+    switched.value = currentBool;
+  }
+
+  setMarkerId(String markID) {
+    markerId.value = markID;
   }
 }
