@@ -128,7 +128,7 @@ class EditProfilePage extends GetWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: Color(0xFF00AA13),
           ),
           onPressed: () {
             Get.back();
@@ -138,7 +138,7 @@ class EditProfilePage extends GetWidget {
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: Colors.green,
+              color: Color(0xFF00AA13),
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -197,7 +197,7 @@ class EditProfilePage extends GetWidget {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color: Colors.green,
+                            color: Color(0xFF00AA13),
                           ),
                           child: Icon(
                             Icons.edit,
@@ -239,7 +239,7 @@ class EditProfilePage extends GetWidget {
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(microseconds: 600));
                     },
-                    color: Color(0xFFA0D1F9),
+                    color: Color(0xFF00AA13),
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
