@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:fix_bike/models/Location.dart';
 import 'package:fix_bike/models/PlaceSearch.dart';
 import 'package:fix_bike/services/GeoService.dart';
 import 'package:fix_bike/services/PlacesService.dart';
+import 'package:fix_bike/styles/MyIcon.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,6 +15,7 @@ class AddressController extends GetxController {
   Rx<Marker> origin = new Marker(markerId: new MarkerId("origin")).obs;
   Rx<Location> location = new Location(lat: 0.0, lng: 0.0).obs;
   RxString address = "".obs;
+  Rx<Uint8List?> markerDesIcon = null.obs;
   @override
   void onInit() {
     super.onInit();
@@ -25,8 +30,13 @@ class AddressController extends GetxController {
         lat: placeSearch.geometry.location.getLat,
         lng: placeSearch.geometry.location.getLng,
       );
+      final Uint8List markerIcon =
+          await getBytesFromAsset('../../assets/images/marker.png', 100);
+      markerDesIcon.value =
+          await getBytesFromAsset('../../assets/images/fix.png', 100);
       origin.value = new Marker(
           markerId: new MarkerId("origin"),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
           position: LatLng(placeSearch.geometry.location.getLat,
               placeSearch.geometry.location.getLng));
       update();
@@ -44,8 +54,10 @@ class AddressController extends GetxController {
       var positionResponse = await getCurrentLocation();
       location.value.lat = positionResponse.latitude;
       location.value.lng = positionResponse.longitude;
+      final Uint8List markerIcon = await getBytesFromAsset(iconMarker, 100);
       origin.value = new Marker(
           markerId: new MarkerId("origin"),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
           position: LatLng(location.value.lat, location.value.lng));
       var addressResponse = await Geocoder.local.findAddressesFromCoordinates(
           Coordinates(location.value.lat, location.value.lng));
@@ -55,5 +67,15 @@ class AddressController extends GetxController {
     } finally {
       loading.value = false;
     }
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 }

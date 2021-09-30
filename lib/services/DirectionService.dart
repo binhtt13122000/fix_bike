@@ -3,7 +3,7 @@ import 'package:fix_bike/models/Direction.dart';
 import 'package:fix_bike/utils/Constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-final googleApiKey = "";
+final googleApiKey = "AIzaSyA5R4hfzBYCcoC0ISLxtOTtLakB4CnoUoU";
 
 class DirectionsRepository {
   static const String _baseUrl = directionUrl;

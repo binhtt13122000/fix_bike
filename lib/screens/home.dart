@@ -73,12 +73,12 @@ class MapGoogleState extends State<MapGoogle> {
         destination = defautDestination;
       });
       // if (destination != null) {
-        // _controller.future.then((value) => {
-        //       value.animateCamera(CameraUpdate.newCameraPosition(
-        //           CameraPosition(target: destination!.position, zoom: 13)))
-        //     });
-        // _controller.future.then(
-        //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
+      // _controller.future.then((value) => {
+      //       value.animateCamera(CameraUpdate.newCameraPosition(
+      //           CameraPosition(target: destination!.position, zoom: 13)))
+      //     });
+      // _controller.future.then(
+      //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
       // }
     } else if (statusAppController.status.value == 3) {
       if (destination != null) {
