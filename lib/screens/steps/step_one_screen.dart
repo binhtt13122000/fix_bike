@@ -1,6 +1,10 @@
 import 'package:fa_stepper/fa_stepper.dart';
 import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/styles/MyIcon.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -40,24 +44,98 @@ List<String> listProducts = [
   "Sirius",
   "Kawashaki",
   "BMW",
+];
+
+List<String> listProductsCar = [
+  "VinFast",
+  "BMW",
+  "Toyota",
   "Lamborghini",
-  "Mercerdes",
   "Range Rover",
+  "Chevrolet",
+  "Mazda",
+  "Ford"
+];
+
+List<String> listProductsCarT = [
+  "Vinfast Lux",
+  "Vinfast Fadil",
+  "Vinfast President",
+  "Vinfast VF e34",
+  "Vinfast Lux SA2.0",
+];
+
+List<String> listProductsCarType = [
+  "Xe 2 chỗ",
+  "Xe 4 chỗ",
+  "Xe 5 chỗ",
+  "Xe 10 chỗ",
+];
+
+List<String> listProductVersion = [
+  "Honda Future",
+  "Wave",
+  "Air Blade",
+  "Blade",
+  "Vision",
+  "Winner",
+  "Dream"
 ];
 
 class _StepOneScreenState extends State<StepOneScreen> {
-  String _myStateProblem = listProblem[0], _myStateProduct = listProducts[0];
+  String _myStateProblem = listProblem[0],
+      _myStateProduct = listProducts[0],
+      _myStateCar = listProductsCar[0],
+      _myStateVersion = listProductVersion[0],
+      _myStateCarType = listProductsCarType[0],
+      _myStateCarT = listProductsCarT[0];
+
+  bool checkedValue = false;
+
+  final StatusAppController statusAppController =
+      Get.put(StatusAppController());
+  void _delete(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            content: Text(
+              'Bạn muốn tìm người sửa xe không?',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            actions: [
+              // The "Yes" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  statusAppController.setStatus(2);
+                  Navigator.of(context).pop();
+                  Get.to(Home());
+                },
+                child: Text('Có'),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              // The "No" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Không'),
+                isDefaultAction: false,
+                isDestructiveAction: false,
+              )
+            ],
+          );
+        });
+  }
 
   FAStepperType stepperType = FAStepperType.horizontal;
 
   int currentStep = 0;
   bool complete = false;
-
-  next() {
-    currentStep + 1 != 4
-        ? goTo(currentStep + 1)
-        : setState(() => complete = true);
-  }
 
   goTo(int step) {
     setState(() {
@@ -69,6 +147,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
     if (currentStep > 0) {
       goTo(currentStep - 1);
     }
+  }
+
+  int groupValue = 0, groupValueType = 0;
+
+  changeSelect(int? value) {
+    setState(() {
+      groupValue = value!;
+    });
+  }
+
+  changeSelectType(int? value) {
+    setState(() {
+      groupValueType = value!;
+    });
   }
 
   final _items =
@@ -137,12 +229,12 @@ class _StepOneScreenState extends State<StepOneScreen> {
                 Text(
                   'Bạn gặp vấn đề gì?',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 14,
                 ),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -176,63 +268,55 @@ class _StepOneScreenState extends State<StepOneScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Nhãn hiệu sản phẩm',
+                  'Loại xe bạn muốn sửa',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                  child: ButtonTheme(
-                    alignedDropdown: true,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: _myStateProduct,
-                      iconSize: 30,
-                      icon: null,
-                      style: TextStyle(color: Colors.black54, fontSize: 16),
-                      hint: Text("Select state"),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _myStateProduct = newValue!;
-                        });
-                      },
-                      items: listProducts
-                          .map((item) => new DropdownMenuItem(
-                                child: Text(item),
-                                value: item,
-                              ))
-                          .toList(),
+                SizedBox(
+                  height: 14,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          Radio(
+                            value: 0,
+                            groupValue: groupValue,
+                            onChanged: changeSelect,
+                          ),
+                          Text("Xe máy"),
+                        ],
+                      ),
                     ),
+                    Container(
+                        child: Row(
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: groupValue,
+                          onChanged: changeSelect,
+                        ),
+                        Text("Ô tô"),
+                      ],
+                    ))
+                  ],
+                ),
+                SizedBox(
+                  height: 14,
+                ),
+                Text(
+                  'Nhãn hiệu sản phẩm',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                Divider(
-                  height: 1,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                  child: TextFormField(
-                    textAlignVertical: TextAlignVertical.center,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4)),
-                        hintText: "Năm sản xuất",
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
-                ),
-                Divider(
-                  height: 1,
+                SizedBox(
+                  height: 4,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -243,9 +327,13 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       fontSize: 16,
                     ),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4)),
-                        hintText: "Model",
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffeeeff0)),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        hintText: "Biển số xe",
                         filled: true,
                         fillColor: Colors.white,
                         prefixStyle: TextStyle(
@@ -254,6 +342,159 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         )),
                   ),
                 ),
+                SizedBox(
+                  height: 14,
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: groupValue == 0 ? _myStateProduct : _myStateCar,
+                      iconSize: 30,
+                      icon: null,
+                      style: TextStyle(color: Colors.black54, fontSize: 16),
+                      hint: Text("Select state"),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          groupValue == 0
+                              ? _myStateProduct = newValue!
+                              : _myStateCar = newValue!;
+                        });
+                      },
+                      items: groupValue == 0
+                          ? listProducts
+                              .map((item) => new DropdownMenuItem(
+                                    child: Text(item),
+                                    value: item,
+                                  ))
+                              .toList()
+                          : listProductsCar
+                              .map((item) => new DropdownMenuItem(
+                                    child: Text(item),
+                                    value: item,
+                                  ))
+                              .toList(),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                groupValue == 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  value: 0,
+                                  groupValue: groupValueType,
+                                  onChanged: changeSelectType,
+                                ),
+                                Text("Xe tay ga"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              child: Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: groupValueType,
+                                onChanged: changeSelectType,
+                              ),
+                              Text("Xe số"),
+                            ],
+                          ))
+                        ],
+                      )
+                    : Container(),
+                SizedBox(
+                  height: 4,
+                ),
+                groupValue == 1
+                    ? Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        child: ButtonTheme(
+                          alignedDropdown: true,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            value: _myStateCarType,
+                            iconSize: 30,
+                            icon: null,
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 16),
+                            hint: Text("Loại xe"),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _myStateCarType = newValue!;
+                              });
+                            },
+                            items: listProductsCarType
+                                .map((item) => new DropdownMenuItem(
+                                      child: Text(item),
+                                      value: item,
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      )
+                    : Container(),
+                SizedBox(
+                  height: 4,
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: groupValue == 0 ? _myStateVersion : _myStateCarT,
+                      iconSize: 30,
+                      icon: null,
+                      style: TextStyle(color: Colors.black54, fontSize: 16),
+                      hint: Text("Select state"),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          groupValue == 0
+                              ? _myStateVersion = newValue!
+                              : _myStateCarT = newValue!;
+                        });
+                      },
+                      items: groupValue == 0
+                          ? listProductVersion
+                              .map((item) => new DropdownMenuItem(
+                                    child: Text(item),
+                                    value: item,
+                                  ))
+                              .toList()
+                          : listProductsCarT
+                              .map((item) => new DropdownMenuItem(
+                                    child: Text(item),
+                                    value: item,
+                                  ))
+                              .toList(),
+                    ),
+                  ),
+                ),
+                groupValue == 1
+                    ? CheckboxListTile(
+                        title: Text("Yêu cầu xe kéo?"),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity
+                            .leading, //  <-- leading Checkbox
+                      )
+                    : Container()
               ],
             ),
           ),
@@ -269,7 +510,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       Text(
                         'Tình trạng xe',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -280,12 +521,6 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         items: _items,
                         title: Text("Tình trạng xe"),
                         selectedColor: Colors.blue,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue,
-                            width: 2,
-                          ),
-                        ),
                         buttonText: Text(
                           "Chọn",
                           style: TextStyle(
@@ -301,7 +536,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
                   child: Column(
@@ -310,7 +545,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       Text(
                         'Chi tiết: ',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -319,11 +554,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         margin:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black54,
-                              width: 2,
-                            )),
+                          color: Colors.white,
+                        ),
                         child: TextFormField(
                           textAlignVertical: TextAlignVertical.center,
                           initialValue: "Xe bị bể bánh",
@@ -361,7 +593,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       Text(
                         'Hình ảnh: ',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -375,44 +607,50 @@ class _StepOneScreenState extends State<StepOneScreen> {
                             onPressed: () {},
                             elevation: 2.0,
                             fillColor: Colors.grey,
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                              size: 30.0,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              height: MediaQuery.of(context).size.width * 0.25,
+                              child: Image(
+                                image: AssetImage(bike_1),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            padding: EdgeInsets.all(28.0),
                           ),
                           RawMaterialButton(
                             onPressed: () {},
                             elevation: 2.0,
                             fillColor: Colors.grey,
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                              size: 30.0,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              height: MediaQuery.of(context).size.width * 0.25,
+                              child: Image(
+                                image: AssetImage(bike_2),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            padding: EdgeInsets.all(28.0),
                           ),
                           RawMaterialButton(
                             onPressed: () {},
                             elevation: 2.0,
                             fillColor: Colors.grey,
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                              size: 30.0,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              height: MediaQuery.of(context).size.width * 0.25,
+                              child: Image(
+                                image: AssetImage(bike_1),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            padding: EdgeInsets.all(28.0),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Text(
                         'Ghi chú: ',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -420,12 +658,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         height: 220,
                         margin:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black54,
-                              width: 2,
-                            )),
+                        color: Colors.white,
                         child: TextFormField(
                           textAlignVertical: TextAlignVertical.center,
                           initialValue: "Cần mua xăng",
@@ -454,13 +687,15 @@ class _StepOneScreenState extends State<StepOneScreen> {
         ],
         type: stepperType,
         currentStep: currentStep,
-        onStepContinue: next,
+        onStepContinue: () {
+          currentStep + 1 != 4 ? goTo(currentStep + 1) : _delete(context);
+        },
         onStepCancel: cancel,
         onStepTapped: (step) => goTo(step),
         controlsBuilder: (BuildContext context,
             {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
           return Container(
-            margin: EdgeInsets.only(top: 60),
+            margin: EdgeInsets.only(top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
