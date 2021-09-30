@@ -15,6 +15,7 @@ class AddressController extends GetxController {
   Rx<Marker> origin = new Marker(markerId: new MarkerId("origin")).obs;
   Rx<Location> location = new Location(lat: 0.0, lng: 0.0).obs;
   RxString address = "".obs;
+  Rx<Uint8List?> markerDesIcon = null.obs;
   @override
   void onInit() {
     super.onInit();
@@ -31,6 +32,8 @@ class AddressController extends GetxController {
       );
       final Uint8List markerIcon =
           await getBytesFromAsset('../../assets/images/marker.png', 100);
+      markerDesIcon.value =
+          await getBytesFromAsset('../../assets/images/fix.png', 100);
       origin.value = new Marker(
           markerId: new MarkerId("origin"),
           icon: BitmapDescriptor.fromBytes(markerIcon),
