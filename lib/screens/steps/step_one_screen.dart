@@ -24,12 +24,12 @@ class Animal {
 }
 
 List<String> listProblem = [
-  "Khác",
   "Không khởi động được",
   "Tôi bị tai nạn",
   "Tôi cần vá săm lốp",
   "Tôi cần thay ắc quy",
   "Tôi cần xe cứu hộ",
+  "Khác",
 ];
 
 List<String> listProducts = [
@@ -46,7 +46,6 @@ List<String> listProducts = [
 ];
 
 class _StepOneScreenState extends State<StepOneScreen> {
-
   String _myStateProblem = listProblem[0], _myStateProduct = listProducts[0];
 
   FAStepperType stepperType = FAStepperType.horizontal;
@@ -112,7 +111,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
               children: [
                 TileItem(
                   prefixIcon: Icons.account_box_rounded,
-                  value: 'Người dùng',
+                  value: 'Trương Thanh Bình',
                   hintText: "Tên người dùng",
                 ),
                 SizedBox(
@@ -133,7 +132,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                   maxLines: 2,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 Text(
                   'Bạn gặp vấn đề gì?',
@@ -142,7 +141,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton(
@@ -150,16 +151,19 @@ class _StepOneScreenState extends State<StepOneScreen> {
                     value: _myStateProblem,
                     iconSize: 30,
                     icon: null,
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 16
-                    ),
+                    style: TextStyle(color: Colors.black54, fontSize: 16),
                     hint: Text("Select state"),
                     onChanged: (String? newValue) {
                       setState(() {
                         _myStateProblem = newValue!;
                       });
-                    }, items: listProblem.map((item) => new DropdownMenuItem(child: Text(item), value: item,)).toList(),
+                    },
+                    items: listProblem
+                        .map((item) => new DropdownMenuItem(
+                              child: Text(item),
+                              value: item,
+                            ))
+                        .toList(),
                   ),
                 ),
               ],
@@ -188,16 +192,19 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       value: _myStateProduct,
                       iconSize: 30,
                       icon: null,
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16
-                      ),
+                      style: TextStyle(color: Colors.black54, fontSize: 16),
                       hint: Text("Select state"),
                       onChanged: (String? newValue) {
                         setState(() {
                           _myStateProduct = newValue!;
                         });
-                      }, items: listProducts.map((item) => new DropdownMenuItem(child: Text(item), value: item,)).toList(),
+                      },
+                      items: listProducts
+                          .map((item) => new DropdownMenuItem(
+                                child: Text(item),
+                                value: item,
+                              ))
+                          .toList(),
                     ),
                   ),
                 ),
@@ -375,7 +382,6 @@ class _StepOneScreenState extends State<StepOneScreen> {
                             ),
                             padding: EdgeInsets.all(28.0),
                           ),
-
                           RawMaterialButton(
                             onPressed: () {},
                             elevation: 2.0,
@@ -387,7 +393,6 @@ class _StepOneScreenState extends State<StepOneScreen> {
                             ),
                             padding: EdgeInsets.all(28.0),
                           ),
-
                           RawMaterialButton(
                             onPressed: () {},
                             elevation: 2.0,
@@ -455,20 +460,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
         controlsBuilder: (BuildContext context,
             {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
           return Container(
-            margin: EdgeInsets.only(top: 14),
+            margin: EdgeInsets.only(top: 60),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                    color: Colors.lightBlueAccent,
-                    child: FlatButton(
-                        onPressed: onStepContinue,
-                        child: Text(
-                          'Tiếp theo',
-                          style: TextStyle(color: Colors.white, fontSize: 17),
-                        ))),
-                FlatButton(
+                ElevatedButton(
+                    onPressed: onStepContinue,
+                    child: Text(
+                      'Tiếp theo',
+                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    )),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.primaries.first),
                     onPressed: onStepCancel,
                     child: Text(
                       'Trở về',
@@ -505,7 +510,12 @@ class TileItem extends StatelessWidget {
       ),
       maxLines: maxLines,
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffeeeff0)),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
           hintText: hintText,
           filled: true,
           fillColor: Colors.white,

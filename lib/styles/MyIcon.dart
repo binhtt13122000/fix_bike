@@ -6,3 +6,4 @@ const imageCar = 'assets/images/1.jpg';
 const iconFacebook = 'assets/images/facebook.png';
 const iconApple = 'assets/images/apple.png';
 const iconZalo = 'assets/images/zalo.png';
+const iconMarker = 'assets/images/marker.png';

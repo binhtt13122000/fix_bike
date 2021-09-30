@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:fix_bike/controller/AddressController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
@@ -13,6 +15,7 @@ import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/services/DirectionService.dart';
 import 'package:fix_bike/services/PlacesService.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -73,12 +76,12 @@ class MapGoogleState extends State<MapGoogle> {
         destination = defautDestination;
       });
       // if (destination != null) {
-        // _controller.future.then((value) => {
-        //       value.animateCamera(CameraUpdate.newCameraPosition(
-        //           CameraPosition(target: destination!.position, zoom: 13)))
-        //     });
-        // _controller.future.then(
-        //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
+      // _controller.future.then((value) => {
+      //       value.animateCamera(CameraUpdate.newCameraPosition(
+      //           CameraPosition(target: destination!.position, zoom: 13)))
+      //     });
+      // _controller.future.then(
+      //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
       // }
     } else if (statusAppController.status.value == 3) {
       if (destination != null) {
@@ -88,6 +91,16 @@ class MapGoogleState extends State<MapGoogle> {
             destination!.position);
       }
     }
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   redraw(lat, lng) {

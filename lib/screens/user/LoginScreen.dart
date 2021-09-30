@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     final AuthenticationController controller =
         Get.put(AuthenticationController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -177,7 +178,8 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           // SizedBox(height: 30),
                                           Padding(
-                                            padding: const EdgeInsets.fromLTRB(0,0,0,10),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 10),
                                             child: Container(
                                               height: 70,
                                               width: double.infinity,
@@ -190,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     "Đăng ký",
                                                     style: TextStyle(
                                                         fontSize: 15,
-                                                        color: Color(0xff888888)),
+                                                        color:
+                                                            Color(0xff888888)),
                                                   ),
                                                   Text(
                                                     "Quên mật khẩu ?",
