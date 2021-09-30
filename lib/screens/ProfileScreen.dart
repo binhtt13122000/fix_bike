@@ -76,7 +76,7 @@ class ProfilePage extends GetWidget {
 
             ProfileMenu(
               text: "Tài khoản của tôi",
-              icon: iconLogin,
+              icon: accountIcon,
               press: () => {
                 Get.to(() => EditProfilePage(),
                     transition: Transition.rightToLeftWithFade,
@@ -85,7 +85,7 @@ class ProfilePage extends GetWidget {
             ),
             ProfileMenu(
               text: "Lịch sử",
-              icon: iconLogin,
+              icon: iconHistory,
               press: () {
                 Get.offAll(() => HistoryPage(),
                     transition: Transition.leftToRightWithFade,
@@ -94,7 +94,7 @@ class ProfilePage extends GetWidget {
             ),
             ProfileMenu(
               text: "Cài đặt",
-              icon: iconLogin,
+              icon: iconSetting,
               press: () {
                 Get.to(() => SettingsPage(),
                     transition: Transition.leftToRightWithFade,
@@ -103,7 +103,7 @@ class ProfilePage extends GetWidget {
             ),
             ProfileMenu(
               text: "Hỗ trợ",
-              icon: iconLogin,
+              icon: iconSupport,
               press: () {
                 Get.to(() => SupportPage(),
                     transition: Transition.leftToRightWithFade,
