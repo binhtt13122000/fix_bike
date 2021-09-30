@@ -12,3 +12,7 @@ const iconHistory = 'assets/images/history.svg';
 const accountIcon = 'assets/images/iconAccount.svg';
 const iconSupport = 'assets/images/support.svg';
 const iconSetting = 'assets/images/setting.svg';
+const iconMarker = 'assets/images/marker.png';
+const bike_1 = 'assets/images/bike_1.jpg';
+const bike_2 = 'assets/images/bike_2.jpg';
+const iconFix = 'assets/images/fix.png';

@@ -42,7 +42,7 @@ class Normal extends StatelessWidget {
             //       destination.position),
             // ),
             ElevatedButton(
-              child: Text("Cập nhật tình trạng xe"),
+              child: Text("Tìm kiếm người sửa xe"),
               onPressed: () {
                 Get.to(() => StepOneScreen(),
                     transition: Transition.rightToLeftWithFade,
