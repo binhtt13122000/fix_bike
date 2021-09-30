@@ -10,6 +10,7 @@ import 'package:fix_bike/screens/home_screen/Found.dart';
 import 'package:fix_bike/screens/home_screen/Normal.dart';
 import 'package:fix_bike/screens/home_screen/Ordered.dart';
 import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/screens/repairman/bike_status_screen.dart';
 import 'package:fix_bike/services/DirectionService.dart';
 import 'package:fix_bike/services/PlacesService.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,13 @@ class MapGoogleState extends State<MapGoogle> {
     if (statusAppController.switched.isFalse) {
       statusAppController.setSwitch(true);
       statusAppController.zoom.value = getZoomLevel(3000);
+      Future.delayed(
+          Duration(seconds: 10),
+          () => {
+                Get.to(() => BikeStatusPage(),
+                    transition: Transition.downToUp,
+                    duration: Duration(milliseconds: 600))
+              });
     } else {
       statusAppController.setSwitch(false);
       statusAppController.zoom.value = 15.0;
