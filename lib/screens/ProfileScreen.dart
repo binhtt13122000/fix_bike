@@ -186,6 +186,7 @@ class TileItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function()? handleFunction;
+
   @override
   Widget build(BuildContext context) {
     return Ink(
