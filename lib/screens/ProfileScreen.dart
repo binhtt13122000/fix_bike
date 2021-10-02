@@ -87,7 +87,7 @@ class ProfilePage extends GetWidget {
               text: "Lịch sử",
               icon: iconHistory,
               press: () {
-                Get.offAll(() => HistoryPage(),
+                Get.to(() => HistoryPage(),
                     transition: Transition.leftToRightWithFade,
                     duration: Duration(microseconds: 600));
               },

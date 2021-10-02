@@ -128,24 +128,24 @@ class EditProfilePage extends GetWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Color(0xFF00AA13),
+            color: Color(0xFFA0D1F9),
           ),
           onPressed: () {
             Get.back();
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Color(0xFF00AA13),
-            ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => SettingsPage()));
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.settings,
+        //       color: Color(0xFFA0D1F9),
+        //     ),
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //           builder: (BuildContext context) => SettingsPage()));
+        //     },
+        //   ),
+        // ],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -197,7 +197,7 @@ class EditProfilePage extends GetWidget {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color: Color(0xFF00AA13),
+                            color: Color(0xFFA0D1F9),
                           ),
                           child: Icon(
                             Icons.edit,
@@ -239,7 +239,7 @@ class EditProfilePage extends GetWidget {
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(microseconds: 600));
                     },
-                    color: Color(0xFF00AA13),
+                    color: Color(0xFFA0D1F9),
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(

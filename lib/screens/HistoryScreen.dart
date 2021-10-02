@@ -163,7 +163,7 @@ class NotificationItem extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0, 60, 120, 0),
                                     child: Text(
-                                      "Tên: " + customerName,
+                                      "Tên người sửa: " + customerName,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
@@ -187,23 +187,23 @@ class NotificationItem extends StatelessWidget {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 8),
-                                              child: Text(
-                                                "\nXem chi tiết",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w300,
-                                                  fontStyle: FontStyle.italic,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.only(left: 260),
-                                              child: Icon(
-                                                  Icons.keyboard_arrow_down_sharp),
-                                            )
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(top: 8),
+                                            //   child: Text(
+                                            //     "\nXem chi tiết",
+                                            //     style: TextStyle(
+                                            //       color: Colors.black,
+                                            //       fontWeight: FontWeight.w300,
+                                            //       fontStyle: FontStyle.italic,
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                            // Padding(
+                                            //   padding:
+                                            //   const EdgeInsets.only(left: 260),
+                                            //   child: Icon(
+                                            //       Icons.keyboard_arrow_down_sharp),
+                                            // )
                                           ],
                                         )
                                       ],

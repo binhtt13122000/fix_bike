@@ -1,10 +1,9 @@
 import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/screens/MessageScreen.dart';
-import 'package:fix_bike/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Ordered extends StatelessWidget {
+class Ordered extends GetWidget {
   final int minutes;
   final String name;
   final Function cancel;
@@ -20,13 +19,6 @@ class Ordered extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-          child: Text(
-            "Thông tin khách hàng",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-        ),
         RichText(
           text: new TextSpan(
             // Note: Styles for TextSpans must be explicitly defined.
@@ -40,7 +32,7 @@ class Ordered extends StatelessWidget {
                   text: 'Tên: ',
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               new TextSpan(
-                text: 'Nguyễn Văn A',
+                text: name,
               ),
             ],
           ),
@@ -55,25 +47,35 @@ class Ordered extends StatelessWidget {
             ),
             children: <TextSpan>[
               new TextSpan(
-                  text: 'Số tiền: ',
+                  text: 'Thời gian dự kiến sẽ đến: ',
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               new TextSpan(
-                text: '150.000 VNĐ',
+                text: '$minutes phút',
               ),
             ],
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.green)),
+              child: Icon(Icons.phone),
+              onPressed: () => {},
+            ),
+            ElevatedButton(
+              child: Icon(Icons.message),
+              onPressed: () => Get.to(MessagePage()),
+            ),
+            ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red)),
-                child: Text("Đã sửa"),
+                child: Text("Hủy"),
                 onPressed: () {
                   statusAppController.setStatus(1);
-                  Get.to(Home());
+                  cancel();
                 })
           ],
         )

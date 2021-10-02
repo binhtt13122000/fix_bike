@@ -8,7 +8,7 @@ class Fixed extends GetWidget {
   final String money;
   final Function cancel;
   final StatusAppController statusAppController =
-      Get.put(StatusAppController());
+  Get.put(StatusAppController());
 
   Fixed({Key? key, this.money = "", required this.cancel}) : super(key: key);
 

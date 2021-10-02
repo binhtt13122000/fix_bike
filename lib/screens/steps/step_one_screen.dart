@@ -94,6 +94,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
 
   final StatusAppController statusAppController =
       Get.put(StatusAppController());
+
   void _delete(BuildContext context) {
     showCupertinoDialog(
         context: context,
@@ -262,7 +263,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
             ),
           ),
           FAStep(
-            title: const Text("Mô tả sản phẩm"),
+            title: const Text("Mô tả phương tiện"),
             isActive: currentStep >= 1,
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -499,7 +500,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
             ),
           ),
           FAStep(
-            title: const Text("Tình trạng sản phẩm"),
+            title: const Text("Tình trạng phương tiện"),
             isActive: currentStep >= 2,
             content: Column(
               children: [
@@ -550,7 +551,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         ),
                       ),
                       Container(
-                        height: 220,
+                        height: 150,
                         margin:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         decoration: BoxDecoration(
@@ -575,21 +576,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FAStep(
-            title: const Text("Hình ảnh và ghi chú"),
-            isActive: currentStep >= 3,
-            content: Column(
-              children: [
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                      // SizedBox(height: 20),
                       Text(
                         'Hình ảnh: ',
                         style: TextStyle(
@@ -597,9 +584,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -644,51 +629,122 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Ghi chú: ',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Container(
-                        height: 220,
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        color: Colors.white,
-                        child: TextFormField(
-                          textAlignVertical: TextAlignVertical.center,
-                          initialValue: "Cần mua xăng",
-                          maxLines: null,
-                          keyboardType: TextInputType.multiline,
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                          decoration: InputDecoration(
-                            labelStyle: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
-                      ),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),
+
               ],
             ),
           ),
+          // FAStep(
+          //   title: const Text("Hình ảnh và ghi chú"),
+          //   isActive: currentStep >= 3,
+          //   content: Column(
+          //     children: [
+          //       Container(
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Text(
+          //               'Hình ảnh: ',
+          //               style: TextStyle(
+          //                 fontSize: 18,
+          //                 fontWeight: FontWeight.w500,
+          //               ),
+          //             ),
+          //             SizedBox(
+          //               height: 10,
+          //             ),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //               children: [
+          //                 RawMaterialButton(
+          //                   onPressed: () {},
+          //                   elevation: 2.0,
+          //                   fillColor: Colors.grey,
+          //                   child: Container(
+          //                     width: MediaQuery.of(context).size.width * 0.25,
+          //                     height: MediaQuery.of(context).size.width * 0.25,
+          //                     child: Image(
+          //                       image: AssetImage(bike_1),
+          //                       fit: BoxFit.fill,
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 RawMaterialButton(
+          //                   onPressed: () {},
+          //                   elevation: 2.0,
+          //                   fillColor: Colors.grey,
+          //                   child: Container(
+          //                     width: MediaQuery.of(context).size.width * 0.25,
+          //                     height: MediaQuery.of(context).size.width * 0.25,
+          //                     child: Image(
+          //                       image: AssetImage(bike_2),
+          //                       fit: BoxFit.fill,
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 RawMaterialButton(
+          //                   onPressed: () {},
+          //                   elevation: 2.0,
+          //                   fillColor: Colors.grey,
+          //                   child: Container(
+          //                     width: MediaQuery.of(context).size.width * 0.25,
+          //                     height: MediaQuery.of(context).size.width * 0.25,
+          //                     child: Image(
+          //                       image: AssetImage(bike_1),
+          //                       fit: BoxFit.fill,
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             SizedBox(
+          //               height: 20,
+          //             ),
+          //             Text(
+          //               'Ghi chú: ',
+          //               style: TextStyle(
+          //                 fontSize: 18,
+          //                 fontWeight: FontWeight.w500,
+          //               ),
+          //             ),
+          //             Container(
+          //               height: 220,
+          //               margin:
+          //                   EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //               color: Colors.white,
+          //               child: TextFormField(
+          //                 textAlignVertical: TextAlignVertical.center,
+          //                 initialValue: "Cần mua xăng",
+          //                 maxLines: null,
+          //                 keyboardType: TextInputType.multiline,
+          //                 style: TextStyle(
+          //                   fontSize: 18,
+          //                 ),
+          //                 decoration: InputDecoration(
+          //                   labelStyle: TextStyle(
+          //                       fontSize: 22,
+          //                       fontWeight: FontWeight.w500,
+          //                       color: Colors.black),
+          //                   border: InputBorder.none,
+          //                   filled: true,
+          //                   fillColor: Colors.white,
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
         type: stepperType,
         currentStep: currentStep,
         onStepContinue: () {
-          currentStep + 1 != 4 ? goTo(currentStep + 1) : _delete(context);
+          currentStep + 1 != 3 ? goTo(currentStep + 1) : _delete(context);
         },
         onStepCancel: cancel,
         onStepTapped: (step) => goTo(step),

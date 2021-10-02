@@ -192,11 +192,10 @@ class _LoginPageState extends State<LoginPage> {
                                                     "Đăng ký",
                                                     style: TextStyle(
                                                         fontSize: 15,
-                                                        color:
-                                                            Color(0xff888888)),
+                                                        color: Colors.black),
                                                   ),
                                                   Text(
-                                                    "Quên mật khẩu ?",
+                                                    "Quên mật khẩu?",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         color: Colors.blue),
