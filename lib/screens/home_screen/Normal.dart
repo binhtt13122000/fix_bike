@@ -11,45 +11,59 @@ class Normal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RichText(
-          text: new TextSpan(
-            // Note: Styles for TextSpans must be explicitly defined.
-            // Child text spans will inherit styles from parent
-            style: new TextStyle(
-              fontSize: 16.0,
-              color: Colors.black,
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+          height: 60,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.white),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.directions_car,
+                          color: Colors.grey.shade500,
+                          size: 35,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Vinfast LUX A2.0",
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
+                    ),
+                    Text(
+                      "30A - 128.93",
+                      style: TextStyle(fontSize: 14),
+                    )
+                  ],
+                )
+              ],
             ),
-            children: <TextSpan>[
-              new TextSpan(
-                  text: 'Địa Chỉ: ',
-                  style: new TextStyle(fontWeight: FontWeight.bold)),
-              new TextSpan(
-                text: '${c.address}',
-              ),
-            ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            // ElevatedButton(
-            //   child: Text("Tìm đường"),
-            //   onPressed: () => drawLine(
-            //       addressController.origin.value.position,
-            //       destination.position),
-            // ),
-            ElevatedButton(
-              child: Text("Tìm kiếm người sửa xe"),
-              onPressed: () {
-                Get.to(() => StepOneScreen(),
-                    transition: Transition.rightToLeftWithFade,
-                    duration: Duration(milliseconds: 500));
-              },
-            )
-          ],
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(double.infinity,
+                  40), // double.infinity is the width and 30 is the height
+              primary: Color(0xFFF9AA33),
+              onPrimary: Colors.black),
+          onPressed: () {
+            Get.to(StepOneScreen(),
+                duration: Duration(microseconds: 500),
+                transition: Transition.upToDown);
+          },
+          child: Text('TÌM NGƯỜI SỬA XE'),
         )
       ],
     );
