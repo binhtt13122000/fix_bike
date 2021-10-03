@@ -69,10 +69,7 @@ class HistoryPage extends GetWidget {
           ),
           Expanded(
             child: Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
@@ -99,10 +96,11 @@ class HistoryPage extends GetWidget {
 }
 
 class NotificationItem extends StatelessWidget {
-  NotificationItem({required this.customerName,
-    required this.price,
-    required this.status,
-    required this.date});
+  NotificationItem(
+      {required this.customerName,
+      required this.price,
+      required this.status,
+      required this.date});
 
   final String customerName, price, status, date;
 
@@ -123,131 +121,127 @@ class NotificationItem extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Text(
-                                      "Ngày",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                child: Text(
+                                  "Ngày",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                                    child: Text(
-                                      date,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(140, 0, 0, 0),
-                                    child: Text(
-                                      "Tổng:" + price,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        // fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 60, 120, 0),
-                                    child: Text(
-                                      "Tên người sửa: " + customerName,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(260, 60, 0, 0),
-                                    child: Icon(Icons.phone, color: Colors.orange),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
-                                    child: Row(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            Text(
-                                              "Chi tiết",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            // Padding(
-                                            //   padding: const EdgeInsets.only(top: 8),
-                                            //   child: Text(
-                                            //     "\nXem chi tiết",
-                                            //     style: TextStyle(
-                                            //       color: Colors.black,
-                                            //       fontWeight: FontWeight.w300,
-                                            //       fontStyle: FontStyle.italic,
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                            // Padding(
-                                            //   padding:
-                                            //   const EdgeInsets.only(left: 260),
-                                            //   child: Icon(
-                                            //       Icons.keyboard_arrow_down_sharp),
-                                            // )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty
-                                      .resolveWith<Color>((Set<
-                                      MaterialState>
-                                  states) {
-                                    if (states.contains(
-                                        MaterialState.pressed))
-                                      return Colors.white70;
-                                    return Color(
-                                        0xff00660B); // Defer to the widget's default.
-                                  }),
-
                                 ),
-                                onPressed: () => {},
-                                child: Container(
-                                  width: double.infinity,
-                                  child: Center(child: Text("Đã Sửa")),
-                                )
-                            ),
-                          ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                child: Text(
+                                  date,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(140, 0, 0, 0),
+                                child: Text(
+                                  "Tổng:" + price,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    // fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 60, 120, 0),
+                                child: Text(
+                                  "Tên người sửa: " + customerName,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(260, 60, 0, 0),
+                                child: Icon(Icons.phone, color: Colors.orange),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 120, 0, 0),
+                                child: Row(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Text(
+                                          "Chi tiết",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(top: 8),
+                                        //   child: Text(
+                                        //     "\nXem chi tiết",
+                                        //     style: TextStyle(
+                                        //       color: Colors.black,
+                                        //       fontWeight: FontWeight.w300,
+                                        //       fontStyle: FontStyle.italic,
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        // Padding(
+                                        //   padding:
+                                        //   const EdgeInsets.only(left: 260),
+                                        //   child: Icon(
+                                        //       Icons.keyboard_arrow_down_sharp),
+                                        // )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      )),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed))
+                                  return Colors.white70;
+                                return Color(
+                                    0xff00660B); // Defer to the widget's default.
+                              }),
+                            ),
+                            onPressed: () => {},
+                            child: Container(
+                              width: double.infinity,
+                              child: Center(child: Text("Đã Sửa")),
+                            )),
+                      ],
+                    ),
+                  )),
                 ],
               ),
               SizedBox(
                 height: 18,
               ),
             ],
-          )
-          ,
-        )
-        ,
-      )
-      ,
+          ),
+        ),
+      ),
     );
   }
 }
-

@@ -16,3 +16,4 @@ const iconMarker = 'assets/images/marker.png';
 const bike_1 = 'assets/images/bike_1.jpg';
 const bike_2 = 'assets/images/bike_2.jpg';
 const iconFix = 'assets/images/fix.png';
+const carIcon = 'assets/images/car.svg';

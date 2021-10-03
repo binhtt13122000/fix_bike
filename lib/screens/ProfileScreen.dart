@@ -3,6 +3,7 @@ import 'package:fix_bike/components/ProfileMenu.dart';
 import 'package:fix_bike/screens/EditProfileScreen.dart';
 import 'package:fix_bike/screens/HistoryScreen.dart';
 import 'package:fix_bike/screens/SupportScreen.dart';
+import 'package:fix_bike/screens/VehicleScreen.dart';
 import 'package:fix_bike/screens/settings.dart';
 import 'package:fix_bike/screens/user/LoginScreen.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
@@ -19,7 +20,7 @@ class ProfilePage extends GetWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(60.0),
+              padding: const EdgeInsets.all(50.0),
               child: SizedBox(
                 height: 150,
                 width: 150,
@@ -28,8 +29,7 @@ class ProfilePage extends GetWidget {
                   clipBehavior: Clip.none,
                   children: [
                     CircleAvatar(
-                      backgroundImage:
-                          AssetImage(avatar),
+                      backgroundImage: AssetImage(avatar),
                     ),
                     Positioned(
                       right: -16,
@@ -56,29 +56,20 @@ class ProfilePage extends GetWidget {
               ),
             ),
 
-            // Container(
-            //   padding: EdgeInsets.only(top: 30.0, bottom: 40.0),
-            //   child: Center(
-            //     child: RawMaterialButton(
-            //       onPressed: () {},
-            //       elevation: 2.0,
-            //       fillColor: Colors.grey,
-            //       child: Icon(
-            //         Icons.camera_alt_outlined,
-            //         color: Colors.white,
-            //         size: 30.0,
-            //       ),
-            //       padding: EdgeInsets.all(28.0),
-            //       shape: CircleBorder(),
-            //     ),
-            //   ),
-            // ),
-
             ProfileMenu(
               text: "Tài khoản của tôi",
               icon: accountIcon,
               press: () => {
                 Get.to(() => EditProfilePage(),
+                    transition: Transition.rightToLeftWithFade,
+                    duration: Duration(milliseconds: 600))
+              },
+            ),
+            ProfileMenu(
+              text: "Phương tiện của tôi",
+              icon: carIcon,
+              press: () => {
+                Get.to(() => VerhiclePage(),
                     transition: Transition.rightToLeftWithFade,
                     duration: Duration(milliseconds: 600))
               },
@@ -111,19 +102,14 @@ class ProfilePage extends GetWidget {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, top: 40, right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
               child: Material(
                 elevation: 5.0,
-                borderRadius:
-                BorderRadius.circular(80.0),
+                borderRadius: BorderRadius.circular(80.0),
                 color: Colors.red,
                 child: MaterialButton(
-                  minWidth: MediaQuery.of(context)
-                      .size
-                      .width,
-                  padding: EdgeInsets.fromLTRB(
-                      20.0, 15.0, 20.0, 15.0),
+                  minWidth: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   onPressed: () {
                     Get.offAll(() => LoginPage(),
                         transition: Transition.leftToRightWithFade,
@@ -131,15 +117,10 @@ class ProfilePage extends GetWidget {
                   },
                   child: Text("Đăng xuất",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily:
-                          'Montserrat',
-                          fontSize: 20.0)
+                      style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0)
                           .copyWith(
-                          color: Colors.white,
-                          fontWeight:
-                          FontWeight
-                              .bold)),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
