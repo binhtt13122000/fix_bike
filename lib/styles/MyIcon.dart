@@ -4,6 +4,7 @@ const imageUser1 = 'assets/images/user.png';
 const imageUser2 = 'assets/images/user_2.png';
 const avatar = 'assets/images/avatar.jpg';
 const iconPromo = 'assets/images/promo2.png';
+const avatarGrab = 'assets/images/Profile_Image.png';
 const imageCar = 'assets/images/1.jpg';
 const iconFacebook = 'assets/images/facebook.png';
 const iconApple = 'assets/images/apple.png';
