@@ -47,7 +47,7 @@ class Found extends GetWidget {
           shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Container(
-            height: 300.0,
+            height: 340.0,
             padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,6 +113,15 @@ class Found extends GetWidget {
                     onRatingUpdate: (rating) {},
                     updateOnDrag: true,
                   ),
+                ),
+                Text(
+                  "Thân thiện, chuyên nghiệp, nhanh chóng",
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "54F5-2185•Honda-AirBlade",
