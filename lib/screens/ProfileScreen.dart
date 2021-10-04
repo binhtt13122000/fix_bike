@@ -19,39 +19,42 @@ class ProfilePage extends GetWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: SizedBox(
-                height: 150,
-                width: 150,
-                child: Stack(
-                  fit: StackFit.expand,
-                  clipBehavior: Clip.none,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage(avatar),
-                    ),
-                    Positioned(
-                      right: -16,
-                      bottom: 0,
-                      child: SizedBox(
-                        height: 46,
-                        width: 46,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              side: BorderSide(color: Colors.white),
-                            ),
-                            primary: Colors.black,
-                            backgroundColor: Color(0xFFF5F6F9),
-                          ),
-                          onPressed: () {},
-                          child: Icon(Icons.camera_alt_outlined),
-                        ),
+            Container(
+              color: Color(0xFFf9aa33),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(110, 50, 110, 30),
+                child: SizedBox(
+                  height: 150,
+                  width: 150,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    clipBehavior: Clip.none,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage(avatar),
                       ),
-                    )
-                  ],
+                      Positioned(
+                        right: -16,
+                        bottom: 0,
+                        child: SizedBox(
+                          height: 46,
+                          width: 46,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                side: BorderSide(color: Colors.black),
+                              ),
+                              primary: Colors.black,
+                              backgroundColor: Color(0xFFF5F6F9),
+                            ),
+                            onPressed: () {},
+                            child: Icon(Icons.camera_alt_outlined),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -102,7 +105,7 @@ class ProfilePage extends GetWidget {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
+              padding: const EdgeInsets.only(left: 50, top: 10, right: 50),
               child: Material(
                 elevation: 5.0,
                 borderRadius: BorderRadius.circular(80.0),
