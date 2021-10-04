@@ -10,6 +10,9 @@ import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const _url = 'https://flutter.dev';
 
 class ProfilePage extends GetWidget {
   @override
@@ -98,11 +101,10 @@ class ProfilePage extends GetWidget {
             ProfileMenu(
               text: "Hỗ trợ",
               icon: iconSupport,
-              press: () {
-                Get.to(() => SupportPage(),
-                    transition: Transition.leftToRightWithFade,
-                    duration: Duration(microseconds: 600));
-              },
+              press: _launchURL,
+              // Get.to(() => SupportPage(),
+              //     transition: Transition.leftToRightWithFade,
+              //     duration: Duration(microseconds: 600));
             ),
             Padding(
               padding: const EdgeInsets.only(left: 50, top: 10, right: 50),
@@ -114,9 +116,9 @@ class ProfilePage extends GetWidget {
                   minWidth: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   onPressed: () {
-                    Get.offAll(() => LoginPage(),
-                        transition: Transition.leftToRightWithFade,
-                        duration: Duration(microseconds: 600));
+                    // Get.offAll(() => LoginPage(),
+                    //     transition: Transition.leftToRightWithFade,
+                    //     duration: Duration(microseconds: 600));
                   },
                   child: Text("Đăng xuất",
                       textAlign: TextAlign.center,
@@ -319,3 +321,6 @@ class HeaderCurvedContainer extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';

@@ -130,7 +130,7 @@ class EditProfilePage extends GetWidget {
               SizedBox(
                 height: 25,
               ),
-              buildTextField("Tên", "Nguyễn Văn A", false),
+              buildTextField("Tên", "Nguyễn Văn Tâm", false),
               buildTextField("Ngày sinh", "05/01/1998", false),
               buildTextField("E-mail", "vana@gmail.com", false),
               buildTextField("Điện thoại", "0333568696", false),
