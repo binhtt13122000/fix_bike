@@ -1,10 +1,15 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:fa_stepper/fa_stepper.dart';
 import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/steps/camera.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -135,7 +140,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
 
   FAStepperType stepperType = FAStepperType.horizontal;
 
-  int currentStep = 0;
+  int currentStep = 0, currentIndex = 0;
   bool complete = false;
 
   goTo(int step) {
@@ -170,6 +175,51 @@ class _StepOneScreenState extends State<StepOneScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  List<String> _path = ['', '', ''];
+
+  Future _showPhotoLibrary() async {
+    final file = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _path[currentIndex] = file.path;
+    });
+  }
+
+  void _showCamera() async {
+    final cameras = await availableCameras();
+    final camera = cameras.first;
+
+    final result = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => CameraScreen(camera: camera)));
+    setState(() {
+      _path[currentIndex] = result;
+    });
+  }
+
+  void _showOptions(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+              height: 150,
+              child: Column(children: <Widget>[
+                ListTile(
+                    onTap: () {
+                      Navigator.pop(context);
+                      _showCamera();
+                    },
+                    leading: Icon(Icons.photo_camera),
+                    title: Text("Take a picture from camera")),
+                ListTile(
+                    onTap: () {
+                      Navigator.pop(context);
+                      _showPhotoLibrary();
+                    },
+                    leading: Icon(Icons.photo_library),
+                    title: Text("Choose from photo library"))
+              ]));
+        });
   }
 
   @override
@@ -589,42 +639,70 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           RawMaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                currentIndex = 0;
+                                _showOptions(context);
+                              });
+                            },
                             elevation: 2.0,
                             fillColor: Colors.grey,
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.25,
                               height: MediaQuery.of(context).size.width * 0.25,
-                              child: Image(
-                                image: AssetImage(bike_1),
-                                fit: BoxFit.fill,
-                              ),
+                              child: _path[0] == ''
+                                  ? Image(
+                                      image: AssetImage(bike_1),
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.file(
+                                      File(_path[0]),
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                           RawMaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                currentIndex = 1;
+                                _showOptions(context);
+                              });
+                            },
                             elevation: 2.0,
                             fillColor: Colors.grey,
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.25,
                               height: MediaQuery.of(context).size.width * 0.25,
-                              child: Image(
-                                image: AssetImage(bike_2),
-                                fit: BoxFit.fill,
-                              ),
+                              child: _path[1] == ''
+                                  ? Image(
+                                      image: AssetImage(bike_2),
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.file(
+                                      File(_path[1]),
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                           RawMaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                currentIndex = 2;
+                                _showOptions(context);
+                              });
+                            },
                             elevation: 2.0,
                             fillColor: Colors.grey,
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.25,
                               height: MediaQuery.of(context).size.width * 0.25,
-                              child: Image(
-                                image: AssetImage(bike_1),
-                                fit: BoxFit.fill,
-                              ),
+                              child: _path[2] == ''
+                                  ? Icon(Icons.camera_alt_outlined,
+                                      size: 18, color: Colors.white)
+                                  : Image.file(
+                                      File(_path[2]),
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                         ],
@@ -633,113 +711,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
-          // FAStep(
-          //   title: const Text("Hình ảnh và ghi chú"),
-          //   isActive: currentStep >= 3,
-          //   content: Column(
-          //     children: [
-          //       Container(
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               'Hình ảnh: ',
-          //               style: TextStyle(
-          //                 fontSize: 18,
-          //                 fontWeight: FontWeight.w500,
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: 10,
-          //             ),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //               children: [
-          //                 RawMaterialButton(
-          //                   onPressed: () {},
-          //                   elevation: 2.0,
-          //                   fillColor: Colors.grey,
-          //                   child: Container(
-          //                     width: MediaQuery.of(context).size.width * 0.25,
-          //                     height: MediaQuery.of(context).size.width * 0.25,
-          //                     child: Image(
-          //                       image: AssetImage(bike_1),
-          //                       fit: BoxFit.fill,
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 RawMaterialButton(
-          //                   onPressed: () {},
-          //                   elevation: 2.0,
-          //                   fillColor: Colors.grey,
-          //                   child: Container(
-          //                     width: MediaQuery.of(context).size.width * 0.25,
-          //                     height: MediaQuery.of(context).size.width * 0.25,
-          //                     child: Image(
-          //                       image: AssetImage(bike_2),
-          //                       fit: BoxFit.fill,
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 RawMaterialButton(
-          //                   onPressed: () {},
-          //                   elevation: 2.0,
-          //                   fillColor: Colors.grey,
-          //                   child: Container(
-          //                     width: MediaQuery.of(context).size.width * 0.25,
-          //                     height: MediaQuery.of(context).size.width * 0.25,
-          //                     child: Image(
-          //                       image: AssetImage(bike_1),
-          //                       fit: BoxFit.fill,
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //             SizedBox(
-          //               height: 20,
-          //             ),
-          //             Text(
-          //               'Ghi chú: ',
-          //               style: TextStyle(
-          //                 fontSize: 18,
-          //                 fontWeight: FontWeight.w500,
-          //               ),
-          //             ),
-          //             Container(
-          //               height: 220,
-          //               margin:
-          //                   EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          //               color: Colors.white,
-          //               child: TextFormField(
-          //                 textAlignVertical: TextAlignVertical.center,
-          //                 initialValue: "Cần mua xăng",
-          //                 maxLines: null,
-          //                 keyboardType: TextInputType.multiline,
-          //                 style: TextStyle(
-          //                   fontSize: 18,
-          //                 ),
-          //                 decoration: InputDecoration(
-          //                   labelStyle: TextStyle(
-          //                       fontSize: 22,
-          //                       fontWeight: FontWeight.w500,
-          //                       color: Colors.black),
-          //                   border: InputBorder.none,
-          //                   filled: true,
-          //                   fillColor: Colors.white,
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
         type: stepperType,
         currentStep: currentStep,

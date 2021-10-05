@@ -9,6 +9,7 @@ class StatusAppController extends GetxController {
 
   RxDouble zoom = 15.0.obs;
   RxBool switched = false.obs;
+  RxBool isFinding = false.obs;
   RxString markerId = "".obs;
   setStatus(int selectedStatus) {
     status.value = selectedStatus;
@@ -21,5 +22,10 @@ class StatusAppController extends GetxController {
 
   setMarkerId(String markID) {
     markerId.value = markID;
+  }
+
+  setFinding(bool currentStatus) {
+    isFinding.value = currentStatus;
+    update();
   }
 }
