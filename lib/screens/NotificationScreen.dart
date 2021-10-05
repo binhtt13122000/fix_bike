@@ -60,10 +60,10 @@ class NotificationPage extends GetWidget {
                   itemCount: listPro.length,
                   itemBuilder: (BuildContext context, index) {
                     return NotificationItem(
-                        promo: listPro[index].promo,
-                        message: listPro[index].message,
-                        date: listPro[index].date,
-                        );
+                      promo: listPro[index].promo,
+                      message: listPro[index].message,
+                      date: listPro[index].date,
+                    );
                   }),
             ),
           )
@@ -88,16 +88,14 @@ class NotificationItem extends StatelessWidget {
   final String promo, message, date;
 
   NotificationItem(
-      {required this.promo,
-        required this.message,
-        required this.date});
+      {required this.promo, required this.message, required this.date});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 4, left: 12, right: 12),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
       child: Ink(
-        color: Colors.grey.shade100,
+        color: Colors.grey[100],
         child: ListTile(
           onTap: () {
             // setState(() {
@@ -106,9 +104,9 @@ class NotificationItem extends StatelessWidget {
           },
           title: Container(
             padding: EdgeInsets.only(top: 14, bottom: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(width: 0.5)),
+            // decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(8),
+            //     border: Border.all(width: 0.5)),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -137,8 +135,8 @@ class NotificationItem extends StatelessWidget {
                         // ),
                         Image(
                       image: AssetImage(iconPromo),
-                      width: 70,
-                      height: 70,
+                      width: 60,
+                      height: 60,
                     )),
                 // SizedBox(
                 //   width: 10.0,
@@ -173,7 +171,7 @@ class NotificationItem extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                         child: Text(
-                           date,
+                          date,
                           style: TextStyle(
                             fontSize: 12,
                             fontStyle: FontStyle.italic,
@@ -185,7 +183,6 @@ class NotificationItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-
                     ],
                   ),
                 )

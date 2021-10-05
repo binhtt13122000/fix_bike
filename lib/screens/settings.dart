@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: ListView(
           children: [
             Text(
-              "Settings",
+              "Cài đặt",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -45,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 8,
                 ),
                 Text(
-                  "Account",
+                  "Tài khoản",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -57,11 +57,11 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
-            buildAccountOptionRow(context, "Change password"),
-            buildAccountOptionRow(context, "Content settings"),
-            buildAccountOptionRow(context, "Social"),
-            buildAccountOptionRow(context, "Language"),
-            buildAccountOptionRow(context, "Privacy and security"),
+            buildAccountOptionRow(context, "Đổi mật khẩu"),
+            buildAccountOptionRow(context, "Cài đặt nội dung"),
+            buildAccountOptionRow(context, "Xã hội"),
+            buildAccountOptionRow(context, "Ngôn ngữ"),
+            buildAccountOptionRow(context, "Quyền riêng tư và bảo mật"),
             SizedBox(
               height: 40,
             ),
@@ -75,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 8,
                 ),
                 Text(
-                  "Notifications",
+                  "Thông báo",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -93,17 +93,17 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 50,
             ),
-            Center(
-              child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
-                child: Text("SIGN OUT",
-                    style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
-              ),
-            )
+            // Center(
+            //   child: OutlineButton(
+            //     padding: EdgeInsets.symmetric(horizontal: 40),
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(20)),
+            //     onPressed: () {},
+            //     child: Text("SIGN OUT",
+            //         style: TextStyle(
+            //             fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
+            //   ),
+            // )
           ],
         ),
       ),

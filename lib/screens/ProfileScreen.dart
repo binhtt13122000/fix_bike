@@ -3,12 +3,16 @@ import 'package:fix_bike/components/ProfileMenu.dart';
 import 'package:fix_bike/screens/EditProfileScreen.dart';
 import 'package:fix_bike/screens/HistoryScreen.dart';
 import 'package:fix_bike/screens/SupportScreen.dart';
+import 'package:fix_bike/screens/VehicleScreen.dart';
 import 'package:fix_bike/screens/settings.dart';
 import 'package:fix_bike/screens/user/LoginScreen.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const _url = 'https://flutter.dev';
 
 class ProfilePage extends GetWidget {
   @override
@@ -18,67 +22,60 @@ class ProfilePage extends GetWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(60.0),
-              child: SizedBox(
-                height: 150,
-                width: 150,
-                child: Stack(
-                  fit: StackFit.expand,
-                  clipBehavior: Clip.none,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage:
-                          AssetImage(avatar),
-                    ),
-                    Positioned(
-                      right: -16,
-                      bottom: 0,
-                      child: SizedBox(
-                        height: 46,
-                        width: 46,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              side: BorderSide(color: Colors.white),
-                            ),
-                            primary: Colors.black,
-                            backgroundColor: Color(0xFFF5F6F9),
-                          ),
-                          onPressed: () {},
-                          child: Icon(Icons.camera_alt_outlined),
-                        ),
+            Container(
+              color: Color(0xFFf9aa33),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(110, 50, 110, 30),
+                child: SizedBox(
+                  height: 150,
+                  width: 150,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    clipBehavior: Clip.none,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage(avatar),
                       ),
-                    )
-                  ],
+                      Positioned(
+                        right: -16,
+                        bottom: 0,
+                        child: SizedBox(
+                          height: 46,
+                          width: 46,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                side: BorderSide(color: Colors.black),
+                              ),
+                              primary: Colors.black,
+                              backgroundColor: Color(0xFFF5F6F9),
+                            ),
+                            onPressed: () {},
+                            child: Icon(Icons.camera_alt_outlined),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-
-            // Container(
-            //   padding: EdgeInsets.only(top: 30.0, bottom: 40.0),
-            //   child: Center(
-            //     child: RawMaterialButton(
-            //       onPressed: () {},
-            //       elevation: 2.0,
-            //       fillColor: Colors.grey,
-            //       child: Icon(
-            //         Icons.camera_alt_outlined,
-            //         color: Colors.white,
-            //         size: 30.0,
-            //       ),
-            //       padding: EdgeInsets.all(28.0),
-            //       shape: CircleBorder(),
-            //     ),
-            //   ),
-            // ),
 
             ProfileMenu(
               text: "Tài khoản của tôi",
               icon: accountIcon,
               press: () => {
                 Get.to(() => EditProfilePage(),
+                    transition: Transition.rightToLeftWithFade,
+                    duration: Duration(milliseconds: 600))
+              },
+            ),
+            ProfileMenu(
+              text: "Phương tiện của tôi",
+              icon: carIcon,
+              press: () => {
+                Get.to(() => VerhiclePage(),
                     transition: Transition.rightToLeftWithFade,
                     duration: Duration(milliseconds: 600))
               },
@@ -104,42 +101,31 @@ class ProfilePage extends GetWidget {
             ProfileMenu(
               text: "Hỗ trợ",
               icon: iconSupport,
-              press: () {
-                Get.to(() => SupportPage(),
-                    transition: Transition.leftToRightWithFade,
-                    duration: Duration(microseconds: 600));
-              },
+              press: _launchURL,
+              // Get.to(() => SupportPage(),
+              //     transition: Transition.leftToRightWithFade,
+              //     duration: Duration(microseconds: 600));
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, top: 40, right: 20),
+              padding: const EdgeInsets.only(left: 50, top: 10, right: 50),
               child: Material(
                 elevation: 5.0,
-                borderRadius:
-                BorderRadius.circular(80.0),
+                borderRadius: BorderRadius.circular(80.0),
                 color: Colors.red,
                 child: MaterialButton(
-                  minWidth: MediaQuery.of(context)
-                      .size
-                      .width,
-                  padding: EdgeInsets.fromLTRB(
-                      20.0, 15.0, 20.0, 15.0),
+                  minWidth: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   onPressed: () {
-                    Get.offAll(() => LoginPage(),
-                        transition: Transition.leftToRightWithFade,
-                        duration: Duration(microseconds: 600));
+                    // Get.offAll(() => LoginPage(),
+                    //     transition: Transition.leftToRightWithFade,
+                    //     duration: Duration(microseconds: 600));
                   },
                   child: Text("Đăng xuất",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily:
-                          'Montserrat',
-                          fontSize: 20.0)
+                      style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0)
                           .copyWith(
-                          color: Colors.white,
-                          fontWeight:
-                          FontWeight
-                              .bold)),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
@@ -335,3 +321,6 @@ class HeaderCurvedContainer extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
