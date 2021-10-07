@@ -1,5 +1,6 @@
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/user/RatingScreen.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +14,142 @@ class MainModal extends StatelessWidget {
   final Function draw;
   final LatLng destination;
   final LatLng origin;
+  final Function cancel;
 
   const MainModal(
       {Key? key,
       required this.height,
       required this.draw,
       required this.destination,
-      required this.origin})
+      required this.origin,
+      required this.cancel})
       : super(key: key);
   final double height;
+
+  showDialog(BuildContext context) {
+    // show the dialog
+    showGeneralDialog(
+      barrierLabel: "showGenerlDialog",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      context: context,
+      pageBuilder: (context, _, __) {
+        return Dialog(
+          insetAnimationCurve: Curves.bounceOut,
+          insetAnimationDuration: Duration(seconds: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 600.0,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Bạn đã sửa xe thành công, vui lòng đánh giá tài xế!",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(0, 10))
+                      ],
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(avatarGrab),
+                      )),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Lê Trọng Nhân",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 8, bottom: 8),
+                  child: RatingBar.builder(
+                    initialRating: 5,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    unratedColor: Colors.amber.withAlpha(50),
+                    itemCount: 5,
+                    itemSize: 20.0,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {},
+                    updateOnDrag: true,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Color(0xFFF9AA33),
+                      onPrimary: Colors.black),
+                  onPressed: () {
+                    if (Get.put(OrderController()).singleOrderApp.status != 0) {
+                      Navigator.of(context).pop(true);
+                      DatabaseMethods().updateTodo(0);
+                      cancel();
+                    }
+                  },
+                  child: Text('GỬI FEEDBACK VỀ TÀI XẾ'),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation1, __, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
 
   showAlertDialog(BuildContext context) {
     // show the dialog
@@ -147,6 +275,9 @@ class MainModal extends StatelessWidget {
     OrderController orderController = Get.find();
     if (orderController.singleOrderApp.status == 2) {
       Future.delayed(Duration.zero, () => {showAlertDialog(context)});
+    }
+    if (orderController.singleOrderApp.status == 6) {
+      Future.delayed(Duration.zero, () => {showDialog(context)});
     }
     return Container(
       child: Column(

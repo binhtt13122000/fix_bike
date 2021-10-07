@@ -105,15 +105,17 @@ class MapGoogleState extends State<MapGoogle> {
   }
 
   cancel() {
-    setState(() {
-      _info = null;
-    });
-    _controller.future.then((value) => {
-          value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-              target: LatLng(addressController.location.value.lat,
-                  addressController.location.value.lng),
-              zoom: 15)))
-        });
+    if (_info != null) {
+      setState(() {
+        _info = null;
+      });
+      _controller.future.then((value) => {
+            value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                target: LatLng(addressController.location.value.lat,
+                    addressController.location.value.lng),
+                zoom: 15)))
+          });
+    }
   }
 
   LatLngBounds getBounds(List<Marker> markers) {
@@ -302,7 +304,8 @@ class MapGoogleState extends State<MapGoogle> {
                                 origin: LatLng(
                                     addressController.location.value.getLat,
                                     addressController.location.value.getLng),
-                                draw: drawLine),
+                                draw: drawLine,
+                                cancel: cancel),
                           ],
                         )),
                       ))
