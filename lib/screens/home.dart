@@ -55,11 +55,37 @@ class MapGoogleState extends State<MapGoogle> {
   final PlacesService placesService = PlacesService();
   final StatusAppController statusAppController =
       Get.put(StatusAppController());
-  final TextEditingController _typeAheadController = TextEditingController();
+
+  double getZoomLevel(double radius) {
+    double zoomLevel = 11;
+    if (radius > 0) {
+      double radiusElevated = radius + radius / 2;
+      double scale = radiusElevated / 500;
+      zoomLevel = 16 - log(scale) / log(2);
+    }
+    zoomLevel = double.parse(zoomLevel.toStringAsFixed(2));
+    return zoomLevel;
+  }
+
+  void toggleSwitch(bool value) {
+    if (statusAppController.switched.isFalse) {
+      statusAppController.setSwitch(true);
+      statusAppController.zoom.value = getZoomLevel(3000);
+    } else {
+      statusAppController.setSwitch(false);
+      statusAppController.zoom.value = 15.0;
+    }
+    _controller.future.then((value) => {
+          value.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+              target: LatLng(addressController.location.value.lat,
+                  addressController.location.value.lng),
+              zoom: statusAppController.zoom.value)))
+        });
+  }
 
   Marker destination = new Marker(
       markerId: new MarkerId("destination"),
-      position: LatLng(10.84686530968016, 106.77740048180068),
+      position: LatLng(10.82702513577814, 106.7230868106364),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
       infoWindow: InfoWindow(
         title: "Nguyễn Văn A",
@@ -184,86 +210,18 @@ class MapGoogleState extends State<MapGoogle> {
                   right: 15,
                   left: 15,
                   child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: TypeAheadField<Place>(
-                                loadingBuilder: (context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                noItemsFoundBuilder: (context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                itemBuilder: (context, suggestion) {
-                                  return ListTile(
-                                    title: Text(suggestion.description),
-                                  );
-                                },
-                                suggestionsCallback: (pattern) async {
-                                  if (pattern == "")
-                                    return List.empty();
-                                  else
-                                    return await placesService.getPlaces(
-                                        input: pattern);
-                                },
-                                onSuggestionSelected: (suggestion) {
-                                  this._typeAheadController.text =
-                                      suggestion.description;
-                                  addressController.setAddress(
-                                      suggestion.description,
-                                      suggestion.placeId,
-                                      redraw);
-                                },
-                                textFieldConfiguration: TextFieldConfiguration(
-                                  controller: this._typeAheadController,
-                                  cursorColor: Colors.black,
-                                  keyboardType: TextInputType.text,
-                                  textInputAction: TextInputAction.go,
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.location_on,
-                                        color: Colors.red[300],
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide.none),
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      hintText: addressController.address.value,
-                                      filled: true,
-                                      fillColor: Colors.white),
-                                ))),
-                      ],
-                    ),
-                  ),
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Switch(
+                        onChanged: toggleSwitch,
+                        value: statusAppController.switched.value,
+                        activeColor: Colors.blue,
+                      )
+                    ],
+                  )),
                 ),
-                if (orderController.singleOrderApp.status == 0) ...[
-                  Positioned(
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    child: Normal(),
-                  )
-                ],
                 if (orderController.singleOrderApp.status == 1) ...[
-                  Positioned(
-                    right: 15,
-                    left: 15,
-                    bottom: 15,
-                    child: Container(
-                      color: Colors.white,
-                      height: 150,
-                      child: WaitingModal(),
-                    ),
-                  )
-                ],
-                if (orderController.singleOrderApp.status != 1 &&
-                    orderController.singleOrderApp.status != 0) ...[
                   Positioned(
                       right: 0,
                       left: 0,

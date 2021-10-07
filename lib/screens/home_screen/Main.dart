@@ -1,3 +1,4 @@
+import 'package:fix_bike/controller/AddressController.dart';
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/services/database.dart';
@@ -28,38 +29,29 @@ class MainModal extends StatelessWidget {
     showGeneralDialog(
       barrierLabel: "showGeneralDialog",
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.6),
       transitionDuration: const Duration(milliseconds: 400),
       context: context,
       pageBuilder: (context, _, __) {
-        Future.delayed(Duration(seconds: 5), () {
+        Future.delayed(Duration(seconds: 30), () {
           Navigator.of(context).pop(true);
           draw(origin, destination);
           DatabaseMethods().updateTodo(3);
         });
-        return Dialog(
-          insetAnimationCurve: Curves.bounceOut,
-          insetAnimationDuration: Duration(seconds: 1),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        return Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.white,
           child: Container(
-            height: 400.0,
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 30,
-                ),
                 Text(
-                  "Yeah! Đã tìm được người sửa xe cho bạn!",
-                  softWrap: true,
+                  "Tìm thấy một người cần sửa xe ở gần đây!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       color: Colors.black,
-                      wordSpacing: 0.5,
-                      fontWeight: FontWeight.w500),
+                      decoration: TextDecoration.none),
                 ),
                 SizedBox(
                   height: 20,
@@ -85,46 +77,125 @@ class MainModal extends StatelessWidget {
                       )),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Text(
-                  "Lê Trọng Nhân",
+                  "Trương Thanh Bình",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 8, bottom: 8),
-                  child: RatingBar.builder(
-                    initialRating: 5,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    unratedColor: Colors.amber.withAlpha(50),
-                    itemCount: 5,
-                    itemSize: 20.0,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {},
-                    updateOnDrag: true,
-                  ),
+                      fontSize: 18,
+                      color: Colors.black,
+                      decoration: TextDecoration.none),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
-                Text(
-                  "Thân thiện, chuyên nghiệp, nhanh chóng",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room,
+                      color: Colors.red[300],
+                      size: 20,
+                    ),
+                    Text(" Địa chỉ",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            decoration: TextDecoration.none))
+                  ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(Get.put(AddressController()).address.value,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        decoration: TextDecoration.none)),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.build,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    Text(" Vấn đề",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            decoration: TextDecoration.none))
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("- Xe không khởi động được",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            decoration: TextDecoration.none)),
+                    Text("- Tôi bị tai nạn",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            decoration: TextDecoration.none)),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.photo_camera,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    Text(" Hình ảnh",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            decoration: TextDecoration.none))
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 7,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFF9AA33),
+                              onPrimary: Colors.black),
+                          child: Text("Nhận đơn"),
+                          onPressed: () {
+                            DatabaseMethods().updateTodo(2);
+                          },
+                        )),
+                    Expanded(
+                      flex: 1,
+                      child: Text(""),
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.red, onPrimary: Colors.white),
+                          child: Text("Hủy"),
+                          onPressed: () {
+                            DatabaseMethods().updateTodo(0);
+                            Navigator.of(context).pop(true);
+                          },
+                        )),
+                  ],
+                )
               ],
             ),
           ),
@@ -145,7 +216,7 @@ class MainModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();
-    if (orderController.singleOrderApp.status == 2) {
+    if (orderController.singleOrderApp.status == 1) {
       Future.delayed(Duration.zero, () => {showAlertDialog(context)});
     }
     return Container(
