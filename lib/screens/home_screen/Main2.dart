@@ -1,6 +1,7 @@
 import 'package:fix_bike/controller/AddressController.dart';
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/home_screen/UpdatePurchase.dart';
 import 'package:fix_bike/screens/steps/bike_status.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
@@ -217,10 +218,12 @@ class MainModal2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final StatusAppController statusAppController =
+        Get.put(StatusAppController());
     OrderController orderController = Get.find();
-    if (orderController.singleOrderApp.status == 2) {
-      draw(origin, destination);
-    }
+    // if (orderController.singleOrderApp.status == 2) {
+    //   draw(origin, destination);
+    // }
     return Container(
       child: Column(
         children: [
@@ -362,8 +365,8 @@ class MainModal2 extends StatelessWidget {
                 if (orderController.singleOrderApp.status == 3) ...[
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity,
-                            40), // double.infinity is the width and 30 is the height
+                        minimumSize: Size(double.infinity, 40),
+                        // double.infinity is the width and 30 is the height
                         primary: Color(0xFFF9AA33),
                         onPrimary: Colors.black),
                     onPressed: () {
@@ -375,8 +378,8 @@ class MainModal2 extends StatelessWidget {
                 if (orderController.singleOrderApp.status == 4) ...[
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity,
-                            40), // double.infinity is the width and 30 is the height
+                        minimumSize: Size(double.infinity, 40),
+                        // double.infinity is the width and 30 is the height
                         primary: Color(0xFFF9AA33),
                         onPrimary: Colors.black),
                     onPressed: () {
@@ -386,16 +389,41 @@ class MainModal2 extends StatelessWidget {
                   ),
                 ],
                 if (orderController.singleOrderApp.status == 5) ...[
+                  Obx(() => statusAppController.isUpdatePurchase.value
+                      ? Text(
+                          "Tổng hóa đơn: " +
+                              statusAppController.totalPrice.value
+                                  .toStringAsFixed(0) +
+                              "vnđ",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        )
+                      : Container()),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity,
-                            40), // double.infinity is the width and 30 is the height
+                        minimumSize: Size(double.infinity, 40),
+                        // double.infinity is the width and 30 is the height
                         primary: Color(0xFFF9AA33),
                         onPrimary: Colors.black),
                     onPressed: () {
-                      DatabaseMethods().updateTodo(0);
+                      statusAppController.isUpdatePurchase.value
+                          ? {
+                              statusAppController.setTotalPrice(0),
+                              statusAppController.setUpdatePurchase(false),
+                              DatabaseMethods().updateTodo(6),
+                            }
+                          : Get.to(
+                              UpdatePurchaseScreen(),
+                              transition: Transition.rightToLeftWithFade,
+                              duration: Duration(milliseconds: 600),
+                            );
                     },
-                    child: Text('XÁC NHẬN ĐÃ THANH TOÁN'),
+                    child: Obx(() => statusAppController.isUpdatePurchase.value
+                        ? Text('XÁC NHẬN ĐÃ THANH TOÁN')
+                        : Text('CẬP NHẬT THANH TOÁN')),
                   ),
                 ],
                 // Row(
@@ -454,6 +482,7 @@ class MainModal2 extends StatelessWidget {
 class IconWidget extends StatelessWidget {
   const IconWidget({Key? key, required this.status}) : super(key: key);
   final int status;
+
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();

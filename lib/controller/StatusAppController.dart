@@ -10,6 +10,8 @@ class StatusAppController extends GetxController {
   RxDouble zoom = 15.0.obs;
   RxBool switched = false.obs;
   RxBool isFinding = false.obs;
+  RxBool isUpdatePurchase = false.obs;
+  RxDouble totalPrice = 0.0.obs;
   RxString markerId = "".obs;
   setStatus(int selectedStatus) {
     status.value = selectedStatus;
@@ -26,6 +28,16 @@ class StatusAppController extends GetxController {
 
   setFinding(bool currentStatus) {
     isFinding.value = currentStatus;
+    update();
+  }
+
+  setUpdatePurchase(bool currentStatus) {
+    isUpdatePurchase.value = currentStatus;
+    update();
+  }
+  setTotalPrice(double price)
+  {
+    totalPrice.value = price;
     update();
   }
 }

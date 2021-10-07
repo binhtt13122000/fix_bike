@@ -8,7 +8,7 @@ class VerhiclePage extends GetWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color(0xFFF9AA33),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -24,7 +24,7 @@ class VerhiclePage extends GetWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFFF9AA33),
         centerTitle: true,
       ),
       bottomNavigationBar: BottomNav(),

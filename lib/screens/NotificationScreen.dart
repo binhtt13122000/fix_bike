@@ -43,6 +43,7 @@ class NotificationPage extends GetWidget {
         centerTitle: true,
         // leading: Icon(Icons.arrow_back_ios),
         automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFF9AA33),
       ),
       bottomNavigationBar: BottomNav(),
       body: Column(
