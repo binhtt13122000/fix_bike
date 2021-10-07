@@ -340,7 +340,7 @@ class MainModal extends StatelessWidget {
                 //     )
                 //   ],
                 // )
-                if (height > 300) ...[HideData()]
+                if (height > 350) ...[HideData()]
               ],
             ),
           )
@@ -381,7 +381,105 @@ class HideData extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
-        children: [Divider(), Text("Tình trạng xe")],
+        children: [
+          Divider(),
+          Text(
+            "Tình trạng xe",
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Chi tiết: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
+                  child: Text(
+                    'Không khởi động được',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text(
+                    'Tôi bị tai nạn',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                // Container(
+                //   // height: 180,
+                //   // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                //   // decoration: BoxDecoration(
+                //   //   color: Colors.white,
+                //   // ),
+
+                //   child: TextFormField(
+                //     textAlignVertical: TextAlignVertical.center,
+                //     initialValue: "Không khởi động được\nTôi bị tai nạn",
+                //     maxLines: null,
+                //     // keyboardType: TextInputType.multiline,
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //     ),
+                //     // decoration: InputDecoration(
+                //     //   labelStyle: TextStyle(
+                //     //       fontSize: 18,
+                //     //       fontWeight: FontWeight.w500,
+                //     //       color: Colors.black),
+                //     //   border: InputBorder.none,
+                //     //   filled: true,
+                //     //   fillColor: Colors.white,
+                //     // ),
+                //   ),
+                // ),
+                Text(
+                  'Hình ảnh: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    // Image: (Image(image: ))
+                  ),
+                ),
+                // Padding(
+                //   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                //   child: ,
+                // ),
+                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Image(
+                      image: AssetImage(bike_1),
+                      width: 70,
+                      height: 70,
+                    ),
+                  ),
+                  Image(
+                    image: AssetImage(bike_2),
+                    width: 60,
+                    height: 60,
+                  ),
+                ])
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
