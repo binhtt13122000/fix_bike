@@ -130,7 +130,6 @@ class MainModal extends StatelessWidget {
                     if (Get.put(OrderController()).singleOrderApp.status != 0) {
                       Navigator.of(context).pop(true);
                       DatabaseMethods().updateTodo(0);
-                      cancel();
                     }
                   },
                   child: Text('GỬI FEEDBACK VỀ TÀI XẾ'),
@@ -490,7 +489,7 @@ class IconWidget extends StatelessWidget {
     OrderController orderController = Get.find();
     return orderController.singleOrderApp.status < status
         ? Icon(
-            Icons.cancel,
+            Icons.watch_later,
             color: Colors.red,
           )
         : (orderController.singleOrderApp.status > status)
