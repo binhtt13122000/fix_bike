@@ -40,29 +40,33 @@ class Found extends GetWidget {
       context: context,
       pageBuilder: (context, _, __) {
         new Future.delayed(
-            const Duration(seconds: 4), () => handleChangeScreen(context));
+            const Duration(seconds: 5), () => handleChangeScreen(context));
         return Dialog(
           insetAnimationCurve: Curves.bounceOut,
           insetAnimationDuration: Duration(seconds: 1),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Container(
-            height: 340.0,
+            height: 400.0,
             padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 30,
+                ),
                 Text(
-                  "Yeah!Đã tìm được một người sửa xe cho bạn",
+                  "Yeah! Đã tìm được người sửa xe cho bạn!",
                   softWrap: true,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.black,
+                      wordSpacing: 0.5,
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 20,
                 ),
                 Container(
                   width: 130,
@@ -85,10 +89,10 @@ class Found extends GetWidget {
                       )),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Text(
-                  "Đỗ Nguyễn Vi Đặng",
+                  "Lê Trọng Nhân",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 17,
@@ -114,19 +118,15 @@ class Found extends GetWidget {
                     updateOnDrag: true,
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "Thân thiện, chuyên nghiệp, nhanh chóng",
                   textAlign: TextAlign.center,
-                  maxLines: 1,
                   style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "54F5-2185•Honda-AirBlade",
-                  style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],

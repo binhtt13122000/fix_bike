@@ -2,13 +2,18 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:fix_bike/components/BottomNav.dart';
+import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/screens/steps/camera.dart';
+import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+
+import '../home.dart';
 
 class BikeStatus extends StatefulWidget {
   const BikeStatus({Key? key}) : super(key: key);
@@ -30,13 +35,54 @@ class _BikeStatusState extends State<BikeStatus> {
   int currentIndex = 0;
   List<String> _path = ['', '', ''];
   final _items =
-  listProblem.map((item) => MultiSelectItem<String>(item, item)).toList();
+      listProblem.map((item) => MultiSelectItem<String>(item, item)).toList();
 
   Future _showPhotoLibrary() async {
     final file = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _path[currentIndex] = file.path;
     });
+  }
+
+  final StatusAppController statusAppController =
+      Get.put(StatusAppController());
+
+  void _delete(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            content: Text(
+              'Bạn muốn tìm người sửa xe không?',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            actions: [
+              // The "Yes" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  DatabaseMethods().updateTodo(1);
+                  Navigator.of(context).pop();
+                  Get.to(Home());
+                },
+                child: Text('Có'),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              // The "No" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Không'),
+                isDefaultAction: false,
+                isDestructiveAction: false,
+              )
+            ],
+          );
+        });
   }
 
   void _showCamera() async {
@@ -74,26 +120,26 @@ class _BikeStatusState extends State<BikeStatus> {
               ]));
         });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Thông tin chi tiết',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-          bottomNavigationBar: BottomNav(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+        title: Text(
+          'Tình trạng phương tiện',
+          style: TextStyle(
+              fontSize: 20.0, fontWeight: FontWeight.w500, color: Colors.black),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Color(0xFFF9AA33)),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
+      bottomNavigationBar: BottomNav(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -104,7 +150,7 @@ class _BikeStatusState extends State<BikeStatus> {
                 children: [
                   SizedBox(height: 20),
                   Text(
-                    'Tình trạng xe',
+                    'Tình trạng phương tiện',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -115,12 +161,19 @@ class _BikeStatusState extends State<BikeStatus> {
                   ),
                   MultiSelectDialogField(
                     items: _items,
-                    title: Text("Tình trạng xe"),
-                    selectedColor: Colors.blue,
+                    title: Text("Tình trạng phương tiện"),
+                    selectedColor: Color(0xFFF9AA33),
+                    // selectedItemsTextStyle: TextStyle(
+                    //     backgroundColor: Color(0xFFF9AA33),
+                    //     color: Colors.black),
+
+                    searchTextStyle: TextStyle(
+                      backgroundColor: Color(0xFFF9AA33),
+                    ),
                     buttonText: Text(
                       "Chọn",
                       style: TextStyle(
-                        color: Colors.blue[800],
+                        color: Colors.black,
                         fontSize: 16,
                       ),
                     ),
@@ -147,8 +200,7 @@ class _BikeStatusState extends State<BikeStatus> {
                   ),
                   Container(
                     height: 180,
-                    margin:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                     ),
@@ -193,17 +245,19 @@ class _BikeStatusState extends State<BikeStatus> {
                         elevation: 2.0,
                         fillColor: Colors.grey,
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.width * 0.25,
                           child: _path[0] == ''
                               ? Image(
-                            image: AssetImage(bike_1),
-                            fit: BoxFit.fill,
-                          )
+                                  image: AssetImage(bike_1),
+                                  fit: BoxFit.fill,
+                                )
                               : Image.file(
-                            File(_path[0]),
-                            fit: BoxFit.fill,
-                          ),
+                                  File(_path[0]),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                       RawMaterialButton(
@@ -220,13 +274,13 @@ class _BikeStatusState extends State<BikeStatus> {
                           height: MediaQuery.of(context).size.width * 0.25,
                           child: _path[1] == ''
                               ? Image(
-                            image: AssetImage(bike_2),
-                            fit: BoxFit.fill,
-                          )
+                                  image: AssetImage(bike_2),
+                                  fit: BoxFit.fill,
+                                )
                               : Image.file(
-                            File(_path[1]),
-                            fit: BoxFit.fill,
-                          ),
+                                  File(_path[1]),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                       RawMaterialButton(
@@ -243,11 +297,11 @@ class _BikeStatusState extends State<BikeStatus> {
                           height: MediaQuery.of(context).size.width * 0.25,
                           child: _path[2] == ''
                               ? Icon(Icons.camera_alt_outlined,
-                              size: 18, color: Colors.white)
+                                  size: 18, color: Colors.white)
                               : Image.file(
-                            File(_path[2]),
-                            fit: BoxFit.fill,
-                          ),
+                                  File(_path[2]),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                     ],
@@ -260,10 +314,14 @@ class _BikeStatusState extends State<BikeStatus> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                            onPressed: () {  },
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xFFF9AA33),
+                                onPrimary: Colors.black),
+                            onPressed: () {
+                              _delete(context);
+                            },
                             child: Text(
                               'Tiếp theo',
-                              style: TextStyle(color: Colors.white, fontSize: 17),
                             )),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -271,7 +329,6 @@ class _BikeStatusState extends State<BikeStatus> {
                             onPressed: () {},
                             child: Text(
                               'Trở về',
-                              style: TextStyle(fontSize: 17),
                             )),
                       ],
                     ),

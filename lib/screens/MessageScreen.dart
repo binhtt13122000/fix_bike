@@ -40,16 +40,15 @@ class _MessagePageState extends State<MessagePage> {
     StatusAppController controller = Get.put(StatusAppController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
         title: Text(
           'Nguyễn Văn A',
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-          ),
+              fontSize: 20.0, fontWeight: FontWeight.w500, color: Colors.black),
         ),
-        centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios, color: Color(0xFFF9AA33)),
           onPressed: () {
             Get.back();
           },
@@ -92,12 +91,12 @@ class _MessagePageState extends State<MessagePage> {
                       height: 30,
                       width: 30,
                       decoration: BoxDecoration(
-                        color: Colors.lightBlue,
+                        color: Color(0xFFF9AA33),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Icon(
                         Icons.camera_alt_rounded,
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 20,
                       ),
                     ),
@@ -108,7 +107,7 @@ class _MessagePageState extends State<MessagePage> {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Type message here...",
+                          hintText: "Nhập tin nhắn ở đây...",
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none),
                     ),
@@ -123,10 +122,10 @@ class _MessagePageState extends State<MessagePage> {
                     },
                     child: Icon(
                       Icons.send,
-                      color: Colors.white,
+                      color: Colors.black,
                       size: 18,
                     ),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xFFF9AA33),
                     elevation: 0,
                   ),
                 ],
@@ -157,7 +156,7 @@ class TextMessage extends StatelessWidget {
         margin: EdgeInsets.only(left: 14, right: 14, top: 20, bottom: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: (!message.isSender ? Colors.grey.shade200 : Colors.blue[200]),
+          color: (!message.isSender ? Colors.grey.shade200 : Color(0xFFF9AA33)),
         ),
         padding: EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
         child: Text(
