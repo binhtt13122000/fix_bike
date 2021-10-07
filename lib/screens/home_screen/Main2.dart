@@ -1,6 +1,7 @@
 import 'package:fix_bike/controller/AddressController.dart';
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/steps/bike_status.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../MessageScreen.dart';
 
-class MainModal extends StatelessWidget {
+class MainModal2 extends StatelessWidget {
   final Function draw;
   final LatLng destination;
   final LatLng origin;
 
-  const MainModal(
+  const MainModal2(
       {Key? key,
       required this.height,
       required this.draw,
@@ -217,8 +218,8 @@ class MainModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();
-    if (orderController.singleOrderApp.status == 1) {
-      Future.delayed(Duration.zero, () => {showAlertDialog(context)});
+    if (orderController.singleOrderApp.status == 2) {
+      draw(origin, destination);
     }
     return Container(
       child: Column(
@@ -307,32 +308,18 @@ class MainModal extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Lê Trọng Nhân",
+                                  "Trương Thanh Bình",
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                Text(
+                                  "Dự kiến tới: 15 phút",
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ],
-                            ),
-                            Container(
-                              child: RatingBar.builder(
-                                initialRating: 5,
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                unratedColor: Colors.amber.withAlpha(50),
-                                itemCount: 5,
-                                itemSize: 16.0,
-                                itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 2.0),
-                                itemBuilder: (context, _) => Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {},
-                                updateOnDrag: true,
-                              ),
                             ),
                           ],
                         )
@@ -369,6 +356,48 @@ class MainModal extends StatelessWidget {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 30,
+                ),
+                if (orderController.singleOrderApp.status == 3) ...[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity,
+                            40), // double.infinity is the width and 30 is the height
+                        primary: Color(0xFFF9AA33),
+                        onPrimary: Colors.black),
+                    onPressed: () {
+                      DatabaseMethods().updateTodo(4);
+                    },
+                    child: Text('XÁC NHẬN ĐÃ ĐẾN'),
+                  ),
+                ],
+                if (orderController.singleOrderApp.status == 4) ...[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity,
+                            40), // double.infinity is the width and 30 is the height
+                        primary: Color(0xFFF9AA33),
+                        onPrimary: Colors.black),
+                    onPressed: () {
+                      DatabaseMethods().updateTodo(5);
+                    },
+                    child: Text('XÁC NHẬN ĐÃ SỬA'),
+                  ),
+                ],
+                if (orderController.singleOrderApp.status == 5) ...[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity,
+                            40), // double.infinity is the width and 30 is the height
+                        primary: Color(0xFFF9AA33),
+                        onPrimary: Colors.black),
+                    onPressed: () {
+                      DatabaseMethods().updateTodo(0);
+                    },
+                    child: Text('XÁC NHẬN ĐÃ THANH TOÁN'),
+                  ),
+                ],
                 // Row(
                 //   children: [
                 //     Expanded(

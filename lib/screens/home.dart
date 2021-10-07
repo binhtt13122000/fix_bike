@@ -9,6 +9,7 @@ import 'package:fix_bike/models/Place.dart';
 import 'package:fix_bike/screens/home_screen/Fixed.dart';
 import 'package:fix_bike/screens/home_screen/Found.dart';
 import 'package:fix_bike/screens/home_screen/Main.dart';
+import 'package:fix_bike/screens/home_screen/Main2.dart';
 import 'package:fix_bike/screens/home_screen/Normal.dart';
 import 'package:fix_bike/screens/home_screen/Ordered.dart';
 import 'package:fix_bike/components/BottomNav.dart';
@@ -93,7 +94,7 @@ class MapGoogleState extends State<MapGoogle> {
   Directions? _info;
 
   //height
-  double _height = 200;
+  double _height = 300;
 
   @override
   void initState() {
@@ -255,6 +256,51 @@ class MapGoogleState extends State<MapGoogle> {
                               },
                             ),
                             MainModal(
+                                height: _height,
+                                destination: destination.position,
+                                origin: LatLng(
+                                    addressController.location.value.getLat,
+                                    addressController.location.value.getLng),
+                                draw: drawLine),
+                          ],
+                        )),
+                      ))
+                ],
+                if (orderController.singleOrderApp.status != 0 &&
+                    orderController.singleOrderApp.status != 1) ...[
+                  Positioned(
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      height: _height,
+                      child: Container(
+                        color: Colors.white,
+                        child: Container(
+                            child: Column(
+                          children: [
+                            GestureDetector(
+                              child: FittedBox(
+                                  child: Text(
+                                "----",
+                                style: TextStyle(
+                                    color: Colors.grey[300], fontSize: 40),
+                              )),
+                              onPanUpdate: (details) {
+                                setState(() {
+                                  _height -= details.delta.dy;
+
+                                  // prevent overflow if height is more/less than available space
+                                  var maxLimit = 500.0;
+                                  var minLimit = 300.0;
+
+                                  if (_height > maxLimit)
+                                    _height = maxLimit;
+                                  else if (_height < minLimit)
+                                    _height = minLimit;
+                                });
+                              },
+                            ),
+                            MainModal2(
                                 height: _height,
                                 destination: destination.position,
                                 origin: LatLng(
