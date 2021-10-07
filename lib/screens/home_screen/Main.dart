@@ -1,5 +1,6 @@
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/detail.dart';
 import 'package:fix_bike/screens/user/RatingScreen.dart';
 import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
@@ -404,7 +405,7 @@ class MainModal extends StatelessWidget {
                             Icons.login,
                             color: Colors.green[400],
                           ),
-                          onTap: () => {},
+                          onTap: () => {Get.to(ViewRepairManScreen())},
                         ),
                         SizedBox(
                           width: 12,
