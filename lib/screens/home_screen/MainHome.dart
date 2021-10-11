@@ -46,16 +46,22 @@ class MainHome extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Icon(
-                      Icons.date_range,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    // Icon(
+                    //   Icons.date_range,
+                    //   size: 31,
+                    //   color: Colors.white,
+                    // ),
                     Text(
-                      "130.000 VNĐ/Ngày",
+                      "Tổng số lần sửa: ",
+                      style: GoogleFonts.lato(
+                          textStyle:
+                              TextStyle(fontSize: 12, color: Colors.white)),
+                    ),
+                    // SizedBox(
+                    //   height: 5,
+                    // ),
+                    Text(
+                      "12 lần",
                       style: GoogleFonts.lato(
                           textStyle:
                               TextStyle(fontSize: 16, color: Colors.white)),
@@ -65,16 +71,23 @@ class MainHome extends StatelessWidget {
                 // Expanded(child: Divider()),
                 Column(
                   children: [
-                    Icon(
-                      Icons.calendar_view_month,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    // Icon(
+                    //   Icons.calendar_view_month,
+                    //   size: 30,
+                    //   color: Colors.white,
+                    // ),
+
                     Text(
-                      "4 tr VNĐ/tháng",
+                      "Tổng số tiền trong tháng:",
+                      style: GoogleFonts.lato(
+                          textStyle:
+                              TextStyle(fontSize: 12, color: Colors.white)),
+                    ),
+                    // SizedBox(
+                    //   height: 5,
+                    // ),
+                    Text(
+                      "4.5 triệu VNĐ",
                       style: GoogleFonts.lato(
                           textStyle:
                               TextStyle(fontSize: 16, color: Colors.white)),
@@ -97,7 +110,7 @@ class MainHome extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
                   child: Text(
                     "SosCar",
                     // style: TextStyle(
@@ -139,22 +152,34 @@ class MainHome extends StatelessWidget {
                               SizedBox(
                                 height: 5,
                               ),
-                              Text(
-                                "100%",
-                                style: TextStyle(
-                                    fontSize: 26, color: Color(0xFF00B242)),
+                              Row(
+                                children: [
+                                  Text(
+                                    "100%",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        // color: Color(0xFF00B242)
+                                        color: Colors.white),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                    child: Text(
+                                      "/Chuyến",
+                                      style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.white)),
+                                    ),
+                                  )
+                                ],
                               ),
-                              Text(
-                                "Chấp nhận",
-                                style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                        fontSize: 14, color: Colors.white54)),
-                              )
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
                           child: Column(
                             children: [
                               Icon(
@@ -163,19 +188,21 @@ class MainHome extends StatelessWidget {
                                 color: Colors.yellow,
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 7,
                               ),
                               Text(
                                 "5.00",
                                 style: TextStyle(
-                                    fontSize: 26, color: Color(0xFF00B242)),
+                                    fontSize: 20,
+                                    // color: Color(0xFF00B242)
+                                    color: Colors.white),
                               ),
-                              Text(
-                                "Đánh giá",
-                                style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                        fontSize: 14, color: Colors.white54)),
-                              )
+                              // Text(
+                              //   "Đánh giá",
+                              //   style: GoogleFonts.lato(
+                              //       textStyle: TextStyle(
+                              //           fontSize: 11, color: Colors.white)),
+                              // )
                             ],
                           ),
                         ),
@@ -191,17 +218,29 @@ class MainHome extends StatelessWidget {
                               SizedBox(
                                 height: 5,
                               ),
-                              Text(
-                                "0.0 %",
-                                style: TextStyle(
-                                    fontSize: 26, color: Color(0xFF00B242)),
+                              Row(
+                                children: [
+                                  Text(
+                                    "0%",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        // color: Color(0xFF00B242)
+                                        color: Colors.white),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                    child: Text(
+                                      "/Chuyến",
+                                      style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.white)),
+                                    ),
+                                  )
+                                ],
                               ),
-                              Text(
-                                "Hủy chuyến",
-                                style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                        fontSize: 14, color: Colors.white54)),
-                              )
                             ],
                           ),
                         ),
