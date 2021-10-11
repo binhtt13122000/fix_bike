@@ -10,12 +10,14 @@ import 'package:fix_bike/screens/home_screen/Fixed.dart';
 import 'package:fix_bike/screens/home_screen/Found.dart';
 import 'package:fix_bike/screens/home_screen/Main.dart';
 import 'package:fix_bike/screens/home_screen/Main2.dart';
+import 'package:fix_bike/screens/home_screen/MainHome.dart';
 import 'package:fix_bike/screens/home_screen/Normal.dart';
 import 'package:fix_bike/screens/home_screen/Ordered.dart';
 import 'package:fix_bike/components/BottomNav.dart';
 import 'package:fix_bike/screens/home_screen/Waiting.dart';
 import 'package:fix_bike/services/DirectionService.dart';
 import 'package:fix_bike/services/PlacesService.dart';
+import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
@@ -206,21 +208,25 @@ class MapGoogleState extends State<MapGoogle> {
                     markers: {addressController.origin.value, destination},
                   ),
                 ),
-                Positioned(
-                  top: 10,
-                  right: 15,
-                  left: 15,
-                  child: Container(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Switch(
-                        onChanged: toggleSwitch,
-                        value: statusAppController.switched.value,
-                        activeColor: Colors.blue,
-                      )
-                    ],
-                  )),
+                Container(
+                  color: Color(0xFF1D2033),
+                  height: 70,
+                  child: Positioned(
+                    top: 10,
+                    right: 15,
+                    left: 15,
+                    child: Container(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Switch(
+                          onChanged: toggleSwitch,
+                          value: statusAppController.switched.value,
+                          activeColor: Color(0xFF00B242),
+                        )
+                      ],
+                    )),
+                  ),
                 ),
                 if (orderController.singleOrderApp.status == 1) ...[
                   Positioned(
@@ -311,6 +317,100 @@ class MapGoogleState extends State<MapGoogle> {
                         )),
                       ))
                 ],
+                // if (_height > 350) ...[HideData()]
+                Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
+                    height: _height,
+                    child: Container(
+                      color: Color(0xFF1D2033),
+                      child: Container(
+                          child: Column(
+                        children: [
+                          GestureDetector(
+                            child: FittedBox(
+                                child: Text(
+                              "----",
+                              style: TextStyle(
+                                  color: Colors.grey[300], fontSize: 40),
+                            )),
+                            onPanUpdate: (details) {
+                              setState(() {
+                                _height -= details.delta.dy;
+
+                                // prevent overflow if height is more/less than available space
+                                var maxLimit = 500.0;
+                                var minLimit = 300.0;
+
+                                if (_height > maxLimit)
+                                  _height = maxLimit;
+                                else if (_height < minLimit) _height = minLimit;
+                              });
+                            },
+                          ),
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       "Ngày",
+                          //       style: TextStyle(
+                          //         color: Colors.black,
+                          //         fontWeight: FontWeight.w700,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       "Ngày",
+                          //       style: TextStyle(
+                          //         color: Colors.black,
+                          //         fontWeight: FontWeight.w700,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+
+                          MainHome(
+                              height: _height,
+                              destination: destination.position,
+                              origin: LatLng(
+                                  addressController.location.value.getLat,
+                                  addressController.location.value.getLng),
+                              draw: drawLine),
+                          // Container(
+                          //   width: 200,
+                          //   height: 80,
+                          //   // color: Colors.grey,
+                          //   padding: EdgeInsets.only(top: 14),
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(30)),
+
+                          //   child: Column(
+                          //       mainAxisAlignment: MainAxisAlignment.start,
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Container(
+                          //           width: 130,
+                          //           height: 130,
+                          //           color: Colors.grey[300],
+                          //         )
+                          //       ]),
+                          //   // color: Colors.grey[300],
+                          // decoration: BoxDecoration(
+                          //   border: Border.all(
+                          //       width: 4,
+                          //       color: Theme.of(context)
+                          //           .scaffoldBackgroundColor),
+                          //   boxShadow: [
+                          //     BoxShadow(
+                          //         spreadRadius: 2,
+                          //         blurRadius: 10,
+                          //         color: Colors.black,
+                          //         offset: Offset(0, 10))
+                          //   ],
+                          // ),
+                          // ),
+                        ],
+                      )),
+                    ))
               ],
             ),
           ));
@@ -321,7 +421,6 @@ class MapGoogleState extends State<MapGoogle> {
 //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
 // }
 }
-
 
 // (Container(
 //                           child: Row(
@@ -359,3 +458,115 @@ class MapGoogleState extends State<MapGoogle> {
 //                             ],
 //                           ),
 //                         ))
+
+class HideData extends StatelessWidget {
+  const HideData({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Divider(),
+          Text(
+            "Tình trạng xe",
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Chi tiết: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
+                  child: Text(
+                    'Không khởi động được',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text(
+                    'Tôi bị tai nạn',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                // Container(
+                //   // height: 180,
+                //   // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                //   // decoration: BoxDecoration(
+                //   //   color: Colors.white,
+                //   // ),
+
+                //   child: TextFormField(
+                //     textAlignVertical: TextAlignVertical.center,
+                //     initialValue: "Không khởi động được\nTôi bị tai nạn",
+                //     maxLines: null,
+                //     // keyboardType: TextInputType.multiline,
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //     ),
+                //     // decoration: InputDecoration(
+                //     //   labelStyle: TextStyle(
+                //     //       fontSize: 18,
+                //     //       fontWeight: FontWeight.w500,
+                //     //       color: Colors.black),
+                //     //   border: InputBorder.none,
+                //     //   filled: true,
+                //     //   fillColor: Colors.white,
+                //     // ),
+                //   ),
+                // ),
+                Text(
+                  'Hình ảnh: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    // Image: (Image(image: ))
+                  ),
+                ),
+                // Padding(
+                //   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                //   child: ,
+                // ),
+                // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                //   Padding(
+                //     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                //     child: Image(
+                //       image: AssetImage(bike_1),
+                //       width: 70,
+                //       height: 70,
+                //     ),
+                //   ),
+                //   Image(
+                //     image: AssetImage(bike_2),
+                //     width: 60,
+                //     height: 60,
+                //   ),
+                // ])
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

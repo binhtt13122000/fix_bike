@@ -18,3 +18,5 @@ const bike_1 = 'assets/images/bike_1.jpg';
 const bike_2 = 'assets/images/bike_2.jpg';
 const iconFix = 'assets/images/fix.png';
 const carIcon = 'assets/images/car.svg';
+const acceptanceIcon = 'assets/images/acceptance.jpg';
+const cancelIcon = 'assets/images/cancel.png';
