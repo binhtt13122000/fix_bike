@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fix_bike/controller/AddressController.dart';
 import 'package:fix_bike/controller/OrderController.dart';
 import 'package:fix_bike/controller/StatusAppController.dart';
+import 'package:fix_bike/screens/HistoryScreen.dart';
 import 'package:fix_bike/screens/home_screen/UpdatePurchase.dart';
 import 'package:fix_bike/screens/steps/bike_status.dart';
 import 'package:fix_bike/services/database.dart';
@@ -53,7 +56,7 @@ class MainHome extends StatelessWidget {
                     // ),
                     Text(
                       "Tổng số lần sửa: ",
-                      style: GoogleFonts.lato(
+                      style: GoogleFonts.raleway(
                           textStyle:
                               TextStyle(fontSize: 12, color: Colors.white)),
                     ),
@@ -79,7 +82,7 @@ class MainHome extends StatelessWidget {
 
                     Text(
                       "Tổng số tiền trong tháng:",
-                      style: GoogleFonts.lato(
+                      style: GoogleFonts.raleway(
                           textStyle:
                               TextStyle(fontSize: 12, color: Colors.white)),
                     ),
@@ -94,9 +97,38 @@ class MainHome extends StatelessWidget {
                     )
                   ],
                 ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      child: Icon(
+                        Icons.login,
+                        color: Colors.white,
+                      ),
+                      onTap: () => {Get.to(HistoryPage())},
+                    ),
+                  ],
+                )
               ],
             ),
           ),
+          // GestureDetector(
+          //   child: Icon(
+          //     Icons.login,
+          //     color: Colors.green[400],
+          //   ),
+          //   onTap: () => {Get.to(HistoryPage())},
+          // ),
+          // ElevatedButton(
+          //     onPressed: () {
+          //       Get.to(() => HistoryPage(),R
+          //           transition: Transition.leftToRightWithFade,
+          //           duration: Duration(microseconds: 600));
+          //     },
+          //     child: Text(
+          //       "Chi tiết",
+          //       style: GoogleFonts.lato(
+          //           textStyle: TextStyle(fontSize: 16, color: Colors.blue)),
+          //     )),
           Container(
             // color: Color(0xFF0F1013),
             // padding: EdgeInsets.all(14),
@@ -117,7 +149,7 @@ class MainHome extends StatelessWidget {
                     //     fontSize: 30,
                     //     fontWeight: FontWeight.bold,
                     //     color: Colors.white),
-                    style: GoogleFonts.lato(
+                    style: GoogleFonts.raleway(
                       textStyle: TextStyle(
                         color: Colors.white,
                         letterSpacing: .5,
@@ -152,34 +184,28 @@ class MainHome extends StatelessWidget {
                               SizedBox(
                                 height: 5,
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "100%",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        // color: Color(0xFF00B242)
-                                        color: Colors.white),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                                    child: Text(
-                                      "/Chuyến",
-                                      style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                              fontSize: 11,
-                                              fontStyle: FontStyle.italic,
-                                              color: Colors.white)),
-                                    ),
-                                  )
-                                ],
+                              Text(
+                                "100%",
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 20,
+                                      // color: Color(0xFF00B242)
+                                      color: Colors.white),
+                                ),
+                              ),
+                              Text(
+                                "/Chuyến",
+                                style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                        fontSize: 11,
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.white54)),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+                          padding: const EdgeInsets.fromLTRB(35, 0, 35, 0),
                           child: Column(
                             children: [
                               Icon(
@@ -188,7 +214,7 @@ class MainHome extends StatelessWidget {
                                 color: Colors.yellow,
                               ),
                               SizedBox(
-                                height: 7,
+                                height: 5,
                               ),
                               Text(
                                 "5.00",
@@ -218,28 +244,22 @@ class MainHome extends StatelessWidget {
                               SizedBox(
                                 height: 5,
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "0%",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        // color: Color(0xFF00B242)
-                                        color: Colors.white),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                                    child: Text(
-                                      "/Chuyến",
-                                      style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                              fontSize: 11,
-                                              fontStyle: FontStyle.italic,
-                                              color: Colors.white)),
-                                    ),
-                                  )
-                                ],
+                              Text(
+                                "0%",
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 20,
+                                      // color: Color(0xFF00B242)
+                                      color: Colors.white),
+                                ),
+                              ),
+                              Text(
+                                "/Chuyến",
+                                style: GoogleFonts.lato(
+                                    textStyle: TextStyle(
+                                        fontSize: 11,
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.white54)),
                               ),
                             ],
                           ),

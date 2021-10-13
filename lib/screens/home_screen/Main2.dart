@@ -8,6 +8,7 @@ import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../MessageScreen.dart';
@@ -50,10 +51,12 @@ class MainModal2 extends StatelessWidget {
                 Text(
                   "Tìm thấy một người cần sửa xe ở gần đây!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      decoration: TextDecoration.none),
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -84,10 +87,12 @@ class MainModal2 extends StatelessWidget {
                 Text(
                   "Trương Thanh Bình",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      decoration: TextDecoration.none),
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -99,21 +104,29 @@ class MainModal2 extends StatelessWidget {
                       color: Colors.red[300],
                       size: 20,
                     ),
-                    Text(" Địa chỉ",
-                        style: TextStyle(
+                    Text(
+                      " Địa chỉ",
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
-                            decoration: TextDecoration.none))
+                            decoration: TextDecoration.none),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Text(Get.put(AddressController()).address.value,
-                    style: TextStyle(
+                Text(
+                  Get.put(AddressController()).address.value,
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
-                        decoration: TextDecoration.none)),
+                        decoration: TextDecoration.none),
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -124,11 +137,15 @@ class MainModal2 extends StatelessWidget {
                       color: Colors.grey,
                       size: 20,
                     ),
-                    Text(" Vấn đề",
-                        style: TextStyle(
+                    Text(
+                      " Vấn đề",
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
-                            decoration: TextDecoration.none))
+                            decoration: TextDecoration.none),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(
@@ -137,18 +154,26 @@ class MainModal2 extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("- Xe không khởi động được",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
+                    Text(
+                      "- Xe không khởi động được",
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
-                            decoration: TextDecoration.none)),
-                    Text("- Tôi bị tai nạn",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Text(
+                      "- Tôi bị tai nạn",
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
-                            decoration: TextDecoration.none)),
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -161,11 +186,15 @@ class MainModal2 extends StatelessWidget {
                       color: Colors.grey,
                       size: 20,
                     ),
-                    Text(" Hình ảnh",
-                        style: TextStyle(
+                    Text(
+                      " Hình ảnh",
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
-                            decoration: TextDecoration.none))
+                            decoration: TextDecoration.none),
+                      ),
+                    )
                   ],
                 ),
                 Row(
@@ -176,7 +205,15 @@ class MainModal2 extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               primary: Color(0xFFF9AA33),
                               onPrimary: Colors.black),
-                          child: Text("Nhận đơn"),
+                          child: Text(
+                            "Nhận đơn",
+                            style: GoogleFonts.raleway(
+                              textStyle: TextStyle(
+                                  // fontSize: 20,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.none),
+                            ),
+                          ),
                           onPressed: () {
                             DatabaseMethods().updateTodo(2);
                             Navigator.of(context).pop(true);
@@ -191,7 +228,15 @@ class MainModal2 extends StatelessWidget {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: Colors.red, onPrimary: Colors.white),
-                          child: Text("Hủy"),
+                          child: Text(
+                            "Hủy",
+                            style: GoogleFonts.raleway(
+                              textStyle: TextStyle(
+                                  // fontSize: 20,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.none),
+                            ),
+                          ),
                           onPressed: () {
                             DatabaseMethods().updateTodo(0);
                             Navigator.of(context).pop(true);
@@ -240,7 +285,12 @@ class MainModal2 extends StatelessWidget {
                     ),
                     Text(
                       "Đang đến",
-                      style: TextStyle(fontSize: 12),
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                            decoration: TextDecoration.none),
+                      ),
                     )
                   ],
                 ),
@@ -253,7 +303,12 @@ class MainModal2 extends StatelessWidget {
                     ),
                     Text(
                       "Đã đến",
-                      style: TextStyle(fontSize: 12),
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                            decoration: TextDecoration.none),
+                      ),
                     )
                   ],
                 ),
@@ -264,10 +319,13 @@ class MainModal2 extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "Đã sửa",
-                      style: TextStyle(fontSize: 12),
-                    )
+                    Text("Đã sửa",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        )),
                   ],
                 ),
                 Expanded(child: Divider()),
@@ -277,10 +335,13 @@ class MainModal2 extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "Đã thanh toán",
-                      style: TextStyle(fontSize: 12),
-                    )
+                    Text("Đã thanh toán",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        )),
                   ],
                 ),
               ],
@@ -316,11 +377,21 @@ class MainModal2 extends StatelessWidget {
                               children: [
                                 Text(
                                   "Trương Thanh Bình",
-                                  style: TextStyle(fontSize: 14),
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  ),
                                 ),
                                 Text(
                                   "Dự kiến tới: 15 phút",
-                                  style: TextStyle(fontSize: 14),
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  ),
                                 ),
                               ],
                             ),
@@ -372,7 +443,15 @@ class MainModal2 extends StatelessWidget {
                     onPressed: () {
                       DatabaseMethods().updateTodo(4);
                     },
-                    child: Text('XÁC NHẬN ĐÃ ĐẾN'),
+                    child: Text(
+                      'XÁC NHẬN ĐÃ ĐẾN',
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                            // fontSize: 14,
+                            color: Colors.black,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
                   ),
                 ],
                 if (orderController.singleOrderApp.status == 4) ...[
@@ -385,7 +464,13 @@ class MainModal2 extends StatelessWidget {
                     onPressed: () {
                       DatabaseMethods().updateTodo(5);
                     },
-                    child: Text('XÁC NHẬN ĐÃ SỬA'),
+                    child: Text('XÁC NHẬN ĐÃ SỬA',
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              // fontSize: 14,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        )),
                   ),
                 ],
                 if (orderController.singleOrderApp.status == 5) ...[

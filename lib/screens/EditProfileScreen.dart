@@ -5,6 +5,7 @@ import 'package:fix_bike/screens/settings.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EditProfilePage extends GetWidget {
   @override
@@ -167,13 +168,13 @@ class EditProfilePage extends GetWidget {
                       elevation: 2,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        "Lưu",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.white),
-                      ),
+                      child: Text("Lưu",
+                          style: GoogleFonts.raleway(
+                            textStyle: TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 2.2,
+                                color: Colors.white),
+                          )),
                     )
                   ],
                 ),

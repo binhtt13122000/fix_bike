@@ -4,6 +4,7 @@ import 'package:fix_bike/screens/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HistoryPage extends GetWidget {
   List<Order> listOrder = [
@@ -55,7 +56,12 @@ class HistoryPage extends GetWidget {
         ),
         title: Text(
           "Lịch sử",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+          style: GoogleFonts.lato(
+            textStyle: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+                decoration: TextDecoration.none),
+          ),
         ),
         elevation: 0,
         backgroundColor: Color(0xFFF9AA33),
@@ -125,20 +131,24 @@ class NotificationItem extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Container(
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(18.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Stack(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Text(
                                   "Ngày",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -146,34 +156,72 @@ class NotificationItem extends StatelessWidget {
                                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 child: Text(
                                   date,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(140, 0, 0, 0),
-                                child: Text(
-                                  "Tổng:" + price,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    // fontWeight: FontWeight.w700,
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Tổng: ",
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      price,
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          // fontWeight: FontWeight.w700,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 60, 130, 0),
-                                child: Text(
-                                  "Người sửa: " + customerName,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
+
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                                    child: Text(
+                                      "Khách hàng: ",
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                                    child: Text(
+                                      customerName,
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          // fontWeight: FontWeight.w700,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+
                               // Padding(
                               //   padding:
                               //       const EdgeInsets.fromLTRB(260, 60, 0, 0),
@@ -187,21 +235,35 @@ class NotificationItem extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              RaisedButton(
-                                padding: EdgeInsets.symmetric(horizontal: 50),
-                                // shape: RoundedRectangleBorder(
-                                //     borderRadius: BorderRadius.circular(20)),
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                color: Colors.blue[100],
-                                child: Text("Chi tiết",
-                                    style: TextStyle(
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
+                                child: RaisedButton(
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
+                                  // padding: EdgeInsets.fromLTRB(40, 5, 40, 5),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  color: Colors.blue[300],
+                                  child: Text(
+                                    "Chi tiết",
+                                    style: GoogleFonts.robotoMono(
+                                      textStyle: TextStyle(
                                         fontSize: 14,
-                                        letterSpacing: 2.2,
-                                        color: Colors.black)),
+                                        // letterSpacing: 1.0,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4,
                               ),
                               RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
                                 onPressed: () {
                                   Get.to(ProfilePage(),
                                       transition:
@@ -229,10 +291,13 @@ class NotificationItem extends StatelessWidget {
                                       : status == "Hủy"
                                           ? "Hủy"
                                           : "Đang sửa",
-                                  style: TextStyle(
+                                  style: GoogleFonts.robotoMono(
+                                    textStyle: TextStyle(
                                       fontSize: 14,
-                                      letterSpacing: 2.2,
-                                      color: Colors.black),
+                                      // letterSpacing: 1.2,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -244,7 +309,7 @@ class NotificationItem extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 18,
+                height: 0,
               ),
             ],
           ),

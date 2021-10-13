@@ -8,6 +8,7 @@ import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationPage extends GetWidget {
   List<Promo> listPro = [
@@ -35,9 +36,12 @@ class NotificationPage extends GetWidget {
       appBar: AppBar(
         title: Text(
           'Thông báo',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
+          style: GoogleFonts.lato(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         centerTitle: true,
@@ -49,11 +53,11 @@ class NotificationPage extends GetWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 20.0,
+            height: 0.0,
           ),
           Expanded(
             child: Container(
-              color: Colors.white54,
+              color: Colors.grey[300],
               child: ListView.builder(
                   padding: const EdgeInsets.only(left: 5, right: 5),
                   scrollDirection: Axis.vertical,
@@ -93,10 +97,13 @@ class NotificationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 4, left: 12, right: 12),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+      margin: EdgeInsets.only(top: 4, bottom: 3, left: 12, right: 6),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          // color: Colors.grey[400]
+          color: Colors.white),
       child: Ink(
-        color: Colors.grey[100],
+        // color: Colors.grey[100],
         child: ListTile(
           onTap: () {
             // setState(() {
@@ -104,7 +111,7 @@ class NotificationItem extends StatelessWidget {
             // });
           },
           title: Container(
-            padding: EdgeInsets.only(top: 14, bottom: 10),
+            padding: EdgeInsets.only(top: 0, bottom: 0),
             // decoration: BoxDecoration(
             //     borderRadius: BorderRadius.circular(8),
             //     border: Border.all(width: 0.5)),
@@ -150,9 +157,11 @@ class NotificationItem extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(0, 20, 5, 5),
                         child: Text(
                           promo,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           softWrap: true,
                           maxLines: 1,
@@ -161,27 +170,31 @@ class NotificationItem extends StatelessWidget {
                       ),
                       Text(
                         message,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                         softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: Text(
                           date,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontStyle: FontStyle.italic,
-                            // color: Colors.grey.shade300,
-                            fontWeight: FontWeight.w300,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 12,
+                              fontStyle: FontStyle.italic,
+                              // color: Colors.grey.shade300,
+                              fontWeight: FontWeight.w300,
+                            ),
                           ),
                           softWrap: true,
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          // overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
