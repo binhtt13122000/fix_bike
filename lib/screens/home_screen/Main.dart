@@ -15,7 +15,7 @@ class MainModal extends StatelessWidget {
   final LatLng destination;
   final LatLng origin;
 
-  const MainModal(
+  MainModal(
       {Key? key,
       required this.height,
       required this.draw,
@@ -23,7 +23,7 @@ class MainModal extends StatelessWidget {
       required this.origin})
       : super(key: key);
   final double height;
-
+  final OrderController orderController = Get.find();
   showAlertDialog(BuildContext context) {
     // show the dialog
     showGeneralDialog(
@@ -166,6 +166,67 @@ class MainModal extends StatelessWidget {
                             decoration: TextDecoration.none))
                   ],
                 ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 2.0,
+                      fillColor: Colors.grey,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        child: orderController.singleOrderApp.image1 == ''
+                            ? Image(
+                          image: AssetImage(bike_1),
+                          fit: BoxFit.fill,
+                        )
+                            : Image.network(
+                          orderController.singleOrderApp.image1,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 2.0,
+                      fillColor: Colors.grey,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        child: orderController.singleOrderApp.image2 == ''
+                            ? Image(
+                          image: AssetImage(bike_2),
+                          fit: BoxFit.fill,
+                        )
+                            : Image.network(
+                          orderController.singleOrderApp.image2,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 2.0,
+                      fillColor: Colors.grey,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        child: orderController.singleOrderApp.image3 == ''
+                            ? Icon(Icons.camera_alt_outlined,
+                            size: 18, color: Colors.white)
+                            : Image.network(
+                          orderController.singleOrderApp.image3,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
