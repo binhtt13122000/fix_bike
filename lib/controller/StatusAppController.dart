@@ -11,6 +11,33 @@ class StatusAppController extends GetxController {
   RxBool switched = false.obs;
   RxBool isFinding = false.obs;
   RxString markerId = "".obs;
+  RxString img1 = "".obs;
+  RxString img2 = "".obs;
+  RxString img3 = "".obs;
+
+  setPath(String path, int index)
+  {
+    switch(index) {
+      case 0: {
+        print("DAN: " + path);
+        img1.value = path;
+        update();
+        break;
+      }
+      case 1: {
+        img2.value = path;
+        update();
+        break;
+      }
+      case 2: {
+        img3.value = path;
+        update();
+        break;
+      }
+    }
+    update();
+  }
+
   setStatus(int selectedStatus) {
     status.value = selectedStatus;
     update();

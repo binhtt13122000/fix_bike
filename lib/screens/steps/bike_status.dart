@@ -33,14 +33,13 @@ List<String> listProblem = [
 
 class _BikeStatusState extends State<BikeStatus> {
   int currentIndex = 0;
-  List<String> _path = ['', '', ''];
   final _items =
       listProblem.map((item) => MultiSelectItem<String>(item, item)).toList();
 
   Future _showPhotoLibrary() async {
     final file = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _path[currentIndex] = file.path;
+      StatusAppController().setPath(file.path, currentIndex);
     });
   }
 
@@ -85,15 +84,12 @@ class _BikeStatusState extends State<BikeStatus> {
         });
   }
 
-  void _showCamera() async {
+  void _showCamera(BuildContext context) async {
     final cameras = await availableCameras();
     final camera = cameras.first;
-
     final result = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => CameraScreen(camera: camera)));
-    setState(() {
-      _path[currentIndex] = result;
-    });
+    await DatabaseMethods().uploadImageToFirebase(context, new File(result), currentIndex);
   }
 
   void _showOptions(BuildContext context) {
@@ -106,7 +102,7 @@ class _BikeStatusState extends State<BikeStatus> {
                 ListTile(
                     onTap: () {
                       Navigator.pop(context);
-                      _showCamera();
+                      _showCamera(context);
                     },
                     leading: Icon(Icons.photo_camera),
                     title: Text("Take a picture from camera")),
@@ -249,15 +245,17 @@ class _BikeStatusState extends State<BikeStatus> {
                               borderRadius: BorderRadius.circular(10)),
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.width * 0.25,
-                          child: _path[0] == ''
-                              ? Image(
-                                  image: AssetImage(bike_1),
-                                  fit: BoxFit.fill,
-                                )
-                              : Image.file(
-                                  File(_path[0]),
-                                  fit: BoxFit.fill,
-                                ),
+                          child: Obx(
+                            () => statusAppController.img1.value == ''
+                                ? Image(
+                                    image: AssetImage(bike_1),
+                                    fit: BoxFit.fill,
+                                  )
+                                : Image.network(
+                                    statusAppController.img1.value,
+                                    fit: BoxFit.fill,
+                                  ),
+                          ),
                         ),
                       ),
                       RawMaterialButton(
@@ -272,15 +270,17 @@ class _BikeStatusState extends State<BikeStatus> {
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.width * 0.25,
-                          child: _path[1] == ''
-                              ? Image(
-                                  image: AssetImage(bike_2),
-                                  fit: BoxFit.fill,
-                                )
-                              : Image.file(
-                                  File(_path[1]),
-                                  fit: BoxFit.fill,
-                                ),
+                          child: Obx(
+                            () => statusAppController.img2.value == ''
+                                ? Image(
+                                    image: AssetImage(bike_2),
+                                    fit: BoxFit.fill,
+                                  )
+                                : Image.network(
+                                    statusAppController.img2.value,
+                                    fit: BoxFit.fill,
+                                  ),
+                          ),
                         ),
                       ),
                       RawMaterialButton(
@@ -295,13 +295,15 @@ class _BikeStatusState extends State<BikeStatus> {
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.width * 0.25,
-                          child: _path[2] == ''
-                              ? Icon(Icons.camera_alt_outlined,
-                                  size: 18, color: Colors.white)
-                              : Image.file(
-                                  File(_path[2]),
-                                  fit: BoxFit.fill,
-                                ),
+                          child: Obx(
+                            () => statusAppController.img3.value == ''
+                                ? Icon(Icons.camera_alt_outlined,
+                                    size: 18, color: Colors.white)
+                                : Image.network(
+                                    statusAppController.img3.value,
+                                    fit: BoxFit.fill,
+                                  ),
+                          ),
                         ),
                       ),
                     ],
