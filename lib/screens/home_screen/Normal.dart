@@ -19,7 +19,7 @@ class Normal extends StatelessWidget {
               onTap: () => Get.to(ListVehicles()),
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                height: 60,
+                height: 70,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -27,8 +27,16 @@ class Normal extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        child: Text(
+                          "Xe bạn muốn sửa: ",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

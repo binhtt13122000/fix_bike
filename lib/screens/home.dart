@@ -67,7 +67,7 @@ class MapGoogleState extends State<MapGoogle> {
   Directions? _info;
 
   //height
-  double _height = 200;
+  double _height = 250;
 
   @override
   void initState() {
@@ -288,8 +288,8 @@ class MapGoogleState extends State<MapGoogle> {
                                   _height -= details.delta.dy;
 
                                   // prevent overflow if height is more/less than available space
-                                  var maxLimit = 400.0;
-                                  var minLimit = 200.0;
+                                  var maxLimit = 600.0;
+                                  var minLimit = 250.0;
 
                                   if (_height > maxLimit)
                                     _height = maxLimit;

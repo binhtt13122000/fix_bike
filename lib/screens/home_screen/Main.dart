@@ -6,8 +6,10 @@ import 'package:fix_bike/services/database.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 import '../MessageScreen.dart';
 
@@ -27,10 +29,145 @@ class MainModal extends StatelessWidget {
       : super(key: key);
   final double height;
 
-  showDialog(BuildContext context) {
+  showMoneyDialog(BuildContext context) {
     // show the dialog
     showGeneralDialog(
-      barrierLabel: "showGenerlDialog",
+      barrierLabel: "showMoneyDialog",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      context: context,
+      pageBuilder: (context, _, __) {
+        return Dialog(
+          insetAnimationCurve: Curves.bounceOut,
+          insetAnimationDuration: Duration(seconds: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 500.0,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Đơn giá",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Tên Phụ kiện"),
+                    Text("Đơn giá"),
+                  ],
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Lưới tản nhiệt"),
+                    Text("500.000 VNĐ"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Cần sang số"),
+                    Text("250.000 VNĐ"),
+                  ],
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Tổng phụ kiện"),
+                    Text("750.000 VNĐ"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Công sửa"),
+                    Text("300.000 VNĐ"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Tiền xe kéo"),
+                    Text("300.000 VNĐ"),
+                  ],
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Tổng tiền"),
+                    Text("1.350.000 VNĐ"),
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Color(0xFFF9AA33),
+                      onPrimary: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    showDialog(context);
+                  },
+                  child: Text('ĐỒNG Ý VÀ FEEDBACK'),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Colors.red,
+                      onPrimary: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    DatabaseMethods().updateTodo(8);
+                  },
+                  child: Text('YÊU CẦU CẬP NHẬT ĐƠN GIÁ'),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation1, __, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
+
+  showCancelDialog(BuildContext context) {
+    // show the dialog
+    showGeneralDialog(
+      barrierLabel: "showCancelDialog",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.6),
       transitionDuration: const Duration(milliseconds: 400),
@@ -51,7 +188,7 @@ class MainModal extends StatelessWidget {
                   height: 30,
                 ),
                 Text(
-                  "Bạn đã sửa xe thành công, vui lòng đánh giá tài xế!",
+                  "Bạn có chắc sẽ hủy đơn? Hãy nói lí do cho người sửa xe của bạn",
                   softWrap: true,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -127,9 +264,145 @@ class MainModal extends StatelessWidget {
                       primary: Color(0xFFF9AA33),
                       onPrimary: Colors.black),
                   onPressed: () {
+                    Navigator.of(context).pop(true);
+                    DatabaseMethods().updateTodo(11);
+                  },
+                  child: Text('HỦY ĐƠN SỬA XE'),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Colors.red,
+                      onPrimary: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  child: Text('HỦY THAO TÁC'),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation1, __, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
+
+  showDialog(BuildContext context) {
+    // show the dialog
+    showGeneralDialog(
+      barrierLabel: "showGenerlDialog",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      context: context,
+      pageBuilder: (context, _, __) {
+        return Dialog(
+          insetAnimationCurve: Curves.bounceOut,
+          insetAnimationDuration: Duration(seconds: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 600.0,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Bạn đã sửa xe thành công, vui lòng đánh giá tài xế!",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(0, 10))
+                      ],
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(avatarGrab),
+                      )),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Lê Trọng Nhân",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 8, bottom: 8),
+                  child: RatingBar.builder(
+                    initialRating: 4.5,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    unratedColor: Colors.amber.withAlpha(50),
+                    itemCount: 5,
+                    itemSize: 20.0,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {},
+                    updateOnDrag: true,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Color(0xFFF9AA33),
+                      onPrimary: Colors.black),
+                  onPressed: () {
                     if (Get.put(OrderController()).singleOrderApp.status != 0) {
                       Navigator.of(context).pop(true);
-                      DatabaseMethods().updateTodo(0);
+                      DatabaseMethods().updateTodo(10);
                     }
                   },
                   child: Text('GỬI FEEDBACK VỀ TÀI XẾ'),
@@ -276,8 +549,8 @@ class MainModal extends StatelessWidget {
     if (orderController.singleOrderApp.status == 2) {
       Future.delayed(Duration.zero, () => {showAlertDialog(context)});
     }
-    if (orderController.singleOrderApp.status == 6) {
-      Future.delayed(Duration.zero, () => {showDialog(context)});
+    if (orderController.singleOrderApp.status == 9) {
+      Future.delayed(Duration.zero, () => {showMoneyDialog(context)});
     }
     return Container(
       child: Column(
@@ -294,7 +567,7 @@ class MainModal extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Đang đến",
+                      "Chuẩn bị",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
@@ -307,7 +580,7 @@ class MainModal extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Đã đến",
+                      "Đang đi",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
@@ -320,20 +593,49 @@ class MainModal extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Đã sửa",
+                      "Đánh giá",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
                 ),
                 Expanded(child: Divider()),
+                if (orderController.singleOrderApp.status == 6) ...[
+                  Column(
+                    children: [
+                      IconWidget(status: 6),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Đang sửa",
+                        style: TextStyle(fontSize: 12),
+                      )
+                    ],
+                  ),
+                ],
+                if (orderController.singleOrderApp.status != 6) ...[
+                  Column(
+                    children: [
+                      IconWidget(status: 7),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Đang sửa",
+                        style: TextStyle(fontSize: 12),
+                      )
+                    ],
+                  ),
+                ],
+                Expanded(child: Divider()),
                 Column(
                   children: [
-                    IconWidget(status: 6),
+                    IconWidget(status: 8),
                     SizedBox(
                       height: 5,
                     ),
                     Text(
-                      "Đã thanh toán",
+                      "Thanh toán",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
@@ -428,6 +730,128 @@ class MainModal extends StatelessWidget {
                     )
                   ],
                 ),
+                if (orderController.singleOrderApp.status == 10) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Feedback đã được gửi về cho tài xế!",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        JumpingDotsProgressIndicator(
+                          fontSize: 20.0,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+                if (orderController.singleOrderApp.status == 4) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Người sửa xe đang trên đường đến",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        JumpingDotsProgressIndicator(
+                          fontSize: 20.0,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+                if (orderController.singleOrderApp.status == 5) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Đã đến và đang đánh giá tình trạng xe",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        JumpingDotsProgressIndicator(
+                          fontSize: 20.0,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+                if (orderController.singleOrderApp.status == 3) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        primary: Colors.red,
+                        onPrimary: Colors.white),
+                    onPressed: () {
+                      showCancelDialog(context);
+                    },
+                    child: Text('HỦY CHUYẾN XE'),
+                  ),
+                ],
+                if (orderController.singleOrderApp.status == 6 ||
+                    orderController.singleOrderApp.status == 7) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        primary: Colors.green[400],
+                        onPrimary: Colors.white),
+                    onPressed: () {
+                      DatabaseMethods().updateTodo(8);
+                    },
+                    child: Text('XÁC NHẬN XE ĐÃ ĐƯỢC SỬA'),
+                  ),
+                ],
+                if (orderController.singleOrderApp.status == 11) ...[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SpinKitThreeInOut(
+                        color: Color(0xFFF9AA33),
+                        size: 50,
+                      ),
+                      Text(
+                        "Đang chờ người sửa xe xác nhận lại!",
+                        style: TextStyle(fontSize: 18),
+                      )
+                    ],
+                  )
+                ],
+                if (orderController.singleOrderApp.status == 8) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Đang chờ người sửa xe nhập hóa đơn!",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        JumpingDotsProgressIndicator(
+                          fontSize: 20.0,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
                 // Row(
                 //   children: [
                 //     Expanded(
