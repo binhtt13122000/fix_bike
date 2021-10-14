@@ -385,115 +385,97 @@ class MainModal2 extends StatelessWidget {
     );
   }
 
-  // showFailDialog(BuildContext context) {
-  //   // show the dialog
-  //   showGeneralDialog(
-  //     barrierLabel: "showSuccessDialog",
-  //     barrierDismissible: true,
-  //     barrierColor: Colors.black.withOpacity(0.6),
-  //     transitionDuration: const Duration(milliseconds: 400),
-  //     context: context,
-  //     pageBuilder: (context, _, __) {
-  //       return Dialog(
-  //         insetAnimationCurve: Curves.bounceOut,
-  //         insetAnimationDuration: Duration(seconds: 1),
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-  //         child: Container(
-  //           height: 600.0,
-  //           padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.center,
-  //             children: [
-  //               SizedBox(
-  //                 height: 30,
-  //               ),
-  //               Text(
-  //                 "Chúc mừng bạn đã sửa xe thành công",
-  //                 softWrap: true,
-  //                 textAlign: TextAlign.center,
-  //                 style: TextStyle(
-  //                     fontSize: 18,
-  //                     color: Colors.black,
-  //                     wordSpacing: 0.5,
-  //                     fontWeight: FontWeight.w500),
-  //               ),
-  //               SizedBox(
-  //                 height: 20,
-  //               ),
-  //               Container(
-  //                 width: 130,
-  //                 height: 130,
-  //                child: Icon(
-  //                   Icons.check_circle,
-  //                   color: Colors.green,
-  //                   size: 100),
-  //               ),
-  //               SizedBox(
-  //                 height: 10,
-  //               ),
-  //               Text(
-  //                 "Trương Thanh Bình",
-  //                 textAlign: TextAlign.center,
-  //                 style: TextStyle(
-  //                   fontSize: 17,
-  //                   fontWeight: FontWeight.w400,
-  //                 ),
-  //               ),
-  //               Container(
-  //                 padding: EdgeInsets.only(top: 8, bottom: 8),
-  //                 child: RatingBar.builder(
-  //                   initialRating: 1,
-  //                   minRating: 1,
-  //                   direction: Axis.horizontal,
-  //                   allowHalfRating: true,
-  //                   unratedColor: Colors.amber.withAlpha(50),
-  //                   itemCount: 5,
-  //                   itemSize: 20.0,
-  //                   itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-  //                   itemBuilder: (context, _) => Icon(
-  //                     Icons.star,
-  //                     color: Colors.amber,
-  //                   ),
-  //                   onRatingUpdate: (rating) {},
-  //                   updateOnDrag: true,
-  //                 ),
-  //               ),
-  //               SizedBox(
-  //                 height: 20,
-  //               ),
-  //               TextField(),
-  //               SizedBox(
-  //                 height: 20,
-  //               ),
-  //               ElevatedButton(
-  //                 style: ElevatedButton.styleFrom(
-  //                     minimumSize: Size(double.infinity,
-  //                         40), // double.infinity is the width and 30 is the height
-  //                     primary: Color(0xFFF9AA33),
-  //                     onPrimary: Colors.black),
-  //                 onPressed: () {
-  //                   Navigator.of(context).pop(true);
-  //                   DatabaseMethods().updateTodo(0);
-  //                 },
-  //                 child: Text('ĐỒNG Ý'),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //     transitionBuilder: (_, animation1, __, child) {
-  //       return SlideTransition(
-  //         position: Tween(
-  //           begin: const Offset(0, 1),
-  //           end: const Offset(0, 0),
-  //         ).animate(animation1),
-  //         child: child,
-  //       );
-  //     },
-  //   );
-  // }
+  showFailDialog(BuildContext context) {
+    // show the dialog
+    showGeneralDialog(
+      barrierLabel: "showSuccessDialog",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      context: context,
+      pageBuilder: (context, _, __) {
+        return Dialog(
+          insetAnimationCurve: Curves.bounceOut,
+          insetAnimationDuration: Duration(seconds: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 600.0,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Xin lỗi. Đơn của bạn đã bị hủy",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 130,
+                  height: 130,
+                  child:
+                      Icon(Icons.cancel, color: Colors.red, size: 100),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Trương Thanh Bình",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Lý do: xe đã khởi động được",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Color(0xFFF9AA33),
+                      onPrimary: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    DatabaseMethods().updateTodo(0);
+                  },
+                  child: Text('ĐỒNG Ý'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation1, __, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -506,9 +488,9 @@ class MainModal2 extends StatelessWidget {
     if (orderController.singleOrderApp.status == 10) {
       Future.delayed(Duration.zero, () => {showSuccessDialog(context)});
     }
-    // if (orderController.singleOrderApp.status == 11) {
-    //   Future.delayed(Duration.zero, () => {showFailDialog(context)});
-    // }
+    if (orderController.singleOrderApp.status == 11) {
+      Future.delayed(Duration.zero, () => {showFailDialog(context)});
+    }
 
     return Container(
       child: Column(
@@ -854,6 +836,24 @@ class MainModal2 extends StatelessWidget {
                     },
                     child: Text('CẬP NHẬP THANH TOÁN'),
                   ),
+                ],
+                if (orderController.singleOrderApp.status == 9) ...[
+                  SpinKitThreeInOut(
+                    color: Color(0xFFF9AA33),
+                    size: 40,
+                  ),
+                  Center(
+                    child: Text(
+                      "Đang tiến hành thanh toán!",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      statusAppController.bringCar.value ? "Tổng tiền: 1.470.000 VNĐ" : "Tổng tiền: 1.170.000 VNĐ",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  )
                 ],
                 // Row(
                 //   children: [

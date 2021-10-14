@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fix_bike/screens/home_screen/UpdatePurchase.dart';
 // import 'package:fix_bike/screens/repairman/login_screen.dart';
 import 'package:fix_bike/screens/user/LoginScreen.dart';
 
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: UpdatePurchaseScreen(),
+      home: LoginPage(),
     );
   }
 }

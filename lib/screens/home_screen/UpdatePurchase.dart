@@ -234,7 +234,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
