@@ -1,5 +1,6 @@
 import 'package:fix_bike/controller/StatusAppController.dart';
 import 'package:fix_bike/models/FeatureBike.dart';
+import 'package:fix_bike/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +33,8 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
     super.initState();
     _nameController = TextEditingController();
   }
+
+  late TextEditingController _otherDevice = TextEditingController();
 
   @override
   void dispose() {
@@ -67,15 +70,144 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    "Tiền sửa xe: 100.000vnđ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                Row(
+                  children: [
+                    Container(
+                      width: 110,
+                      child: Text(
+                        "Phụ kiện khác:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      width: 180,
+                      child: TextFormField(
+                        initialValue: "1 lốp xe",
+                        decoration: new InputDecoration(
+                          border: UnderlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 110,
+                      child: Text(
+                        "Giá tiền phụ kiện khác:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 180,
+                      child: TextFormField(
+                      initialValue: "120.000",
+                        decoration: new InputDecoration(
+                          border: UnderlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 10),
+                      width: 60,
+                      child: Text(
+                        "VND",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                statusAppController.bringCar.value ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 100,
+                      child: Text(
+                        "Tiền xe kéo:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 180,
+                      child: TextFormField(
+                        initialValue: "300.000",
+                        decoration: new InputDecoration(
+                          border: UnderlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 0),
+                      width: 60,
+                      child: Text(
+                        "VND",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ) : Container(),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 100,
+                      child: Text(
+                        "Tiền sửa xe:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 180,
+                      child: TextFormField(
+                        initialValue: "300.000",
+                        decoration: new InputDecoration(
+                          border: UnderlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 0),
+                      width: 60,
+                      child: Text(
+                        "VND",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10,
@@ -92,7 +224,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                         ),
                       ),
                       Text(
-                        totalPrice.toStringAsFixed(0) + "vnđ",
+                        statusAppController.bringCar.value ? (totalPrice+120000+500000).toStringAsFixed(0) + " VNĐ" : (totalPrice+120000+200000).toStringAsFixed(0) + " VNĐ",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -114,6 +246,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                           primary: Color(0xFFF9AA33),
                           onPrimary: Colors.black),
                       onPressed: () {
+                        DatabaseMethods().updateTodo(9);
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           statusAppController.setTotalPrice(totalPrice);
@@ -121,7 +254,10 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                           Get.back();
                         }
                       },
-                      child: Text('Thanh toán', style: TextStyle(color: Colors.black),),
+                      child: Text(
+                        'Xác nhận',
+                        style: TextStyle(color: Colors.black, fontSize: 22),
+                      ),
                     )
                   ],
                 ),
@@ -161,9 +297,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
         if (add) {
           totalPrice += friendsList[0].price;
           friendsList.insert(0, listProblem[0]);
-          setState(() {
-
-          });
+          setState(() {});
         } else
           friendsList.removeAt(index);
         totalPrice -= friendsList[index].price;
@@ -212,10 +346,10 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      _nameController.text = _UpdatePurchaseScreenState.friendsList[widget.index].name ?? '';
+      _nameController.text =
+          _UpdatePurchaseScreenState.friendsList[widget.index].name ?? '';
     });
     String _myStateProblem = listProblem[widget.index].name;
-
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

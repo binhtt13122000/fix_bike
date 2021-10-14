@@ -218,13 +218,13 @@ class MainModal extends StatelessWidget {
                         height: MediaQuery.of(context).size.width * 0.25,
                         child: orderController.singleOrderApp.image1 == ''
                             ? Image(
-                          image: AssetImage(bike_1),
-                          fit: BoxFit.fill,
-                        )
+                                image: AssetImage(bike_1),
+                                fit: BoxFit.fill,
+                              )
                             : Image.network(
-                          orderController.singleOrderApp.image1,
-                          fit: BoxFit.fill,
-                        ),
+                                orderController.singleOrderApp.image1,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                     RawMaterialButton(
@@ -236,13 +236,13 @@ class MainModal extends StatelessWidget {
                         height: MediaQuery.of(context).size.width * 0.25,
                         child: orderController.singleOrderApp.image2 == ''
                             ? Image(
-                          image: AssetImage(bike_2),
-                          fit: BoxFit.fill,
-                        )
+                                image: AssetImage(bike_2),
+                                fit: BoxFit.fill,
+                              )
                             : Image.network(
-                          orderController.singleOrderApp.image2,
-                          fit: BoxFit.fill,
-                        ),
+                                orderController.singleOrderApp.image2,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                     RawMaterialButton(
@@ -254,11 +254,11 @@ class MainModal extends StatelessWidget {
                         height: MediaQuery.of(context).size.width * 0.25,
                         child: orderController.singleOrderApp.image3 == ''
                             ? Icon(Icons.camera_alt_outlined,
-                            size: 18, color: Colors.white)
+                                size: 18, color: Colors.white)
                             : Image.network(
-                          orderController.singleOrderApp.image3,
-                          fit: BoxFit.fill,
-                        ),
+                                orderController.singleOrderApp.image3,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                   ],

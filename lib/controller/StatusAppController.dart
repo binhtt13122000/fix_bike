@@ -6,6 +6,7 @@ class StatusAppController extends GetxController {
   //2 - FOUND
   //3 - BOOKED
   //4 - FIXED
+  RxBool bringCar = false.obs;
 
   RxDouble zoom = 15.0.obs;
   RxBool switched = false.obs;
@@ -35,8 +36,8 @@ class StatusAppController extends GetxController {
     isUpdatePurchase.value = currentStatus;
     update();
   }
-  setTotalPrice(double price)
-  {
+
+  setTotalPrice(double price) {
     totalPrice.value = price;
     update();
   }

@@ -1,5 +1,6 @@
 import 'package:fix_bike/components/TextFieldPrefIcon.dart';
 import 'package:fix_bike/controller/AuthenticationController.dart';
+import 'package:fix_bike/screens/home.dart';
 import 'package:fix_bike/services/Auth.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -220,9 +221,10 @@ class _LoginPageState extends State<LoginPage> {
                                                 20, 10, 20, 23),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                controller
-                                                    .authenticationWithGoogle(
-                                                        context);
+                                                Get.to(Home());
+                                                // controller
+                                                //     .authenticationWithGoogle(
+                                                //         context);
                                               },
                                               style: ButtonStyle(
                                                 elevation:
