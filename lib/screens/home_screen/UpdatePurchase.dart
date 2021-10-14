@@ -63,7 +63,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                   height: 20,
                 ),
                 Text(
-                  'Thêm link kiện',
+                  'Thêm phụ kiện',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
                 ..._getItems(),
@@ -111,7 +111,7 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                     Container(
                       width: 180,
                       child: TextFormField(
-                      initialValue: "120.000",
+                        initialValue: "120.000",
                         decoration: new InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
@@ -134,42 +134,44 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                statusAppController.bringCar.value ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 100,
-                      child: Text(
-                        "Tiền xe kéo:",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 180,
-                      child: TextFormField(
-                        initialValue: "300.000",
-                        decoration: new InputDecoration(
-                          border: UnderlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 0),
-                      width: 60,
-                      child: Text(
-                        "VND",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ) : Container(),
+                statusAppController.bringCar.value
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 100,
+                            child: Text(
+                              "Tiền xe kéo:",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            child: TextFormField(
+                              initialValue: "300.000",
+                              decoration: new InputDecoration(
+                                border: UnderlineInputBorder(),
+                              ),
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 0),
+                            width: 60,
+                            child: Text(
+                              "VND",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 SizedBox(
                   height: 10,
                 ),
@@ -224,7 +226,13 @@ class _UpdatePurchaseScreenState extends State<UpdatePurchaseScreen> {
                         ),
                       ),
                       Text(
-                        statusAppController.bringCar.value ? (totalPrice+120000+500000).toStringAsFixed(0) + " VNĐ" : (totalPrice+120000+200000).toStringAsFixed(0) + " VNĐ",
+                        statusAppController.bringCar.value
+                            ? (totalPrice + 120000 + 500000)
+                                    .toStringAsFixed(0) +
+                                " VNĐ"
+                            : (totalPrice + 120000 + 200000)
+                                    .toStringAsFixed(0) +
+                                " VNĐ",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

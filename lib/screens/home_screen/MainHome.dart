@@ -185,7 +185,7 @@ class MainHome extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                "100%",
+                                "89%",
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(
                                       fontSize: 20,
@@ -217,7 +217,7 @@ class MainHome extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                "5.00",
+                                "4.6",
                                 style: TextStyle(
                                     fontSize: 20,
                                     // color: Color(0xFF00B242)
@@ -245,7 +245,7 @@ class MainHome extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                "0%",
+                                "11%",
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(
                                       fontSize: 20,

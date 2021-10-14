@@ -242,7 +242,8 @@ class MainModal2 extends StatelessWidget {
                           ),
                           onPressed: () {
                             DatabaseMethods().updateTodo(0);
-                            Navigator.of(context).pop(true);
+                            Navigator.of(context)
+                                .popUntil((route) => route.isFirst);
                           },
                         )),
                   ],
@@ -312,14 +313,6 @@ class MainModal2 extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Trương Thanh Bình",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
                 Container(
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: RatingBar.builder(
@@ -343,7 +336,7 @@ class MainModal2 extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Được thanh toán: 970.000 VNĐ",
+                  "Được thanh toán: 1.470.000 VNĐ",
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(
@@ -424,8 +417,7 @@ class MainModal2 extends StatelessWidget {
                 Container(
                   width: 130,
                   height: 130,
-                  child:
-                      Icon(Icons.cancel, color: Colors.red, size: 100),
+                  child: Icon(Icons.cancel, color: Colors.red, size: 100),
                 ),
                 SizedBox(
                   height: 10,
@@ -542,7 +534,7 @@ class MainModal2 extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text("Đánh giá",
+                    Text("Kiểm tra",
                         style: GoogleFonts.lato(
                           textStyle: TextStyle(
                               fontSize: 12,
@@ -572,8 +564,8 @@ class MainModal2 extends StatelessWidget {
                   children: [
                     orderController.singleOrderApp.status < 8
                         ? (Icon(
-                            Icons.watch_later,
-                            color: Colors.red,
+                            Icons.watch_later_outlined,
+                            color: Colors.black,
                           ))
                         : (Icon(
                             Icons.pending,
@@ -850,7 +842,9 @@ class MainModal2 extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      statusAppController.bringCar.value ? "Tổng tiền: 1.470.000 VNĐ" : "Tổng tiền: 1.170.000 VNĐ",
+                      statusAppController.bringCar.value
+                          ? "Tổng tiền: 1.470.000 VNĐ"
+                          : "Tổng tiền: 1.170.000 VNĐ",
                       style: TextStyle(fontSize: 18),
                     ),
                   )
@@ -917,8 +911,8 @@ class IconWidget extends StatelessWidget {
     OrderController orderController = Get.find();
     return orderController.singleOrderApp.status < status
         ? Icon(
-            Icons.watch_later,
-            color: Colors.red,
+            Icons.watch_later_outlined,
+            color: Colors.black,
           )
         : (orderController.singleOrderApp.status > status)
             ? Icon(
