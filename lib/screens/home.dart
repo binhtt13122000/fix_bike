@@ -318,99 +318,69 @@ class MapGoogleState extends State<MapGoogle> {
                       ))
                 ],
                 // if (_height > 350) ...[HideData()]
-                Positioned(
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    height: _height,
-                    child: Container(
-                      color: Color(0xFF1D2033),
+                if (orderController.singleOrderApp.status == 0) ...[
+                  Positioned(
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      height: _height,
                       child: Container(
-                          child: Column(
-                        children: [
-                          GestureDetector(
-                            child: FittedBox(
-                                child: Text(
-                              "----",
-                              style: TextStyle(
-                                  color: Colors.grey[300], fontSize: 40),
-                            )),
-                            onPanUpdate: (details) {
-                              setState(() {
-                                _height -= details.delta.dy;
+                        color: Color(0xFF1D2033),
+                        child: Container(
+                            child: Column(
+                          children: [
+                            GestureDetector(
+                              child: FittedBox(
+                                  child: Text(
+                                "----",
+                                style: TextStyle(
+                                    color: Colors.grey[300], fontSize: 40),
+                              )),
+                              onPanUpdate: (details) {
+                                setState(() {
+                                  _height -= details.delta.dy;
 
-                                // prevent overflow if height is more/less than available space
-                                var maxLimit = 500.0;
-                                var minLimit = 300.0;
+                                  // prevent overflow if height is more/less than available space
+                                  var maxLimit = 500.0;
+                                  var minLimit = 300.0;
 
-                                if (_height > maxLimit)
-                                  _height = maxLimit;
-                                else if (_height < minLimit) _height = minLimit;
-                              });
-                            },
-                          ),
-                          // Row(
-                          //   children: [
-                          //     Text(
-                          //       "Ngày",
-                          //       style: TextStyle(
-                          //         color: Colors.black,
-                          //         fontWeight: FontWeight.w700,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       "Ngày",
-                          //       style: TextStyle(
-                          //         color: Colors.black,
-                          //         fontWeight: FontWeight.w700,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                                  if (_height > maxLimit)
+                                    _height = maxLimit;
+                                  else if (_height < minLimit)
+                                    _height = minLimit;
+                                });
+                              },
+                            ),
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       "Ngày",
+                            //       style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontWeight: FontWeight.w700,
+                            //       ),
+                            //     ),
+                            //     Text(
+                            //       "Ngày",
+                            //       style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontWeight: FontWeight.w700,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
 
-                          MainHome(
-                              height: _height,
-                              destination: destination.position,
-                              origin: LatLng(
-                                  addressController.location.value.getLat,
-                                  addressController.location.value.getLng),
-                              draw: drawLine),
-                          // Container(
-                          //   width: 200,
-                          //   height: 80,
-                          //   // color: Colors.grey,
-                          //   padding: EdgeInsets.only(top: 14),
-                          //   decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(30)),
-
-                          //   child: Column(
-                          //       mainAxisAlignment: MainAxisAlignment.start,
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         Container(
-                          //           width: 130,
-                          //           height: 130,
-                          //           color: Colors.grey[300],
-                          //         )
-                          //       ]),
-                          //   // color: Colors.grey[300],
-                          // decoration: BoxDecoration(
-                          //   border: Border.all(
-                          //       width: 4,
-                          //       color: Theme.of(context)
-                          //           .scaffoldBackgroundColor),
-                          //   boxShadow: [
-                          //     BoxShadow(
-                          //         spreadRadius: 2,
-                          //         blurRadius: 10,
-                          //         color: Colors.black,
-                          //         offset: Offset(0, 10))
-                          //   ],
-                          // ),
-                          // ),
-                        ],
-                      )),
-                    ))
+                            MainHome(
+                                height: _height,
+                                destination: destination.position,
+                                origin: LatLng(
+                                    addressController.location.value.getLat,
+                                    addressController.location.value.getLng),
+                                draw: drawLine),
+                          ],
+                        )),
+                      ))
+                ],
               ],
             ),
           ));
