@@ -98,33 +98,33 @@ class MapGoogleState extends State<MapGoogle> {
   //height
   double _height = 300;
 
-  @override
-  void initState() {
-    super.initState();
-    // if (statusAppController.status.value == 1 ||
-    //     statusAppController.status.value == 4) {
-    //   cancel();
-    // } else if (statusAppController.status.value == 2) {
-    //   setState(() {
-    //     destination = defautDestination;
-    //   });
-    //   // if (destination != null) {
-    //   // _controller.future.then((value) => {
-    //   //       value.animateCamera(CameraUpdate.newCameraPosition(
-    //   //           CameraPosition(target: destination!.position, zoom: 13)))
-    //   //     });
-    //   // _controller.future.then(
-    //   //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
-    //   // }
-    // } else if (statusAppController.status.value == 3) {
-    //   if (destination != null) {
-    //     drawLine(
-    //         LatLng(addressController.location.value.getLat,
-    //             addressController.location.value.getLng),
-    //         destination!.position);
-    //   }
-    // }
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // if (statusAppController.status.value == 1 ||
+  //   //     statusAppController.status.value == 4) {
+  //   //   cancel();
+  //   // } else if (statusAppController.status.value == 2) {
+  //   //   setState(() {
+  //   //     destination = defautDestination;
+  //   //   });
+  //   //   // if (destination != null) {
+  //   //   // _controller.future.then((value) => {
+  //   //   //       value.animateCamera(CameraUpdate.newCameraPosition(
+  //   //   //           CameraPosition(target: destination!.position, zoom: 13)))
+  //   //   //     });
+  //   //   // _controller.future.then(
+  //   //   //     (value) => {value.showMarkerInfoWindow(MarkerId("destination"))});
+  //   //   // }
+  //   // } else if (statusAppController.status.value == 3) {
+  //   //   if (destination != null) {
+  //   //     drawLine(
+  //   //         LatLng(addressController.location.value.getLat,
+  //   //             addressController.location.value.getLng),
+  //   //         destination!.position);
+  //   //   }
+  //   // }
+  // }
 
   redraw(lat, lng) {
     _controller.future.then((value) => {
