@@ -87,6 +87,13 @@ class MainModal extends StatelessWidget {
                     Text("250.000 VNĐ"),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Khác"),
+                    Text("120.000 VNĐ"),
+                  ],
+                ),
                 Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +121,7 @@ class MainModal extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Tổng tiền"),
-                    Text("1.350.000 VNĐ"),
+                    Text("1.470.000 VNĐ"),
                   ],
                 ),
                 SizedBox(
@@ -911,6 +918,12 @@ class IconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();
+    if (orderController.singleOrderApp.status == 11) {
+      return Icon(
+        Icons.watch_later,
+        color: Colors.red,
+      );
+    }
     return orderController.singleOrderApp.status < status
         ? Icon(
             Icons.watch_later,
