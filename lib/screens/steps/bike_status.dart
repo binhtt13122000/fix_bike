@@ -89,7 +89,8 @@ class _BikeStatusState extends State<BikeStatus> {
     final camera = cameras.first;
     final result = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => CameraScreen(camera: camera)));
-    await DatabaseMethods().uploadImageToFirebase(context, new File(result), currentIndex);
+    await DatabaseMethods()
+        .uploadImageToFirebase(context, new File(result), currentIndex);
   }
 
   void _showOptions(BuildContext context) {
@@ -317,6 +318,13 @@ class _BikeStatusState extends State<BikeStatus> {
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                                primary: Colors.primaries.first),
+                            onPressed: () {},
+                            child: Text(
+                              'Trở về',
+                            )),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
                                 primary: Color(0xFFF9AA33),
                                 onPrimary: Colors.black),
                             onPressed: () {
@@ -324,13 +332,6 @@ class _BikeStatusState extends State<BikeStatus> {
                             },
                             child: Text(
                               'Tiếp theo',
-                            )),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.primaries.first),
-                            onPressed: () {},
-                            child: Text(
-                              'Trở về',
                             )),
                       ],
                     ),

@@ -137,7 +137,7 @@ class MainModal extends StatelessWidget {
                     Navigator.of(context).pop(true);
                     showDialog(context);
                   },
-                  child: Text('ĐỒNG Ý VÀ FEEDBACK'),
+                  child: Text('ĐỒNG Ý'),
                 ),
                 SizedBox(
                   height: 10,
@@ -149,7 +149,8 @@ class MainModal extends StatelessWidget {
                       primary: Colors.red,
                       onPrimary: Colors.white),
                   onPressed: () {
-                    Navigator.of(context).pop(true);
+                    // Navigator.of(context).pop();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                     DatabaseMethods().updateTodo(8);
                   },
                   child: Text('YÊU CẦU CẬP NHẬT ĐƠN GIÁ'),
@@ -238,25 +239,25 @@ class MainModal extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 8, bottom: 8),
-                  child: RatingBar.builder(
-                    initialRating: 5,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    unratedColor: Colors.amber.withAlpha(50),
-                    itemCount: 5,
-                    itemSize: 20.0,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {},
-                    updateOnDrag: true,
-                  ),
-                ),
+                // Container(
+                //   padding: EdgeInsets.only(top: 8, bottom: 8),
+                //   child: RatingBar.builder(
+                //     initialRating: 1,
+                //     minRating: 1,
+                //     direction: Axis.horizontal,
+                //     allowHalfRating: true,
+                //     unratedColor: Colors.amber.withAlpha(50),
+                //     itemCount: 5,
+                //     itemSize: 20.0,
+                //     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                //     itemBuilder: (context, _) => Icon(
+                //       Icons.star,
+                //       color: Colors.amber,
+                //     ),
+                //     onRatingUpdate: (rating) {},
+                //     updateOnDrag: true,
+                //   ),
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -377,7 +378,7 @@ class MainModal extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: RatingBar.builder(
-                    initialRating: 4.5,
+                    initialRating: 1,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -600,7 +601,7 @@ class MainModal extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Đánh giá",
+                      "Kiểm tra",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
@@ -806,7 +807,7 @@ class MainModal extends StatelessWidget {
                     onPressed: () {
                       showCancelDialog(context);
                     },
-                    child: Text('HỦY CHUYẾN XE'),
+                    child: Text('HỦY ĐƠN'),
                   ),
                 ],
                 if (orderController.singleOrderApp.status == 6 ||
@@ -920,14 +921,14 @@ class IconWidget extends StatelessWidget {
     OrderController orderController = Get.find();
     if (orderController.singleOrderApp.status == 11) {
       return Icon(
-        Icons.watch_later,
-        color: Colors.red,
+        Icons.watch_later_outlined,
+        color: Colors.black,
       );
     }
     return orderController.singleOrderApp.status < status
         ? Icon(
-            Icons.watch_later,
-            color: Colors.red,
+            Icons.watch_later_outlined,
+            color: Colors.black,
           )
         : (orderController.singleOrderApp.status > status)
             ? Icon(
