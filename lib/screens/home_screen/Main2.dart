@@ -574,7 +574,7 @@ class MainModal2 extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text("Thanh toán",
+                    Text("Hoàn thành",
                         style: GoogleFonts.lato(
                           textStyle: TextStyle(
                               fontSize: 12,

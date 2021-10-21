@@ -355,7 +355,7 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _nameController.text =
-          _UpdatePurchaseScreenState.friendsList[widget.index].name ?? '';
+          _UpdatePurchaseScreenState.friendsList[widget.index].name;
     });
     String _myStateProblem = listProblem[widget.index].name;
 
