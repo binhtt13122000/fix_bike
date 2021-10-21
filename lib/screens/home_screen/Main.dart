@@ -650,7 +650,7 @@ class MainModal extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Thanh toán",
+                      "Hoàn thành",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
