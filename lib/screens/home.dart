@@ -163,7 +163,6 @@ class MapGoogleState extends State<MapGoogle> {
   }
 
   void drawLine(LatLng origin, LatLng destinationLatLng) async {
-    print("MM");
     DirectionsRepository()
         .getDirections(origin: origin, destination: destinationLatLng)
         .then((directions) => setState(() => _info = directions));
@@ -273,7 +272,8 @@ class MapGoogleState extends State<MapGoogle> {
                       ))
                 ],
                 if (orderController.singleOrderApp.status != 0 &&
-                    orderController.singleOrderApp.status != 1) ...[
+                    orderController.singleOrderApp.status != 1 && 
+                    orderController.singleOrderApp.status != 14) ...[
                   Positioned(
                       right: 0,
                       left: 0,
@@ -318,7 +318,7 @@ class MapGoogleState extends State<MapGoogle> {
                       ))
                 ],
                 // if (_height > 350) ...[HideData()]
-                if (orderController.singleOrderApp.status == 0) ...[
+                if (orderController.singleOrderApp.status == 0 || orderController.singleOrderApp.status == 14 || orderController.singleOrderApp.status == 8 || orderController.singleOrderApp.status == 15) ...[
                   Positioned(
                       right: 0,
                       left: 0,

@@ -19,6 +19,13 @@ class StatusAppController extends GetxController {
     update();
   }
 
+  RxList listReason = [
+    "Thiếu phụ kiện",
+    "Không thể sửa loại xe này",
+    "Khác",
+  ].obs;
+  RxString reason = "".obs;
+
   setSwitch(bool currentBool) {
     switched.value = currentBool;
   }
