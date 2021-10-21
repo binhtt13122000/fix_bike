@@ -261,7 +261,14 @@ class MainModal extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                //FIX-1
                 TextField(),
+                //lí do:
+                //- Đã có một người sửa xe khác giúp đỡ
+                //- Đã có người nhà tới hỗ trợ
+                //- Đã tìm được một tiệm sửa xe gần đây
+                //- Khác
+                // nhấn khác -> Textfield()
                 SizedBox(
                   height: 20,
                 ),
