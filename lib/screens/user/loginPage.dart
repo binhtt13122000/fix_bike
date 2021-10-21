@@ -1,4 +1,5 @@
 import 'package:fix_bike/screens/Widget/bezierContainer.dart';
+import 'package:fix_bike/screens/home.dart';
 import 'package:fix_bike/screens/repairman/login_screen.dart';
 import 'package:fix_bike/styles/MyIcon.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +135,10 @@ class _LoginPageState extends State<LoginPageScreeen> {
             flex: 1,
             child: ElevatedButton(
               onPressed: () {
-                controller.authenticationWithGoogle(context);
+Get.to(() => Home(),
+          transition: Transition.leftToRightWithFade,
+          duration: Duration(milliseconds: 500));
+                // controller.authenticationWithGoogle(context);
               },
               style: ButtonStyle(
                 elevation: MaterialStateProperty.all(6),

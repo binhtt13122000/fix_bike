@@ -15,25 +15,35 @@ class StatusAppController extends GetxController {
   RxString img2 = "".obs;
   RxString img3 = "".obs;
 
-  setPath(String path, int index)
-  {
-    switch(index) {
-      case 0: {
-        print("DAN: " + path);
-        img1.value = path;
-        update();
-        break;
-      }
-      case 1: {
-        img2.value = path;
-        update();
-        break;
-      }
-      case 2: {
-        img3.value = path;
-        update();
-        break;
-      }
+  RxList listReason = [
+    "Đã có một người sửa xe khác giúp đỡ",
+    "Đã có người nhà tới hỗ trợ",
+    "Đã tìm được một tiệm sửa xe gần đây",
+    "Khác",
+  ].obs;
+  RxString reason = "".obs;
+
+  setPath(String path, int index) {
+    switch (index) {
+      case 0:
+        {
+          print("DAN: " + path);
+          img1.value = path;
+          update();
+          break;
+        }
+      case 1:
+        {
+          img2.value = path;
+          update();
+          break;
+        }
+      case 2:
+        {
+          img3.value = path;
+          update();
+          break;
+        }
     }
     update();
   }

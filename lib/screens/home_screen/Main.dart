@@ -19,7 +19,7 @@ class MainModal extends StatelessWidget {
   final LatLng origin;
   final Function cancel;
 
-  const MainModal(
+  MainModal(
       {Key? key,
       required this.height,
       required this.draw,
@@ -28,6 +28,8 @@ class MainModal extends StatelessWidget {
       required this.cancel})
       : super(key: key);
   final double height;
+
+  final statusAppController = Get.put(StatusAppController());
 
   showMoneyDialog(BuildContext context) {
     // show the dialog
@@ -181,127 +183,157 @@ class MainModal extends StatelessWidget {
       transitionDuration: const Duration(milliseconds: 400),
       context: context,
       pageBuilder: (context, _, __) {
-        return Dialog(
-          insetAnimationCurve: Curves.bounceOut,
-          insetAnimationDuration: Duration(seconds: 1),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          child: Container(
-            height: 600.0,
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30,
+        return Obx(() => Dialog(
+              insetAnimationCurve: Curves.bounceOut,
+              insetAnimationDuration: Duration(seconds: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Container(
+                height: 600.0,
+                padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      "Bạn có chắc sẽ hủy đơn? Hãy nói lí do cho người sửa xe của bạn",
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          wordSpacing: 0.5,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 10))
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(avatarGrab),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Lê Trọng Nhân",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    // Container(
+                    //   padding: EdgeInsets.only(top: 8, bottom: 8),
+                    //   child: RatingBar.builder(
+                    //     initialRating: 1,
+                    //     minRating: 1,
+                    //     direction: Axis.horizontal,
+                    //     allowHalfRating: true,
+                    //     unratedColor: Colors.amber.withAlpha(50),
+                    //     itemCount: 5,
+                    //     itemSize: 20.0,
+                    //     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                    //     itemBuilder: (context, _) => Icon(
+                    //       Icons.star,
+                    //       color: Colors.amber,
+                    //     ),
+                    //     onRatingUpdate: (rating) {},
+                    //     updateOnDrag: true,
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    //FIX-1
+                    DropdownButton(
+                      hint: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text("Chọn lý do"),
+                      ),
+                      onChanged: (newValue) {
+                        statusAppController.reason.value = newValue.toString();
+                      },
+                      value: statusAppController.reason.value.isEmpty
+                          ? null
+                          : statusAppController.reason.value,
+                      isExpanded: true,
+                      items: statusAppController.listReason.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: Text(
+                              valueItem,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    statusAppController.reason.value == "Khác"
+                        ? TextField()
+                        : Container(),
+                    //lí do:
+                    //- Đã có một người sửa xe khác giúp đỡ
+                    //- Đã có người nhà tới hỗ trợ
+                    //- Đã tìm được một tiệm sửa xe gần đây
+                    //- Khác
+                    // nhấn khác -> Textfield()
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(double.infinity,
+                              40), // double.infinity is the width and 30 is the height
+                          primary: Color(0xFFF9AA33),
+                          onPrimary: Colors.black),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                        DatabaseMethods().updateTodo(11);
+                      },
+                      child: Text('HỦY ĐƠN SỬA XE'),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(double.infinity,
+                              40), // double.infinity is the width and 30 is the height
+                          primary: Colors.red,
+                          onPrimary: Colors.white),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                      child: Text('HỦY THAO TÁC'),
+                    )
+                  ],
                 ),
-                Text(
-                  "Bạn có chắc sẽ hủy đơn? Hãy nói lí do cho người sửa xe của bạn",
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      wordSpacing: 0.5,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 130,
-                  height: 130,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 4,
-                          color: Theme.of(context).scaffoldBackgroundColor),
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1),
-                            offset: Offset(0, 10))
-                      ],
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(avatarGrab),
-                      )),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Lê Trọng Nhân",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                // Container(
-                //   padding: EdgeInsets.only(top: 8, bottom: 8),
-                //   child: RatingBar.builder(
-                //     initialRating: 1,
-                //     minRating: 1,
-                //     direction: Axis.horizontal,
-                //     allowHalfRating: true,
-                //     unratedColor: Colors.amber.withAlpha(50),
-                //     itemCount: 5,
-                //     itemSize: 20.0,
-                //     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                //     itemBuilder: (context, _) => Icon(
-                //       Icons.star,
-                //       color: Colors.amber,
-                //     ),
-                //     onRatingUpdate: (rating) {},
-                //     updateOnDrag: true,
-                //   ),
-                // ),
-                SizedBox(
-                  height: 20,
-                ),
-                //FIX-1
-                TextField(),
-                //lí do:
-                //- Đã có một người sửa xe khác giúp đỡ
-                //- Đã có người nhà tới hỗ trợ
-                //- Đã tìm được một tiệm sửa xe gần đây
-                //- Khác
-                // nhấn khác -> Textfield()
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity,
-                          40), // double.infinity is the width and 30 is the height
-                      primary: Color(0xFFF9AA33),
-                      onPrimary: Colors.black),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                    DatabaseMethods().updateTodo(11);
-                  },
-                  child: Text('HỦY ĐƠN SỬA XE'),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity,
-                          40), // double.infinity is the width and 30 is the height
-                      primary: Colors.red,
-                      onPrimary: Colors.white),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: Text('HỦY THAO TÁC'),
-                )
-              ],
-            ),
-          ),
-        );
+              ),
+            ));
       },
       transitionBuilder: (_, animation1, __, child) {
         return SlideTransition(
@@ -417,7 +449,7 @@ class MainModal extends StatelessWidget {
                   onPressed: () {
                     if (Get.put(OrderController()).singleOrderApp.status != 0) {
                       Navigator.of(context).pop(true);
-                      DatabaseMethods().updateTodo(10);
+                      DatabaseMethods().updateTodo(0);
                     }
                   },
                   child: Text('GỬI FEEDBACK VỀ TÀI XẾ'),
@@ -558,14 +590,108 @@ class MainModal extends StatelessWidget {
     );
   }
 
+  showReasonCannotFix(BuildContext context) {
+    // show the dialog
+    showGeneralDialog(
+      barrierLabel: "showGenerlDialog",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      context: context,
+      pageBuilder: (context, _, __) {
+        return Dialog(
+          insetAnimationCurve: Curves.bounceOut,
+          insetAnimationDuration: Duration(seconds: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 300.0,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Xin lỗi xe của bạn không thể sửa!",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                  size: 80,
+                ),
+                SizedBox(height: 20,),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: 'Lý do: ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      TextSpan(
+                          text: "Xe không sửa được",
+                          style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                ),
+                                SizedBox(height: 20,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity,
+                          40), // double.infinity is the width and 30 is the height
+                      primary: Color(0xFFF9AA33),
+                      onPrimary: Colors.black),
+                  onPressed: () {
+                    if (Get.put(OrderController()).singleOrderApp.status != 0) {
+                      Navigator.of(context).pop(true);
+                      DatabaseMethods().updateTodo(0);
+                    }
+                  },
+                  child: Text('QUAY LẠI MÀN HÌNH CHÍNH'),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation1, __, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();
     if (orderController.singleOrderApp.status == 2) {
       Future.delayed(Duration.zero, () => {showAlertDialog(context)});
     }
-    if (orderController.singleOrderApp.status == 9) {
-      Future.delayed(Duration.zero, () => {showMoneyDialog(context)});
+    if (orderController.singleOrderApp.status == 8) {
+      Future.delayed(Duration.zero, () => {showDialog(context)});
+    }
+    if (orderController.singleOrderApp.status == 14) {
+      Future.delayed(Duration.zero, () => {showReasonCannotFix(context)});
     }
     return Container(
       child: Column(
@@ -603,7 +729,11 @@ class MainModal extends StatelessWidget {
                 Expanded(child: Divider()),
                 Column(
                   children: [
-                    IconWidget(status: 5),
+                    orderController.singleOrderApp.status == 5
+                        ? IconWidget(status: 5)
+                        : orderController.singleOrderApp.status == 16
+                            ? IconWidget(status: 16)
+                            : IconWidget(status: 6),
                     SizedBox(
                       height: 5,
                     ),
@@ -617,7 +747,9 @@ class MainModal extends StatelessWidget {
                 if (orderController.singleOrderApp.status == 6) ...[
                   Column(
                     children: [
-                      IconWidget(status: 6),
+                      orderController.singleOrderApp.status == 16
+                          ? IconWidget(status: 17)
+                          : IconWidget(status: 7),
                       SizedBox(
                         height: 5,
                       ),
@@ -631,7 +763,9 @@ class MainModal extends StatelessWidget {
                 if (orderController.singleOrderApp.status != 6) ...[
                   Column(
                     children: [
-                      IconWidget(status: 7),
+                      orderController.singleOrderApp.status == 16
+                          ? IconWidget(status: 17)
+                          : IconWidget(status: 7),
                       SizedBox(
                         height: 5,
                       ),
@@ -645,7 +779,9 @@ class MainModal extends StatelessWidget {
                 Expanded(child: Divider()),
                 Column(
                   children: [
-                    IconWidget(status: 8),
+                    orderController.singleOrderApp.status == 16
+                        ? IconWidget(status: 17)
+                        : IconWidget(status: 8),
                     SizedBox(
                       height: 5,
                     ),
@@ -764,6 +900,12 @@ class MainModal extends StatelessWidget {
                     ),
                   )
                 ],
+                // if (orderController.singleOrderApp.status == 14) ...[
+                //   SizedBox(
+                //     height: 20,
+                //   ),
+                //   showAlertDialog(context)
+                // ],
                 if (orderController.singleOrderApp.status == 4) ...[
                   SizedBox(
                     height: 20,
@@ -817,8 +959,7 @@ class MainModal extends StatelessWidget {
                     child: Text('HỦY ĐƠN'),
                   ),
                 ],
-                if (orderController.singleOrderApp.status == 6 ||
-                    orderController.singleOrderApp.status == 7) ...[
+                if (orderController.singleOrderApp.status == 7) ...[
                   SizedBox(
                     height: 20,
                   ),
@@ -832,6 +973,44 @@ class MainModal extends StatelessWidget {
                     },
                     child: Text('XÁC NHẬN XE ĐÃ ĐƯỢC SỬA'),
                   ),
+                ],
+                if (orderController.singleOrderApp.status == 6) ...[
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                      "Người sửa xe muốn đưa xe về tiệm. Bạn có đồng ý không?"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 150,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(double.infinity, 40),
+                              primary: Colors.green[400],
+                              onPrimary: Colors.white),
+                          onPressed: () {
+                            DatabaseMethods().updateTodo(16);
+                          },
+                          child: Text('Đồng ý'),
+                        ),
+                      ),
+                      Container(
+                        width: 150,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(double.infinity, 40),
+                              primary: Colors.red[400],
+                              onPrimary: Colors.white),
+                          onPressed: () {
+                            DatabaseMethods().updateTodo(15);
+                          },
+                          child: Text('Không đồng ý'),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
                 if (orderController.singleOrderApp.status == 11) ...[
                   Column(
@@ -848,25 +1027,40 @@ class MainModal extends StatelessWidget {
                     ],
                   )
                 ],
-                if (orderController.singleOrderApp.status == 8) ...[
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Đang chờ người sửa xe nhập hóa đơn!",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        JumpingDotsProgressIndicator(
-                          fontSize: 20.0,
-                        ),
-                      ],
-                    ),
+                if (orderController.singleOrderApp.status == 16) ...[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SpinKitThreeInOut(
+                        color: Color(0xFFF9AA33),
+                        size: 50,
+                      ),
+                      Text(
+                        "Xe đang được đưa về tiệm!",
+                        style: TextStyle(fontSize: 18),
+                      )
+                    ],
                   )
                 ],
+                // if (orderController.singleOrderApp.status == 8) ...[
+                //   SizedBox(
+                //     height: 20,
+                //   ),
+                //   Center(
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Text(
+                //           "Đang chờ người sửa xe nhập hóa đơn!",
+                //           style: TextStyle(fontSize: 16),
+                //         ),
+                //         JumpingDotsProgressIndicator(
+                //           fontSize: 20.0,
+                //         ),
+                //       ],
+                //     ),
+                //   )
+                // ],
                 // Row(
                 //   children: [
                 //     Expanded(

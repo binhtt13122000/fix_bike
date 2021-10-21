@@ -245,7 +245,7 @@ class MapGoogleState extends State<MapGoogle> {
                   ),
                 ),
                 if (orderController.singleOrderApp.status == 0 ||
-                    orderController.singleOrderApp.status == 10) ...[
+                    orderController.singleOrderApp.status == 10 || orderController.singleOrderApp.status == 15) ...[
                   Positioned(
                     right: 0,
                     left: 0,
@@ -267,7 +267,8 @@ class MapGoogleState extends State<MapGoogle> {
                 ],
                 if (orderController.singleOrderApp.status != 1 &&
                     orderController.singleOrderApp.status != 0 &&
-                    orderController.singleOrderApp.status != 10) ...[
+                    orderController.singleOrderApp.status != 10 &&
+                    orderController.singleOrderApp.status != 15) ...[
                   Positioned(
                       right: 0,
                       left: 0,
